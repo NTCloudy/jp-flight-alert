@@ -14,7 +14,7 @@
 
 ## 🖥️ 網頁控制台
 
-👉 **https://ntcloudy.github.io/jp-flight-alert/**（手機、電腦都可以用）
+👉 https://ntcloudy.github.io/jp-flight-alert/
 
 - 看目前找到的機票、各目的地最低價和 30 天價格走勢、最近的促銷消息
 - 修改通知門檻、起降時段、天數、人數、出發機場、目的地、航空公司
