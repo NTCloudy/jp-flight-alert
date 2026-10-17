@@ -114,7 +114,7 @@
   <div class="card" id="pauseCard" style="display:none"></div>
 
   <div class="card">
-    <h2>🔥 目前找到的機票 <span class="muted" id="dealsInfo"></span></h2>
+    <h2>🔥 符合門檻的機票 <span class="muted" id="dealsInfo"></span></h2>
     <div class="tabs" id="dealTabs"></div>
     <div id="deals"><p class="empty">載入中…</p></div>
   </div>
@@ -282,15 +282,18 @@ function dealCard(d) {
 }
 
 function renderDeals() {
-  const L = S.latest || {}, deals = L.deals || [];
-  const groups = { hot: deals.filter(d => d.category === "instant"), good: deals.filter(d => ["instant","digest","anomaly"].includes(d.category)),
-                   all: deals };
-  const labels = { hot:`🔥 超便宜 (${groups.hot.length})`, good:`符合門檻 (${groups.good.length})`, all:`全部已確認 (${groups.all.length})` };
-  if (S.tab === "good" && !groups.good.length && !S.tabTouched) S.tab = "all";
+  // Only itineraries that pass the price thresholds belong here. Cheaper-than-nothing references
+  // (right times and airlines, but above the thresholds) live in the destination table below.
+  const L = S.latest || {}, deals = L.deals || [], c = (S.cfg && S.cfg.alerts) || {};
+  const groups = { good: deals.filter(d => ["instant","digest","anomaly"].includes(d.category)),
+                   hot: deals.filter(d => d.category === "instant") };
+  const labels = { good:`全部符合門檻 (${groups.good.length})`, hot:`🔥 超便宜 (${groups.hot.length})` };
+  if (!groups[S.tab]) S.tab = "good";
   $("dealTabs").innerHTML = Object.keys(groups).map(k => `<button class="tab ${S.tab===k?"on":""}" data-tab="${k}">${labels[k]}</button>`).join("");
   const list = groups[S.tab].slice(0, 60);
   $("deals").innerHTML = list.length ? list.map(dealCard).join("") :
-    `<p class="empty">${S.tab==="all" ? "還在收集資料，第一次執行後約 1 小時會陸續出現。" : "目前沒有符合門檻的機票；有的話會馬上寄信或放進每日整理。"}</p>`;
+    `<p class="empty">目前沒有符合門檻的機票（每人 ≤ ${money(c.instant_max)} 馬上寄信、≤ ${money(c.digest_max)} 或比平常便宜 ${c.anomaly_pct ?? 20}% 以上放進每日整理）。<br>
+     符合時段、但價格還太高的各地最低價，請看下面的「各目的地最低價」。</p>`;
   $("dealsInfo").textContent = L.updated ? `（${ago(L.updated)}更新）` : "";
 }
 
@@ -311,7 +314,7 @@ function renderRoutes() {
   $("routeTable").innerHTML = rows.length ? `<tr><th>目的地</th><th style="text-align:right">最低每人</th><th>日期／航班</th><th style="text-align:right">平常</th><th>30 天走勢</th></tr>` +
     rows.map(({k,r,v,price}) => `<tr><td><b>${esc(JP[r.dest]||r.dest)}</b><div class="muted">${esc(TW[r.origin]||r.origin)}出發</div></td>
       <td class="num">${money(price)}</td>
-      <td class="muted">${v ? `${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}`
+      <td class="muted">${v ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}</a>`
         : r.near_miss ? `參考價：還沒有完全符合時段的航班<br>（${esc(r.near_miss.why)}）` : `${shortD(r.min_dep)} 出發（參考價，航班確認中）`}</td>
       <td class="num muted">${money(r.avg30_pp)}</td><td>${spark(k)}</td></tr>`).join("")
     : `<tr><td class="empty">還在收集資料…</td></tr>`;
@@ -410,7 +413,7 @@ function needToken() {
 
 // ---------- events ----------
 document.addEventListener("click", async e => {
-  const tab = e.target.closest("[data-tab]"); if (tab) { S.tab = tab.dataset.tab; S.tabTouched = true; renderDeals(); return; }
+  const tab = e.target.closest("[data-tab]"); if (tab) { S.tab = tab.dataset.tab; renderDeals(); return; }
   const el = e.target.closest("[data-act]"); if (!el) return;
   const act = el.dataset.act;
   if (act === "mute" || act === "unmute") {
