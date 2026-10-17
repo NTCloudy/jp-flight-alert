@@ -12,6 +12,8 @@ import logging
 import os
 import random
 import time
+from collections.abc import Callable
+from copy import deepcopy
 from dataclasses import dataclass, field
 from datetime import date, datetime, timedelta
 
@@ -69,9 +71,9 @@ class Pacer:
         self._last = time.monotonic()
 
 
-def _install_paced_client(pacer: Pacer, timeout: float = 30) -> None:
-    """Replace fli's shared HTTP client `post` with a paced, non-retrying version and make fli run
-    its internal follow-up requests sequentially (no bursts)."""
+def _install_paced_client(pacer: Pacer, stats: "SourceStats", timeout: float = 30) -> None:
+    """Replace fli's shared HTTP client `post` with a paced, non-retrying, counting version and
+    make fli run its internal follow-up requests sequentially (no bursts)."""
     from fli.search import _concurrency
     from fli.search import client as fli_client
 
@@ -80,6 +82,7 @@ def _install_paced_client(pacer: Pacer, timeout: float = 30) -> None:
 
     def post(url: str, **kwargs):
         pacer.wait()
+        stats.requests += 1
         kwargs.setdefault("timeout", timeout)
         try:
             r = c._session().post(url, **kwargs)
@@ -114,8 +117,9 @@ class Itinerary:
 
 @dataclass
 class SourceStats:
-    requests: int = 0
+    requests: int = 0  # HTTP requests actually sent
     failures: int = 0
+    empty: int = 0     # answers without any result rows (after one retry)
     rate_limited: bool = False
     errors: list[str] = field(default_factory=list)
 
@@ -133,31 +137,38 @@ class GoogleFlights:
         from fli.models import Airline, Airport
         from fli.search import SearchDates, SearchFlights
 
-        _install_paced_client(Pacer(gap))
+        self.stats = SourceStats()
+        self.last_note = ""  # why the last itinerary look-up found nothing usable
+        _install_paced_client(Pacer(gap), self.stats)
         self._Airline, self._Airport = Airline, Airport
         self._dates, self._flights = SearchDates(), SearchFlights()
         self.cfg = cfg
         self.retries = retries
-        self.stats = SourceStats()
 
     # ---- plumbing --------------------------------------------------------
     def _call(self, what: str, fn):
+        """Returns (result, status) with status "ok", "empty" (Google answered without results,
+        twice) or "fail". HTTP 429 raises RateLimited."""
         for attempt in range(self.retries + 1):
-            self.stats.requests += 1
             try:
-                return fn(), True
+                return fn(), "ok"
             except RateLimited:
                 self.stats.rate_limited = True
                 self.stats.fail(f"{what}: HTTP 429")
                 raise
+            except EmptyResponse:
+                if attempt == self.retries:
+                    self.stats.empty += 1
+                    return None, "empty"
+                time.sleep(3 + random.uniform(0, 3))
             except Exception as e:  # noqa: BLE001 - network/parse errors must not stop the scan
                 msg = f"{what}: {type(e).__name__}: {str(e)[:160]}"
                 log.warning("%s (attempt %d)", msg, attempt + 1)
                 if attempt == self.retries:
                     self.stats.fail(msg)
-                    return None, False
+                    return None, "fail"
                 time.sleep(5 + random.uniform(0, 5))
-        return None, False
+        return None, "fail"
 
     def _restrictions(self, w: Window):
         from fli.models.google_flights.base import TimeRestrictions
@@ -195,9 +206,9 @@ class GoogleFlights:
     # ---- public API ------------------------------------------------------
     def calendar(self, origin: str, dest: str, nights: int, start: date, end: date) -> dict[tuple[date, date], float] | None:
         """Cheapest total price per (departure, return) date pair for departures in [start, end]
-        (at most CHUNK_DAYS days: one request). Dates without matching flights are simply absent.
-        None if the request failed or Google answered without any date rows (a transient glitch
-        that would otherwise look like "no flights")."""
+        (at most CHUNK_DAYS days: one request). Dates without matching flights are simply absent,
+        so {} means "nothing found" (Google sometimes says that by mistake; the scanner decides
+        whether to trust it). None if the request failed."""
         from fli.models.google_flights.dates import DateSearchFilters
         from fli.search._urls import with_locale_params
         from fli.search._wire import parse_first_wrb_payload
@@ -219,11 +230,11 @@ class GoogleFlights:
                 raise EmptyResponse("Google 回傳空白日曆")
             return rows
 
-        rows, ok = self._call(f"calendar {origin}-{dest} {nights}晚 {start}", fetch)
-        if not ok:
+        rows, status = self._call(f"calendar {origin}-{dest} {nights}晚 {start}", fetch)
+        if status == "fail":
             return None
         prices: dict[tuple[date, date], float] = {}
-        for row in rows:
+        for row in rows or []:
             try:
                 dep, ret = date.fromisoformat(row[0]), date.fromisoformat(row[1])
                 price = float(row[2][0][1]) if row[2] else None
@@ -233,27 +244,55 @@ class GoogleFlights:
                 prices[(dep, ret)] = min(prices.get((dep, ret), float("inf")), price)
         return prices
 
-    def itineraries(self, origin: str, dest: str, dep: date, ret: date, max_outbound: int = 5) -> list[Itinerary] | None:
-        """All round-trip combinations Google offers for these dates (server-side filtered).
-        Only called for dates the calendar priced, so an empty answer is treated as a glitch (None)."""
+    def itineraries(self, origin: str, dest: str, dep: date, ret: date,
+                    outbound_ok: Callable[[list[Leg]], bool] | None = None,
+                    max_outbound: int = 3) -> list[Itinerary] | None:
+        """Round-trip combinations for these dates: one request for the outbound list, then one per
+        outbound (cheapest `max_outbound` that pass `outbound_ok`) for its return options and the
+        round-trip total. [] = nothing bookable right now (or no outbound passes `outbound_ok`);
+        None = the request failed."""
         from fli.models.google_flights.base import SortBy
         from fli.models.google_flights.flights import FlightSearchFilters
 
         filters = FlightSearchFilters(**self._common(), flight_segments=self._segments(origin, dest, dep, ret),
                                       sort_by=SortBy.CHEAPEST)
+        locale = dict(currency="TWD", language="zh-TW", country="TW")
 
-        def fetch():
-            combos = self._flights.search(filters, top_n=max_outbound, currency="TWD", language="zh-TW", country="TW")
-            combos = [c for c in combos or [] if isinstance(c, tuple) and len(c) == 2 and c[1].price is not None]
-            if not combos:
-                raise EmptyResponse("Google 沒有回傳航班")
-            return combos
+        def fetch(f, capture: bool, what: str):
+            rows = self._flights._fetch_flights(f, capture_session=capture, **locale)
+            rows = [r for r in rows or [] if r.price is not None and r.legs]
+            if not rows:
+                raise EmptyResponse(f"Google 沒有回傳{what}")
+            return rows
 
-        res, ok = self._call(f"flights {origin}-{dest} {dep}~{ret}", fetch)
-        if not ok:
+        outs, status = self._call(f"flights {origin}-{dest} {dep}~{ret}", lambda: fetch(filters, True, "去程航班"))
+        self.last_note = ""
+        if status != "ok":
+            self.last_note = "Google 目前查不到可訂的航班（可能已售完）"
+            return None if status == "fail" else []
+        picked = [o for o in outs if outbound_ok is None or outbound_ok([_leg(x) for x in o.legs])]
+        if not picked:
+            o = min(outs, key=lambda x: x.price)
+            first, last = o.legs[0], o.legs[-1]
+            self.last_note = (f"去程沒有符合時段的航班（最便宜的 {_leg(first).flight} "
+                              f"{first.departure_datetime:%H:%M} 起飛、{last.arrival_datetime:%H:%M} 抵達）")
+            return []
+        picked = sorted(picked, key=lambda o: o.price)[:max_outbound]
+        result: list[Itinerary] = []
+        failed = 0
+        for o in picked:
+            f2 = deepcopy(filters)
+            f2.flight_segments[0].selected_flight = o
+            rets, status = self._call(f"return {origin}-{dest} {dep}~{ret} {o.legs[0].flight_number}",
+                                      lambda f2=f2: fetch(f2, False, "回程航班"))
+            if status != "ok":
+                failed += status == "fail"
+                continue
+            out_legs = [_leg(x) for x in o.legs]
+            result += [Itinerary(out=out_legs, ret=[_leg(x) for x in r.legs], total=float(r.price)) for r in rets]
+        if picked and failed == len(picked):
             return None
-        return [Itinerary(out=[_leg(x) for x in first.legs], ret=[_leg(x) for x in second.legs], total=float(second.price))
-                for first, second in res]
+        return result
 
 
 def _code(enum_member) -> str:

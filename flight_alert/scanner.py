@@ -63,6 +63,7 @@ class RunResult:
     tasks_done: int = 0
     tasks_due: int = 0
     verified: int = 0
+    suspect_empty: int = 0
     coverage: float = 0.0
 
     @property
@@ -147,6 +148,15 @@ def plan(cfg: Config, calendar: dict, state: dict, now: datetime, force: bool = 
                     tasks.append(Task(route, nights, k, s, e, interval, age, abs(nights + 1 - cfg.prefer_days)))
     tasks.sort(key=lambda t: t.priority)
     return tasks
+
+
+def _window_had_prices(calendar: dict, task: Task, now: datetime) -> bool:
+    cache = (calendar.get(task.route) or {}).get(str(task.nights)) or {}
+    for d in _days(task.start, task.end):
+        entry = cache.get(d.isoformat())
+        if entry and entry[0] is not None and _hours_since(entry[1], now) <= FRESH_HOURS:
+            return True
+    return False
 
 
 def _store_calendar(calendar: dict, task: Task, prices: dict, now: datetime) -> None:
@@ -311,11 +321,14 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
         state["cooldown_until"] = (now + timedelta(minutes=minutes)).isoformat(timespec="minutes")
 
     # ---- phase 1: calendar tasks ------------------------------------------------------
+    done_now: set[tuple] = set()
+
     def calendar_phase(limit: int) -> None:
         for task in plan(cfg, calendar, state, now, force=force):
             if not network or not budget_left(limit):
                 return
-            if _no_service(state, task.route, today):
+            key = (task.route, task.nights, task.chunk)
+            if key in done_now or _no_service(state, task.route, today):
                 continue
             origin, dest = task.route.split("-")
             try:
@@ -323,7 +336,11 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
             except RateLimited:
                 throttled()
                 return
+            done_now.add(key)
             if prices is None:
+                continue
+            if not prices and _window_had_prices(calendar, task, now):
+                res.suspect_empty += 1  # Google sometimes answers "nothing" by mistake: keep old data
                 continue
             _store_calendar(calendar, task, prices, now)
             res.tasks_done += 1
@@ -356,6 +373,7 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
         priced[route] = cal
 
     found_all: list[dict] = []
+    ranked_by_route: dict[str, list] = {}
     queue: list[tuple[float, str, date, date, float, float]] = []  # (pp, route, dep, ret, total, max_age)
     for route, cal in priced.items():
         if not cal:
@@ -363,6 +381,7 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
         avg = res.routes[route].get("avg30_pp")
         ceiling = max(cfg.digest_max, rules.anomaly_ceiling(cfg, avg))
         ranked = sorted(cal.items(), key=lambda kv: (kv[1], abs((kv[0][1] - kv[0][0]).days + 1 - cfg.prefer_days)))
+        ranked_by_route[route] = ranked
         found: dict[str, dict] = {}
         need_reference = True
         queued = 0
@@ -391,7 +410,7 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
             break
         origin, dest = route.split("-")
         try:
-            its = source.itineraries(origin, dest, dep, ret)
+            its = source.itineraries(origin, dest, dep, ret, outbound_ok=lambda legs: rules.outbound_ok(legs, cfg))
         except RateLimited:
             throttled()
             break
@@ -400,9 +419,24 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
         res.verified += 1
         picked = rules.best(its, cfg)
         deal = make_deal(cfg, origin, dest, dep, ret, picked[0], picked[1], now) if picked else None
-        cache[f"{route}|{dep}|{ret}"] = {"cal_total": total, "at": now.isoformat(timespec="minutes"), "deal": deal}
+        entry = {"cal_total": total, "at": now.isoformat(timespec="minutes"), "deal": deal}
+        if not deal:
+            entry["why"] = (rules.explain(its, cfg) if its else getattr(source, "last_note", "")) or "目前沒有可訂的航班"
+        cache[f"{route}|{dep}|{ret}"] = entry
         if deal:
             found_all.append(deal)
+
+    # routes with prices but no qualifying itinerary yet: explain the cheapest near miss
+    with_deals = {d["route"] for d in found_all}
+    for route, ranked in ranked_by_route.items():
+        if route in with_deals:
+            continue
+        for (dep, ret), total in ranked[:REFERENCE_DEPTH]:
+            entry = cache.get(f"{route}|{dep}|{ret}")
+            if entry and entry.get("deal") is None and entry.get("why"):
+                res.routes[route]["near_miss"] = {"dep": dep.isoformat(), "ret": ret.isoformat(),
+                                                  "pp": round(total / cfg.adults), "why": entry["why"]}
+                break
 
     # ---- phase 3: leftover budget goes back to calendar tasks ----------------------------
     if network:

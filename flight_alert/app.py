@@ -71,7 +71,7 @@ def build_latest(cfg: Config, state: dict, res: scanner.RunResult, now: datetime
         "run": {
             "ok": res.ok, "requests": res.requests, "failures": res.failures, "rate_limited": res.rate_limited,
             "skipped_cooldown": res.skipped_cooldown, "tasks_done": res.tasks_done, "tasks_due": res.tasks_due,
-            "verified": res.verified,
+            "verified": res.verified, "suspect_empty": res.suspect_empty,
         },
         "errors": res.errors[:10],
         "coverage": res.coverage,
@@ -94,7 +94,7 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
     calendar = store.load("calendar.json", {})
     history = store.load("history.json", {})
     paused = cfg.is_paused(now.date())
-    max_requests = max_requests or int(os.environ.get("MAX_REQUESTS", "45"))
+    max_requests = max_requests or int(os.environ.get("MAX_REQUESTS", "60"))
     if not state.get("last_run") and not state.get("digest_last_date") and mode != "digest":
         # Brand-new install: the first daily digest goes out the next morning, once enough
         # prices have been collected (instant alerts work from the first run).
@@ -108,7 +108,8 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
 
             source = GoogleFlights(cfg)
         res = scanner.run(cfg, source, state, calendar, history, now, max_requests=max_requests, force=(mode == "scan"))
-        print(f"[掃描] 完成 {res.tasks_done} 個日曆查詢、確認 {res.verified} 組航班；請求 {res.requests} 次、失敗 {res.failures} 次"
+        print(f"[掃描] 完成 {res.tasks_done} 個日曆查詢、確認 {res.verified} 組航班；送出 {res.requests} 個請求、失敗 {res.failures} 次"
+              f"{f'、可疑空白 {res.suspect_empty} 次' if res.suspect_empty else ''}"
               f"{'、被限流' if res.rate_limited else ''}{'、冷卻中略過' if res.skipped_cooldown else ''}；"
               f"資料完整度 {round(res.coverage * 100)}%，待查 {res.tasks_due} 項，符合條件 {len(res.deals)} 組")
         for e in res.errors[:5]:

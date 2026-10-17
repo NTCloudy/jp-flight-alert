@@ -303,7 +303,8 @@ function renderRoutes() {
   $("routeTable").innerHTML = rows.length ? `<tr><th>目的地</th><th style="text-align:right">最低每人</th><th>日期／航班</th><th style="text-align:right">平常</th><th>30 天走勢</th></tr>` +
     rows.map(({k,r,v,price}) => `<tr><td><b>${esc(JP[r.dest]||r.dest)}</b><div class="muted">${esc(TW[r.origin]||r.origin)}出發</div></td>
       <td class="num">${money(price)}</td>
-      <td class="muted">${v ? `${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}` : `${shortD(r.min_dep)} 出發（參考價，航班確認中）`}</td>
+      <td class="muted">${v ? `${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}`
+        : r.near_miss ? `參考價：還沒有完全符合時段的航班<br>（${esc(r.near_miss.why)}）` : `${shortD(r.min_dep)} 出發（參考價，航班確認中）`}</td>
       <td class="num muted">${money(r.avg30_pp)}</td><td>${spark(k)}</td></tr>`).join("")
     : `<tr><td class="empty">還在收集資料…</td></tr>`;
   const off = Object.entries(routes).filter(([,r]) => r.no_service).map(([,r]) => `${TW[r.origin]||r.origin}→${JP[r.dest]||r.dest}`);

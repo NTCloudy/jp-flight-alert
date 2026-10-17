@@ -104,6 +104,20 @@ class ScannerTest(unittest.TestCase):
         self.assertTrue(any(t.route == "TPE-NRT" for t in scanner.plan(self.cfg, cal, state, NOW)))
         self.assertTrue(res.ok)  # one failure out of several requests
 
+    def test_sudden_empty_answer_keeps_previous_prices(self):
+        state, cal = fresh_state(), {}
+        scanner.run(self.cfg, self.src, state, cal, {}, NOW, max_requests=100)
+        self.src.calendar_prices["TPE-OKA"] = {}  # Google glitch: "no flights" for a priced window
+        res = scanner.run(self.cfg, self.src, state, cal, {}, NOW + timedelta(hours=4), max_requests=100)
+        self.assertEqual(res.suspect_empty, 1)
+        self.assertEqual(res.routes["TPE-OKA"]["min_pp"], 7500)
+
+    def test_near_miss_reason_is_reported(self):
+        self.src.itins[("TPE-OKA", self.dep, self.ret)] = [itin(self.dep, self.ret, 15000.0, back=("JX", "871", "15:25", "16:10"))]
+        self.src.calendar_prices["TPE-OKA"] = {(self.dep, self.ret): 15000.0}
+        res = scanner.run(self.cfg, self.src, fresh_state(), {}, {}, NOW, max_requests=100)
+        self.assertIn("15:25", res.routes["TPE-OKA"]["near_miss"]["why"])
+
 
 if __name__ == "__main__":
     unittest.main()

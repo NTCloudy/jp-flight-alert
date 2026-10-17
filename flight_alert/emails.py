@@ -187,8 +187,10 @@ def digest(cfg: Config, latest: dict, promos: list[dict], now: datetime) -> tupl
             name = f"{airport_name(info['dest'])}（{airport_name(info['origin'])}）"
             if v:
                 when = f"{short_date(v['dep'])}・{v['days']} 天・{v['out']['flight']}/{v['back']['flight']}"
+            elif info.get("near_miss"):
+                when = f"參考價，還沒有完全符合時段的航班（{info['near_miss']['why']}）"
             else:
-                when = f"{short_date(info['min_dep'])} 出發（參考價，航班待確認）"
+                when = f"{short_date(info['min_dep'])} 出發（參考價，航班確認中）"
             lines.append(f"- {name}：每人 {money(price)}｜{when}")
             trs.append(f"<tr><td style=\"padding:5px 4px;border-bottom:1px solid #eef1f6\">{escape(name)}</td>"
                        f"<td style=\"padding:5px 4px;border-bottom:1px solid #eef1f6;text-align:right;white-space:nowrap\">"

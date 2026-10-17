@@ -37,6 +37,11 @@ def _check_direction(legs: list[Leg], w: Window, cfg: Config, label: str, late_f
     return True, ([late_flag] if arr > w.arrive_ideal else []), ""
 
 
+def outbound_ok(legs: list[Leg], cfg: Config) -> bool:
+    """Used to skip outbound flights that can never qualify before asking for their returns."""
+    return _check_direction(legs, cfg.outbound, cfg, "去程", LATE_OUT)[0]
+
+
 def check(it: Itinerary, cfg: Config) -> tuple[bool, list[str], str]:
     ok, f1, why = _check_direction(it.out, cfg.outbound, cfg, "去程", LATE_OUT)
     if not ok:
@@ -58,6 +63,15 @@ def best(its: list[Itinerary], cfg: Config) -> tuple[Itinerary, list[str]] | Non
         return None
     valid.sort(key=lambda x: (x[0], x[1]))
     return valid[0][2], valid[0][3]
+
+
+def explain(its: list[Itinerary], cfg: Config) -> str:
+    """Why the cheapest itinerary for these dates does not qualify (shown as a 'near miss')."""
+    if not its:
+        return "目前沒有符合時段的航班可訂"
+    cheapest = min(its, key=lambda it: it.total)
+    ok, _, why = check(cheapest, cfg)
+    return "" if ok else why
 
 
 @dataclass

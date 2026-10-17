@@ -55,11 +55,12 @@ class FakeSource:
         return {(d, r): p for (d, r), p in self.calendar_prices.get(route, {}).items()
                 if start <= d <= end and (r - d).days == nights}
 
-    def itineraries(self, origin, dest, dep, ret):
+    def itineraries(self, origin, dest, dep, ret, outbound_ok=None, max_outbound=3):
         self._tick()
         route = f"{origin}-{dest}"
         self.itinerary_calls.append((route, dep, ret))
-        return list(self.itins.get((route, dep, ret), []))
+        its = list(self.itins.get((route, dep, ret), []))
+        return [it for it in its if outbound_ok is None or outbound_ok(it.out)]
 
 
 def small_config(**over) -> Config:
