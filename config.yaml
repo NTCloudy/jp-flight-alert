@@ -28,7 +28,7 @@ outbound:
   arrive_latest: "18:30"
 inbound:
   depart_earliest: "13:00"
-  depart_latest: "15:00"
+  depart_latest: "15:30"
   arrive_ideal: "18:00"
   arrive_latest: "20:00"
 promo:
