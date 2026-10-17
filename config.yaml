@@ -6,7 +6,7 @@ alerts:
   digest_max: 10000
   anomaly_pct: 30
   digest_hour: 18
-  renotify_drop: 300
+  renotify_drop: 2000
   paused_until: ""
 schedule:
   interval_hours: 3
@@ -16,7 +16,7 @@ trip:
   min_days: 4
   max_days: 8
   prefer_days: 5
-  lead_days: 2
+  lead_days: 7
   horizon_days: 180
   adults: 2
   nonstop_only: true
@@ -24,12 +24,12 @@ trip:
 outbound:
   depart_earliest: "10:00"
   depart_latest: "14:00"
-  arrive_ideal: "18:00"
+  arrive_ideal: "14:00"
   arrive_latest: "18:30"
 inbound:
   depart_earliest: "13:00"
   depart_latest: "15:00"
-  arrive_ideal: "19:00"
+  arrive_ideal: "18:00"
   arrive_latest: "20:00"
 promo:
   enabled: true
