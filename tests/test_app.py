@@ -84,6 +84,17 @@ class AppRunTest(unittest.TestCase):
         app.run(cfg, "auto", source=self._source(), now=NOW, max_requests=50)
         self.assertEqual(self.sent, [])
 
+    def test_email_failure_is_retried_next_run(self):
+        cfg = small_config(destinations=["OKA"])
+        with mock.patch.object(app, "send_email", side_effect=OSError("smtp down")):
+            app.run(cfg, "auto", source=self._source(), now=NOW, max_requests=50)
+        state = store.load_state()
+        self.assertEqual(state["notified"], {})
+        self.assertIn("smtp down", state["email_error"]["error"])
+        self.assertTrue(store.load("latest.json", {})["deals"])  # data still saved
+        app.run(cfg, "auto", source=self._source(), now=NOW + timedelta(hours=1), max_requests=50)
+        self.assertTrue(any(s.startswith("🔥") for s in self.sent))
+
     def test_digest_before_hour_not_sent(self):
         cfg = small_config(destinations=["OKA"], digest_hour=23)
         app.run(cfg, "auto", source=self._source(), now=NOW, max_requests=50)

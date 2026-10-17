@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 from datetime import datetime, timedelta
 
@@ -87,6 +88,17 @@ def build_latest(cfg: Config, state: dict, res: scanner.RunResult, now: datetime
     }
 
 
+def _send(state: dict, subject: str, text: str, html: str | None, dry_run: bool) -> bool:
+    """Send without ever crashing the run (collected prices must still be saved)."""
+    try:
+        send_email(subject, text, html, dry_run=dry_run)
+        return True
+    except Exception as e:  # noqa: BLE001 - SMTP/auth/network problems
+        print(f"[寄信失敗] {subject}：{type(e).__name__}: {e}")
+        state["email_error"] = {"at": now_tpe().isoformat(timespec="minutes"), "error": f"{type(e).__name__}: {e}"[:200]}
+        return False
+
+
 def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now: datetime | None = None,
         max_requests: int | None = None) -> int:
     now = now or now_tpe()
@@ -114,6 +126,8 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
               f"資料完整度 {round(res.coverage * 100)}%，待查 {res.tasks_due} 項，符合條件 {len(res.deals)} 組")
         for e in res.errors[:5]:
             print("   [錯誤]", e)
+        store.save("calendar.json", calendar)
+        store.save("history.json", history)
 
         # promotions (cheap: one RSS request)
         if cfg.promo_enabled and _hours_since(state.get("promo_checked_at"), now) >= 0.9:
@@ -125,18 +139,20 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
             except Exception as e:  # noqa: BLE001
                 print(f"[促銷] 讀取失敗：{type(e).__name__}: {e}")
 
-        # instant alerts
+        # instant alerts (only remembered as "notified" once the email actually went out)
         if not paused:
+            before = json.loads(json.dumps(state["notified"]))
             hot = pick_instant(res.deals, state, cfg, now)
             if hot:
                 subject, text, html = emails.instant(hot, cfg)
-                send_email(subject, text, html, dry_run=dry_run)
+                if not _send(state, subject, text, html, dry_run):
+                    state["notified"] = before
 
         # health tracking
         if not res.skipped_cooldown:
             if res.ok:
                 if state.get("health_alert_at") and not paused:
-                    send_email("✅ 日本機票提醒：查詢已恢復正常", "Google Flights 查詢恢復正常，會繼續幫你盯票。", dry_run=dry_run)
+                    _send(state, "✅ 日本機票提醒：查詢已恢復正常", "Google Flights 查詢恢復正常，會繼續幫你盯票。", None, dry_run)
                 state["fail_streak"], state["health_alert_at"] = 0, None
             else:
                 state["fail_streak"] = int(state.get("fail_streak") or 0) + 1
@@ -145,16 +161,14 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
                     problem = "Google Flights 查詢一直被限流" if res.rate_limited else "Google Flights 查詢一直失敗"
                     detail = f"連續 {state['fail_streak']} 次執行沒有成功。最近的錯誤：\n" + "\n".join(res.errors[:5])
                     subject, text = emails.health(problem, detail)
-                    send_email(subject, text, dry_run=dry_run)
-                    state["health_alert_at"] = now.isoformat(timespec="minutes")
+                    if _send(state, subject, text, None, dry_run):
+                        state["health_alert_at"] = now.isoformat(timespec="minutes")
             state["scan_log"] = (state.get("scan_log") or [])[-47:] + [{
                 "at": now.isoformat(timespec="minutes"), "ok": res.ok, "requests": res.requests,
                 "failures": res.failures, "rate_limited": res.rate_limited, "tasks_done": res.tasks_done,
                 "verified": res.verified, "deals": len(res.deals)}]
         state["last_run"] = now.isoformat(timespec="minutes")
         latest = build_latest(cfg, state, res, now)
-        store.save("calendar.json", calendar)
-        store.save("history.json", history)
         store.save("latest.json", latest)
     else:
         latest = store.load("latest.json", {})
@@ -164,12 +178,12 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
             print("[整理] 通知暫停中，略過每日整理")
         else:
             subject, text, html = emails.digest(cfg, latest, state.get("promo_pending") or [], now)
-            send_email(subject, text, html, dry_run=dry_run)
-            state["digest_last_date"] = now.astimezone(TPE_TZ).date().isoformat()
-            state["promo_pending"] = []
-            if latest:
-                latest["digest_last_date"] = state["digest_last_date"]
-                store.save("latest.json", latest)
+            if _send(state, subject, text, html, dry_run):
+                state["digest_last_date"] = now.astimezone(TPE_TZ).date().isoformat()
+                state["promo_pending"] = []
+                if latest:
+                    latest["digest_last_date"] = state["digest_last_date"]
+                    store.save("latest.json", latest)
     store.save("state.json", state)
     return 0
 
