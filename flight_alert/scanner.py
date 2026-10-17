@@ -314,7 +314,7 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
     if state.get("fp_server") not in (None, server_fp):
         calendar.clear()                 # prices were fetched with other time/airline filters
         state["routes"] = {}
-    if state.get("fp_exact") not in (None, exact_fp):
+    if state.get("fp_exact") != exact_fp:
         state["verify_cache"] = {}       # re-check itineraries against the new rules
     state["fp_server"], state["fp_exact"] = server_fp, exact_fp
     prune_calendar(cfg, calendar, today)
