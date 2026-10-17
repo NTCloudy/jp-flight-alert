@@ -5,7 +5,7 @@ alerts:
   instant_max: 8000
   digest_max: 10000
   anomaly_pct: 30
-  digest_hour: 8
+  digest_hour: 18
   renotify_drop: 300
   paused_until: ""
 schedule:
