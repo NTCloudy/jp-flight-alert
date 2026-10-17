@@ -242,7 +242,15 @@ async function gh(path, opts={}) {
 }
 const b64dec = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\n/g,"")), c => c.charCodeAt(0)));
 const b64enc = s => { const b = new TextEncoder().encode(s); let bin=""; b.forEach(x => bin += String.fromCharCode(x)); return btoa(bin); };
-async function raw(name) { const r = await fetch(`${RAW}/${name}?t=${Date.now()}`); if (!r.ok) throw new Error(r.status); return r.json(); }
+async function raw(name) {
+  // Logged in: read through the API (always fresh). Otherwise use the raw CDN (cached ~5 min,
+  // but no API rate limit for anonymous visitors).
+  const r = token()
+    ? await fetch(`${API}/contents/${name}?ref=data&t=${Date.now()}`, { headers: { Accept: "application/vnd.github.raw", Authorization: `Bearer ${token()}` } })
+    : await fetch(`${RAW}/${name}?t=${Date.now()}`);
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
 
 // ---------- config access ----------
 const get = (path) => path.split(".").reduce((o,k) => (o||{})[k], S.cfg);
@@ -486,7 +494,7 @@ async function init() {
   renderAll(); updateLoginUI(); loadRun();
 }
 init();
-setInterval(async () => { try { S.latest = await raw("latest.json"); renderDeals(); renderRoutes(); renderPromos(); } catch {} loadRun(); }, 120000);
+setInterval(async () => { try { S.latest = await raw("latest.json"); renderDeals(); renderRoutes(); renderPromos(); } catch {} loadRun(); }, 300000);
 </script>
 </body>
 </html>

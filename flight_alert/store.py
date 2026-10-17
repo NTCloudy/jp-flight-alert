@@ -70,12 +70,10 @@ def record_day(history: dict, route: str, day: date, prices_pp: list[float]) -> 
         del row[k]
 
 
-def route_average(history: dict, route: str, day: date, window: int = 30) -> float | None:
-    """Average of the daily median prices over the previous `window` days (falls back to today)."""
+def route_average(history: dict, route: str, day: date, window: int = 30, min_days: int = 3) -> float | None:
+    """Average of the daily median prices over the previous `window` days. None until at least
+    `min_days` earlier days are known, so "unusually cheap" is not judged from a single snapshot."""
     row = history.get(route) or {}
     start = (day - timedelta(days=window)).isoformat()
     past = [v["med"] for k, v in row.items() if start <= k < day.isoformat() and v.get("med")]
-    if past:
-        return sum(past) / len(past)
-    today = row.get(day.isoformat())
-    return float(today["med"]) if today and today.get("med") else None
+    return sum(past) / len(past) if len(past) >= min_days else None
