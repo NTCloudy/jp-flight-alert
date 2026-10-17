@@ -292,6 +292,8 @@ class GoogleFlights:
             result += [Itinerary(out=out_legs, ret=[_leg(x) for x in r.legs], total=float(r.price)) for r in rets]
         if picked and failed == len(picked):
             return None
+        if picked and not result:
+            self.last_note = "回程目前查不到可訂的航班（可能已售完）"
         return result
 
 

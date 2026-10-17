@@ -25,6 +25,7 @@ from .links import url_for
 
 FRESH_HOURS = 30              # calendar prices older than this are ignored for deals
 VERIFY_CACHE_HOURS = 12       # reuse a verification while the calendar price is unchanged
+SHORT_CACHE_HOURS = 3         # ...but "Google returned nothing bookable" is re-checked sooner
 REFERENCE_CACHE_HOURS = 24    # each route's cheapest valid itinerary is refreshed about daily
 REFERENCE_DEPTH = 15          # how far down a route's price list to look for that itinerary
 MAX_DEALS_PER_ROUTE = 8
@@ -410,6 +411,8 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
             key = f"{route}|{dep}|{ret}"
             entry = cache.get(key)
             max_age = VERIFY_CACHE_HOURS if cheap else REFERENCE_CACHE_HOURS
+            if entry and entry.get("short"):
+                max_age = min(max_age, SHORT_CACHE_HOURS)
             if entry and entry.get("cal_total") == total and _hours_since(entry.get("at"), now) < max_age:
                 if entry.get("deal") and len(found) < MAX_DEALS_PER_ROUTE:
                     found[key] = entry["deal"]
@@ -440,6 +443,8 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
         entry = {"cal_total": total, "at": now.isoformat(timespec="minutes"), "deal": deal}
         if not deal:
             entry["why"] = (rules.explain(its, cfg) if its else getattr(source, "last_note", "")) or "目前沒有可訂的航班"
+            if not its:
+                entry["short"] = True  # "nothing bookable" may be a Google glitch: look again sooner
         cache[f"{route}|{dep}|{ret}"] = entry
         if deal:
             found_all.append(deal)
