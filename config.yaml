@@ -1,35 +1,37 @@
-# ✈️ 日本傳統航空便宜機票提醒設定（網頁控制台：https://ntcloudy.github.io/jp-flight-alert/）
-# 價格一律是「每人、來回、含稅」新台幣；時間都是當地時間（去程看台灣起飛／日本抵達，回程看日本起飛／台灣抵達）
+# ✈️ 日本傳統航空便宜機票提醒設定（由網頁控制台產生：https://ntcloudy.github.io/jp-flight-alert/）
+# 價格＝每人、來回、含稅（新台幣）｜時間＝當地時間｜instant_max 馬上寄、digest_max 每日整理、anomaly_pct 比平常便宜幾 %
+# muted：不再通知的行程｜paused_until：暫停通知到這天（YYYY-MM-DD）
 alerts:
-  instant_max: 8000      # 🔥 超便宜：每人 ≤ 這個價格 → 馬上寄信
-  digest_max: 10000      # 👍 划算：每人 ≤ 這個價格 → 放進每日整理
-  anomaly_pct: 20        # 📉 特別便宜：比該航線過去 30 天平均便宜幾 % 以上 → 放進每日整理
-  digest_hour: 8         # 每日整理幾點寄（台灣時間）
-  renotify_drop: 300     # 已通知過的行程，每人再降價多少才再寄一次
-  paused_until: ""       # 暫停所有通知到這一天（YYYY-MM-DD），空白 = 不暫停
+  instant_max: 8000
+  digest_max: 10000
+  anomaly_pct: 20
+  digest_hour: 8
+  renotify_drop: 300
+  paused_until: ""
 schedule:
-  interval_hours: 3      # 多久查一次（最常用的 5 天行程、近 2 個月出發的日期照這個頻率；較遠日期會放慢）
+  interval_hours: 3
 trip:
-  origins: [TPE, TSA]    # TPE 桃園、TSA 松山（松山只有飛羽田）
-  destinations: [NRT, HND, KIX, NGO, FUK, CTS, OKA, SDJ, HKD, AOJ, KMQ, TOY, HIJ, OKJ, TAK, MYJ, KMJ, KOJ, KMI, FSZ, IBR, KIJ, HNA, AXT, ISG, UKB, KKJ]
-  min_days: 4            # 最少玩幾天（含出發、回程當天）
-  max_days: 8            # 最多玩幾天
-  prefer_days: 5         # 最想玩幾天（排序優先、更新最頻繁）
-  lead_days: 2           # 最快幾天後出發
-  horizon_days: 180      # 查未來幾天內出發的機票
-  adults: 2              # 幾位大人（經濟艙；價格會換算成每人）
-  nonstop_only: true     # 只看直飛
-  airlines: [CI, BR, JX, AE, JL, NH, CX]   # 華航、長榮、星宇、華信、日航、全日空、國泰
-outbound:                # 去程（台灣 → 日本）
+  origins: ["TPE", "TSA"]
+  destinations: ["NRT", "HND", "KIX", "NGO", "FUK", "CTS", "OKA", "SDJ", "HKD", "AOJ", "KMQ", "TOY", "HIJ", "OKJ", "TAK", "MYJ", "KMJ", "KOJ", "KMI", "FSZ", "IBR", "KIJ", "HNA", "AXT", "ISG", "UKB", "KKJ"]
+  min_days: 4
+  max_days: 8
+  prefer_days: 5
+  lead_days: 2
+  horizon_days: 180
+  adults: 2
+  nonstop_only: true
+  airlines: ["CI", "BR", "JX", "AE", "JL", "NH", "CX"]
+outbound:
   depart_earliest: "10:00"
   depart_latest: "14:00"
-  arrive_ideal: "18:00"  # 超過會標「稍晚抵達」
+  arrive_ideal: "18:00"
   arrive_latest: "18:30"
-inbound:                 # 回程（日本 → 台灣）
+inbound:
   depart_earliest: "13:00"
   depart_latest: "15:00"
   arrive_ideal: "19:00"
   arrive_latest: "20:00"
 promo:
-  enabled: true          # 航空公司促銷消息（放進每日整理）
-muted: []                # 不想再收到通知的行程，例如 "TPE-OKA|2026-11-20|2026-11-24"
+  enabled: true
+muted:
+  - "TPE-CTS|2026-10-19|2026-10-23"
