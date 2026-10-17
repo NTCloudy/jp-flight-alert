@@ -25,7 +25,10 @@ class ConfigError(ValueError):
 
 
 def hhmm(value, name: str) -> int:
-    """'14:00' -> minutes after midnight."""
+    """'14:00' -> minutes after midnight. (YAML 1.1 reads an unquoted 14:00 as the base-60
+    integer 840, which is conveniently the same number of minutes.)"""
+    if isinstance(value, int) and not isinstance(value, bool) and 0 <= value < 24 * 60:
+        return value
     m = re.fullmatch(r"\s*(\d{1,2}):(\d{2})\s*", str(value))
     if not m or int(m.group(1)) > 23 or int(m.group(2)) > 59:
         raise ConfigError(f"{name} 時間格式要像 14:00，目前是 {value!r}")
