@@ -114,47 +114,72 @@ def _no_service(state: dict, route: str, today: date) -> bool:
     return bool(until and until >= today.isoformat())
 
 
-def plan(cfg: Config, calendar: dict, state: dict, now: datetime) -> list[Task]:
-    """Every due calendar task, most overdue first (never-fetched data first of all)."""
+def _preferred_nights(cfg: Config) -> int:
+    nights = cfg.prefer_days - 1
+    return nights if nights in cfg.durations else cfg.durations[0]
+
+
+def plan(cfg: Config, calendar: dict, state: dict, now: datetime, force: bool = False) -> list[Task]:
+    """Every due calendar task, most overdue first (never-fetched data first of all).
+    With force=True every task is returned (manual "check now"), stalest first.
+    Routes whose preferred trip length came back completely empty only re-check that trip
+    length (until it shows a price or the route is marked as having no service)."""
     today = now.date()
+    wins = windows(cfg, today)
+    pref = _preferred_nights(cfg)
     tasks = []
     for origin, dest in cfg.routes():
         route = f"{origin}-{dest}"
         if _no_service(state, route, today):
             continue
+        pref_cache = (calendar.get(route) or {}).get(str(pref)) or {}
+        all_seen = all(d.isoformat() in pref_cache for _, s, e in wins for d in _days(s, e))
+        looks_empty = all_seen and all(v[0] is None for v in pref_cache.values())
         for nights in cfg.durations:
+            if looks_empty and nights != pref:
+                continue
             cache = (calendar.get(route) or {}).get(str(nights)) or {}
-            for k, s, e in windows(cfg, today):
+            for k, s, e in wins:
                 ages = [_hours_since((cache.get(d.isoformat()) or [None, None])[1], now) for d in _days(s, e)]
                 age = max(ages) if ages else MISSING
                 interval = task_interval(cfg, nights, k)
-                if age >= interval * 0.9:
+                if force or age >= interval * 0.9:
                     tasks.append(Task(route, nights, k, s, e, interval, age, abs(nights + 1 - cfg.prefer_days)))
     tasks.sort(key=lambda t: t.priority)
     return tasks
 
 
 def _store_calendar(calendar: dict, task: Task, prices: dict, now: datetime) -> None:
+    """Cache entries: [total_price, fetched_at] or [None, fetched_at, times_seen_empty]."""
     cache = calendar.setdefault(task.route, {}).setdefault(str(task.nights), {})
     stamp = now.isoformat(timespec="minutes")
+    priced = {dep: total for (dep, ret), total in prices.items()
+              if task.start <= dep <= task.end and (ret - dep).days == task.nights}
     for d in _days(task.start, task.end):
-        cache[d.isoformat()] = [None, stamp]
-    for (dep, ret), total in prices.items():
-        if task.start <= dep <= task.end and (ret - dep).days == task.nights:
-            cache[dep.isoformat()] = [round(total), stamp]
+        if d in priced:
+            cache[d.isoformat()] = [round(priced[d]), stamp]
+        else:
+            prev = cache.get(d.isoformat())
+            seen = prev[2] + 1 if prev and prev[0] is None and len(prev) > 2 else 1
+            cache[d.isoformat()] = [None, stamp, min(seen, 9)]
 
 
 def _check_no_service(cfg: Config, calendar: dict, state: dict, route: str, now: datetime) -> bool:
-    """Mark a route as having no matching service when every preferred-length window is empty."""
-    nights = cfg.prefer_days - 1
-    if nights not in cfg.durations:
-        nights = cfg.durations[0]
+    """Mark a route as having no matching service when every preferred-length date is empty and
+    (almost) every date came back empty at least twice — Google occasionally returns empty answers,
+    so one look is not enough. (The newest date at the end of the horizon is only ever seen once.)"""
+    nights = _preferred_nights(cfg)
     cache = (calendar.get(route) or {}).get(str(nights)) or {}
+    total = confirmed = 0
     for _, s, e in windows(cfg, now.date()):
         for d in _days(s, e):
             entry = cache.get(d.isoformat())
-            if not entry or _hours_since(entry[1], now) > 24 * NO_SERVICE_RECHECK_DAYS or entry[0] is not None:
+            if not entry or entry[0] is not None or _hours_since(entry[1], now) > 24 * NO_SERVICE_RECHECK_DAYS:
                 return False
+            total += 1
+            confirmed += len(entry) > 2 and entry[2] >= 2
+    if not total or confirmed < 0.9 * total:
+        return False
     state["routes"][route] = {"no_service_until": (now.date() + timedelta(days=NO_SERVICE_RECHECK_DAYS)).isoformat()}
     return True
 
@@ -179,10 +204,10 @@ def prune_calendar(cfg: Config, calendar: dict, today: date) -> None:
 def fresh_prices(cfg: Config, calendar: dict, route: str, now: datetime) -> dict[tuple[date, date], float]:
     out = {}
     for n, cache in (calendar.get(route) or {}).items():
-        for d, (price, at) in cache.items():
-            if price is not None and _hours_since(at, now) <= FRESH_HOURS:
+        for d, entry in cache.items():
+            if entry[0] is not None and _hours_since(entry[1], now) <= FRESH_HOURS:
                 dep = date.fromisoformat(d)
-                out[(dep, dep + timedelta(days=int(n)))] = price
+                out[(dep, dep + timedelta(days=int(n)))] = entry[0]
     return out
 
 
@@ -260,7 +285,7 @@ def coverage(cfg: Config, calendar: dict, state: dict, now: datetime) -> float:
 
 
 def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: datetime,
-        max_requests: int = 45, max_seconds: float = 15 * 60, clock=time.monotonic) -> RunResult:
+        max_requests: int = 45, max_seconds: float = 15 * 60, clock=time.monotonic, force: bool = False) -> RunResult:
     today = now.date()
     res = RunResult(started=now)
     t0 = clock()
@@ -268,9 +293,13 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
     cooldown = _parse(state.get("cooldown_until"))
     network = not (cooldown and cooldown > now)
     res.skipped_cooldown = not network
+    req0, fail0, err0 = source.stats.requests, source.stats.failures, len(source.stats.errors)
+
+    def used() -> int:
+        return source.stats.requests - req0
 
     def budget_left(limit: int) -> bool:
-        return source.stats.requests < limit and clock() - t0 < max_seconds
+        return used() < limit and clock() - t0 < max_seconds
 
     def throttled() -> None:
         nonlocal network
@@ -283,7 +312,7 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
 
     # ---- phase 1: calendar tasks ------------------------------------------------------
     def calendar_phase(limit: int) -> None:
-        for task in plan(cfg, calendar, state, now):
+        for task in plan(cfg, calendar, state, now, force=force):
             if not network or not budget_left(limit):
                 return
             if _no_service(state, task.route, today):
@@ -317,7 +346,7 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
             info.update(no_service=True, recheck=state["routes"][route]["no_service_until"])
             continue
         cal = fresh_prices(cfg, calendar, route, now)
-        stamps = [at for n in (calendar.get(route) or {}).values() for _, at in n.values() if at]
+        stamps = [entry[1] for n in (calendar.get(route) or {}).values() for entry in n.values() if entry[1]]
         info["updated"] = max(stamps) if stamps else None
         if cal:
             info.update(_summarize(cal, cfg.adults))
@@ -389,8 +418,8 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
         res.deals.append({**deal, "category": verdict.category, "discount_pct": verdict.discount_pct})
     res.deals.sort(key=lambda d: (d["price_pp"], abs(d["days"] - cfg.prefer_days), d["dep"]))
 
-    res.requests, res.failures = source.stats.requests, source.stats.failures
-    res.errors = list(source.stats.errors)
+    res.requests, res.failures = used(), source.stats.failures - fail0
+    res.errors = list(source.stats.errors[err0:])
     if network and not res.rate_limited and res.requests:
         state["rate_limit_streak"] = 0
     res.tasks_due = len(plan(cfg, calendar, state, now))

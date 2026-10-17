@@ -1,0 +1,49 @@
+name: Flight Scan
+
+# Runs every hour. Each run queries only the price data that is due (5-day trips departing in the
+# next two months every `interval_hours`, other trip lengths / later dates less often), verifies
+# promising dates, sends instant alerts, and sends the daily digest once a day.
+on:
+  schedule:
+    - cron: "41 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "scan = 立即檢查；auto = 例行檢查；digest = 立即寄每日整理；test-email = 寄測試信"
+        type: choice
+        options: [scan, auto, digest, test-email]
+        default: scan
+
+concurrency:
+  group: jp-flight-alert
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Check flights & notify
+        env:
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          MODE: ${{ github.event.inputs.mode || 'auto' }}
+        run: |
+          source scripts/common.sh
+          pull_data
+          python -m flight_alert "$MODE" || echo "::warning::run failed"
+          push_data
+          keepalive

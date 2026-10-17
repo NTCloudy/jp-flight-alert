@@ -21,11 +21,15 @@ log = logging.getLogger(__name__)
 logging.getLogger("fli").setLevel(logging.ERROR)
 
 CHUNK_DAYS = 61  # Google returns at most ~61 departure dates per calendar request
-DEFAULT_GAP = float(os.environ.get("FLIGHT_ALERT_GAP", "6"))  # seconds between requests
+DEFAULT_GAP = float(os.environ.get("FLIGHT_ALERT_GAP", "5"))  # seconds between requests
 
 
 class RateLimited(RuntimeError):
     """Google answered HTTP 429: stop querying for a while."""
+
+
+class EmptyResponse(RuntimeError):
+    """Google answered 200 but without any result rows (happens now and then); retry later."""
 
 
 def _patch_okinawa() -> None:
@@ -191,8 +195,12 @@ class GoogleFlights:
     # ---- public API ------------------------------------------------------
     def calendar(self, origin: str, dest: str, nights: int, start: date, end: date) -> dict[tuple[date, date], float] | None:
         """Cheapest total price per (departure, return) date pair for departures in [start, end]
-        (at most CHUNK_DAYS days: one request). None if the request failed."""
+        (at most CHUNK_DAYS days: one request). Dates without matching flights are simply absent.
+        None if the request failed or Google answered without any date rows (a transient glitch
+        that would otherwise look like "no flights")."""
         from fli.models.google_flights.dates import DateSearchFilters
+        from fli.search._urls import with_locale_params
+        from fli.search._wire import parse_first_wrb_payload
 
         end = min(end, start + timedelta(days=CHUNK_DAYS - 1))
         filters = DateSearchFilters(
@@ -200,39 +208,52 @@ class GoogleFlights:
             flight_segments=self._segments(origin, dest, start, start + timedelta(days=nights)),
             from_date=start.isoformat(), to_date=end.isoformat(), duration=nights,
         )
-        res, ok = self._call(f"calendar {origin}-{dest} {nights}晚 {start}",
-                             lambda: self._dates.search(filters, currency="TWD", language="zh-TW", country="TW"))
+        url = with_locale_params(self._dates.BASE_URL, "TWD", "zh-TW", "TW")
+
+        def fetch():
+            r = self._dates.client.post(url=url, data=f"f.req={filters.encode()}", impersonate="chrome",
+                                        allow_redirects=True)
+            data = parse_first_wrb_payload(r.text)
+            rows = data[-1] if isinstance(data, list) and data and isinstance(data[-1], list) else None
+            if not rows:
+                raise EmptyResponse("Google 回傳空白日曆")
+            return rows
+
+        rows, ok = self._call(f"calendar {origin}-{dest} {nights}晚 {start}", fetch)
         if not ok:
             return None
         prices: dict[tuple[date, date], float] = {}
-        for r in res or []:
-            if len(r.date) == 2 and r.price:
-                key = (r.date[0].date(), r.date[1].date())
-                prices[key] = min(prices.get(key, float("inf")), float(r.price))
+        for row in rows:
+            try:
+                dep, ret = date.fromisoformat(row[0]), date.fromisoformat(row[1])
+                price = float(row[2][0][1]) if row[2] else None
+            except (TypeError, ValueError, IndexError):
+                continue
+            if price:
+                prices[(dep, ret)] = min(prices.get((dep, ret), float("inf")), price)
         return prices
 
     def itineraries(self, origin: str, dest: str, dep: date, ret: date, max_outbound: int = 5) -> list[Itinerary] | None:
-        """All round-trip combinations Google offers for these dates (server-side filtered)."""
+        """All round-trip combinations Google offers for these dates (server-side filtered).
+        Only called for dates the calendar priced, so an empty answer is treated as a glitch (None)."""
         from fli.models.google_flights.base import SortBy
         from fli.models.google_flights.flights import FlightSearchFilters
 
         filters = FlightSearchFilters(**self._common(), flight_segments=self._segments(origin, dest, dep, ret),
                                       sort_by=SortBy.CHEAPEST)
-        res, ok = self._call(f"flights {origin}-{dest} {dep}~{ret}",
-                             lambda: self._flights.search(filters, top_n=max_outbound, currency="TWD",
-                                                          language="zh-TW", country="TW"))
+
+        def fetch():
+            combos = self._flights.search(filters, top_n=max_outbound, currency="TWD", language="zh-TW", country="TW")
+            combos = [c for c in combos or [] if isinstance(c, tuple) and len(c) == 2 and c[1].price is not None]
+            if not combos:
+                raise EmptyResponse("Google 沒有回傳航班")
+            return combos
+
+        res, ok = self._call(f"flights {origin}-{dest} {dep}~{ret}", fetch)
         if not ok:
             return None
-        out: list[Itinerary] = []
-        for combo in res or []:
-            if not isinstance(combo, tuple) or len(combo) != 2:
-                continue
-            first, second = combo
-            if second.price is None:
-                continue
-            out.append(Itinerary(out=[_leg(x) for x in first.legs], ret=[_leg(x) for x in second.legs],
-                                 total=float(second.price)))
-        return out
+        return [Itinerary(out=[_leg(x) for x in first.legs], ret=[_leg(x) for x in second.legs], total=float(second.price))
+                for first, second in res]
 
 
 def _code(enum_member) -> str:

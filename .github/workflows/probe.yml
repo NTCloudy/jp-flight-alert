@@ -1,4 +1,4 @@
-name: Probe (Google Flights from GitHub)
+name: Connectivity Probe (manual)
 
 on:
   workflow_dispatch:
@@ -9,9 +9,6 @@ on:
       max_calls:
         description: "最多查詢幾次"
         default: "30"
-      script:
-        description: "probe 或 diag"
-        default: "probe"
 
 permissions:
   contents: read
@@ -28,9 +25,4 @@ jobs:
           cache: pip
       - run: pip install -r requirements.txt
       - name: Probe
-        run: |
-          if [ "${{ github.event.inputs.script }}" = "diag" ]; then
-            python scripts/diag.py
-          else
-            python scripts/probe.py --gap "${{ github.event.inputs.gap }}" --max-calls "${{ github.event.inputs.max_calls }}"
-          fi
+        run: python scripts/probe.py --gap "${{ github.event.inputs.gap }}" --max-calls "${{ github.event.inputs.max_calls }}"
