@@ -118,6 +118,21 @@ class ScannerTest(unittest.TestCase):
         res = scanner.run(self.cfg, self.src, fresh_state(), {}, {}, NOW, max_requests=100)
         self.assertIn("15:25", res.routes["TPE-OKA"]["near_miss"]["why"])
 
+    def test_settings_change_rechecks_with_new_rules(self):
+        from flight_alert.config import Window
+        self.src.itins[("TPE-OKA", self.dep, self.ret)] = [itin(self.dep, self.ret, 15000.0, back=("JX", "871", "15:25", "16:10"))]
+        self.src.calendar_prices["TPE-OKA"] = {(self.dep, self.ret): 15000.0}
+        state, cal = fresh_state(), {}
+        res = scanner.run(self.cfg, self.src, state, cal, {}, NOW, max_requests=100)
+        self.assertFalse([d for d in res.deals if d["route"] == "TPE-OKA"])
+        # user relaxes the return window to 15:30 -> cached "no valid itinerary" is discarded and re-checked
+        relaxed = small_config(inbound=Window(13 * 60, 15 * 60 + 30, 19 * 60, 20 * 60))
+        res = scanner.run(relaxed, self.src, state, cal, {}, NOW + timedelta(minutes=30), max_requests=100)
+        oka = [d for d in res.deals if d["route"] == "TPE-OKA"]
+        self.assertEqual(oka[0]["back"]["flight"], "JX871")
+        self.assertIn("/travel/flights/search?", oka[0]["url"])
+        self.assertTrue(cal)  # same whole-hour Google filters -> collected prices kept
+
 
 if __name__ == "__main__":
     unittest.main()

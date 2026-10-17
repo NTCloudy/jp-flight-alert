@@ -1,0 +1,30 @@
+name: Link Check (manual)
+
+# Opens the Google Flights links of the current deals in a headless browser and saves screenshots,
+# to confirm the links show the same flights and prices as the alerts.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt playwright && python -m playwright install --with-deps chromium
+      - name: Open links
+        run: |
+          source scripts/common.sh
+          pull_data
+          python scripts/linkcheck.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linkcheck
+          path: linkcheck_*.png

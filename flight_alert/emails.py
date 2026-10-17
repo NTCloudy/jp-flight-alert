@@ -41,6 +41,11 @@ def notes(deal: dict) -> list[str]:
     return out
 
 
+def how_to_find(deal: dict) -> str:
+    return (f"在 Google Flights 先選去程 {deal['out']['flight']}（{deal['out']['dep']}），再選回程 "
+            f"{deal['back']['flight']}（{deal['back']['dep']}），會看到 {deal['adults']} 人總價 {money(deal['price_total'])}")
+
+
 def deal_text(deal: dict, icon: str = "✈️") -> str:
     lines = [
         f"{icon} {route_title(deal)} 每人 {money(deal['price_pp'])}（{deal['adults']} 人共 {money(deal['price_total'])}）",
@@ -49,6 +54,7 @@ def deal_text(deal: dict, icon: str = "✈️") -> str:
     ]
     lines += [f"   {n}" for n in notes(deal)]
     lines.append(f"   👉 {deal['url']}")
+    lines.append(f"   （{how_to_find(deal)}）")
     return "\n".join(lines)
 
 
@@ -91,6 +97,7 @@ def deal_html(deal: dict, highlight: bool = False) -> str:
         f"・{deal['days']} 天・{escape(_airlines(deal))}"
         f"<span style=\"float:right;color:#6b7385;font-size:13px\">{deal['adults']} 人共 {money(deal['price_total'])}</span></div>"
         f"<div style=\"font-size:14px;color:#374151;margin-top:2px\">{escape(flights_line(deal))}</div>{note_html}"
+        f"<div style=\"font-size:12px;color:#6b7385;margin-top:6px\">{escape(how_to_find(deal))}</div>"
         f"<div style=\"margin-top:8px\"><a href=\"{escape(deal['url'])}\" style=\"{STYLE_BTN}\">查看航班／訂票</a>{site_link}</div>"
         "</div>"
     )

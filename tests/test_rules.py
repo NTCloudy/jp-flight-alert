@@ -104,12 +104,19 @@ class LinksTest(unittest.TestCase):
         import base64
         from urllib.parse import parse_qs, urlparse
 
+        from flight_alert.links import url_for
+
         url = google_flights_url("TPE", "OKA", day(10), day(14), 2, ["CI", "JX"])
+        self.assertTrue(url.startswith("https://www.google.com/travel/flights/search?"))
         q = parse_qs(urlparse(url).query)
         raw = base64.urlsafe_b64decode(q["tfs"][0] + "==")
         for token in (b"TPE", b"OKA", b"CI", b"JX", day(10).isoformat().encode(), day(14).isoformat().encode()):
             self.assertIn(token, raw)
         self.assertEqual(q["curr"], ["TWD"])
+        # time windows become whole-hour filters: 10-14 dep / 18 arr out, 13-15 dep / 20 arr back
+        raw2 = base64.urlsafe_b64decode(parse_qs(urlparse(url_for(Config(), "TPE", "OKA", day(10), day(14))).query)["tfs"][0] + "==")
+        for field in (b"\x40\x0a", b"\x48\x0e", b"\x58\x12", b"\x40\x0d", b"\x48\x0f", b"\x58\x14"):
+            self.assertIn(field, raw2)
 
 
 if __name__ == "__main__":

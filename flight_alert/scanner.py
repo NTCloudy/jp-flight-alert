@@ -11,6 +11,7 @@ airlines, nonstop). Deals and the daily digest always use the freshest data avai
 
 from __future__ import annotations
 
+import json
 import statistics
 import time
 from dataclasses import dataclass, field
@@ -20,7 +21,7 @@ from . import rules, store
 from .airports import airport_name
 from .config import Config
 from .gflights import CHUNK_DAYS, Itinerary, Leg, RateLimited
-from .links import google_flights_url
+from .links import url_for
 
 FRESH_HOURS = 30              # calendar prices older than this are ignored for deals
 VERIFY_CACHE_HOURS = 12       # reuse a verification while the calendar price is unchanged
@@ -272,7 +273,7 @@ def make_deal(cfg: Config, origin: str, dest: str, dep: date, ret: date, it: Iti
         "back": _legs_info(it.ret),
         "flags": flags,
         "verified_at": now.isoformat(timespec="minutes"),
-        "url": google_flights_url(origin, dest, dep, ret, cfg.adults, cfg.airlines, cfg.nonstop_only),
+        "url": url_for(cfg, origin, dest, dep, ret),
     }
 
 
@@ -294,11 +295,28 @@ def coverage(cfg: Config, calendar: dict, state: dict, now: datetime) -> float:
     return fresh / total if total else 1.0
 
 
+def fingerprints(cfg: Config) -> tuple[str, str]:
+    """(what Google is asked, what our exact rules check). When the first changes, cached calendar
+    prices were fetched with different filters; when the second changes, verifications are stale."""
+    hours = lambda w: [w.depart_earliest // 60, w.depart_latest // 60, w.arrive_latest // 60]  # noqa: E731
+    server = json.dumps([hours(cfg.outbound), hours(cfg.inbound), sorted(cfg.airlines), cfg.nonstop_only, cfg.adults])
+    exact = json.dumps([vars(cfg.outbound), vars(cfg.inbound), sorted(cfg.airlines), cfg.nonstop_only, cfg.adults],
+                       sort_keys=True)
+    return server, exact
+
+
 def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: datetime,
         max_requests: int = 45, max_seconds: float = 15 * 60, clock=time.monotonic, force: bool = False) -> RunResult:
     today = now.date()
     res = RunResult(started=now)
     t0 = clock()
+    server_fp, exact_fp = fingerprints(cfg)
+    if state.get("fp_server") not in (None, server_fp):
+        calendar.clear()                 # prices were fetched with other time/airline filters
+        state["routes"] = {}
+    if state.get("fp_exact") not in (None, exact_fp):
+        state["verify_cache"] = {}       # re-check itineraries against the new rules
+    state["fp_server"], state["fp_exact"] = server_fp, exact_fp
     prune_calendar(cfg, calendar, today)
     cooldown = _parse(state.get("cooldown_until"))
     network = not (cooldown and cooldown > now)
@@ -449,7 +467,8 @@ def run(cfg: Config, source, state: dict, calendar: dict, history: dict, now: da
             continue
         seen.add(deal["key"])
         verdict = rules.classify(deal["price_pp"], cfg, res.routes.get(deal["route"], {}).get("avg30_pp"))
-        res.deals.append({**deal, "category": verdict.category, "discount_pct": verdict.discount_pct})
+        link = url_for(cfg, deal["origin"], deal["dest"], date.fromisoformat(deal["dep"]), date.fromisoformat(deal["ret"]))
+        res.deals.append({**deal, "url": link, "category": verdict.category, "discount_pct": verdict.discount_pct})
     res.deals.sort(key=lambda d: (d["price_pp"], abs(d["days"] - cfg.prefer_days), d["dep"]))
 
     res.requests, res.failures = used(), source.stats.failures - fail0

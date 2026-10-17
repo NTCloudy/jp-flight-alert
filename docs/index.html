@@ -275,7 +275,8 @@ function dealCard(d) {
       <div class="meta">去 ${esc(d.out.flight)} ${d.out.dep}→${d.out.arr}｜回 ${esc(d.back.flight)} ${d.back.dep}→${d.back.arr}</div>
       <div>${flags}</div></div>
     <div class="price">每人 ${money(d.price_pp)}<div class="meta">${d.adults} 人共 ${money(d.price_total)}</div><div class="meta">${ago(d.verified_at)}確認</div></div>
-    <div class="acts"><a class="btn primary small" href="${esc(d.url)}" target="_blank" rel="noopener">查看航班／訂票</a>
+    <div class="acts"><span class="meta" style="flex-basis:100%">在 Google Flights 先選去程 ${esc(d.out.flight)}（${d.out.dep}），再選回程 ${esc(d.back.flight)}（${d.back.dep}），會看到 ${d.adults} 人總價 ${money(d.price_total)}</span>
+      <a class="btn primary small" href="${esc(d.url)}" target="_blank" rel="noopener">查看航班／訂票</a>
       ${SITES[a1] ? `<a class="btn small" href="${SITES[a1]}" target="_blank" rel="noopener">${esc(AIRLINES[a1])}官網</a>` : ""}
       <button class="ghost small" data-act="${muted?"unmute":"mute"}" data-key="${esc(d.key)}">${muted?"🔔 恢復通知":"🙈 不再通知這個"}</button></div>
   </div>`;
@@ -313,14 +314,16 @@ function renderRoutes() {
     .map(([k,r]) => ({k, r, v: best[k], price: best[k] ? best[k].price_pp : r.min_pp})).sort((a,b) => a.price - b.price);
   $("routeTable").innerHTML = rows.length ? `<tr><th>目的地</th><th style="text-align:right">最低每人</th><th>日期／航班</th><th style="text-align:right">平常</th><th>30 天走勢</th></tr>` +
     rows.map(({k,r,v,price}) => `<tr><td><b>${esc(JP[r.dest]||r.dest)}</b><div class="muted">${esc(TW[r.origin]||r.origin)}出發</div></td>
-      <td class="num">${money(price)}</td>
+      <td class="num">${money(price)}${v ? `<div class="muted" style="font-weight:400">${v.adults} 人共 ${money(v.price_total)}</div>` : ""}</td>
       <td class="muted">${v ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}</a>`
         : r.near_miss ? `參考價：還沒有完全符合時段的航班<br>（${esc(r.near_miss.why)}）` : `${shortD(r.min_dep)} 出發（參考價，航班確認中）`}</td>
       <td class="num muted">${money(r.avg30_pp)}</td><td>${spark(k)}</td></tr>`).join("")
     : `<tr><td class="empty">還在收集資料…</td></tr>`;
   const off = Object.entries(routes).filter(([,r]) => r.no_service).map(([,r]) => `${TW[r.origin]||r.origin}→${JP[r.dest]||r.dest}`);
   const pending = Object.entries(routes).filter(([,r]) => !r.no_service && r.min_pp == null).map(([,r]) => `${TW[r.origin]||r.origin}→${JP[r.dest]||r.dest}`);
-  $("routeNote").innerHTML = (off.length ? `目前沒有符合時段的傳統航空直飛（每週重查）：${esc(off.join("、"))}<br>` : "") +
+  $("routeNote").innerHTML = `💡 點日期會開 Google Flights（已套用日期、${(S.cfg?.trip?.adults)||2} 位大人、直飛、航空公司和起降時段）。
+    Google 顯示的是 <b>${(S.cfg?.trip?.adults)||2} 人總價</b>，而且第一頁是「去程＋最便宜回程」的價格；先點表上的去程航班、再選回程航班，就是這裡的價格（票價隨時會變）。<br>` +
+    (off.length ? `目前沒有符合時段的傳統航空直飛（每週重查）：${esc(off.join("、"))}<br>` : "") +
     (pending.length ? `資料收集中：${esc(pending.join("、"))}` : "");
 }
 
