@@ -333,12 +333,12 @@ function renderPause() {
   const on = p && p >= todayTPE();
   $("pauseCard").style.display = "block";
   $("pauseCard").innerHTML = on
-    ? `<div class="row"><div class="grow warn">⏸️ 通知暫停中，到 <b>${esc(p)}</b> 為止（期間不寄任何信，但會繼續收集價格）。</div>
+    ? `<div class="row"><div class="warn" style="flex:1 1 260px">⏸️ 通知暫停中，到 <b>${esc(p)}</b> 為止（期間不寄任何信，但會繼續收集價格）。</div>
        <button class="primary" data-act="resume">▶️ 恢復通知</button></div>`
-    : `<div class="row"><span class="grow">🎉 買到機票、暫時不想收通知？</span>
+    : `<div class="row"><span style="flex:1 1 260px">🎉 買到機票、暫時不想收通知？</span>
        <button class="ghost small" data-act="pause" data-days="7">暫停 7 天</button>
        <button class="ghost small" data-act="pause" data-days="30">暫停 30 天</button>
-       <input type="date" id="pauseDate" title="暫停到這天"> <button class="ghost small" data-act="pauseTo">暫停到這天</button></div>`;
+       <span class="row" style="gap:6px"><input type="date" id="pauseDate" title="暫停到這天"><button class="ghost small" data-act="pauseTo">暫停到這天</button></span></div>`;
 }
 
 function renderSettings() {
