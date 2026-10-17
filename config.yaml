@@ -12,7 +12,7 @@ schedule:
   interval_hours: 3
 trip:
   origins: ["TPE", "TSA"]
-  destinations: ["NRT", "HND", "KIX", "NGO", "FUK", "CTS", "OKA", "SDJ", "HKD", "AOJ", "KMQ", "TOY", "HIJ", "OKJ", "TAK", "MYJ", "KMJ", "KOJ", "KMI", "FSZ", "IBR", "KIJ", "HNA", "AXT", "ISG", "UKB", "KKJ"]
+  destinations: ["NRT", "HND", "KIX", "UKB", "NGO", "FUK", "KKJ", "CTS", "HKD", "OKA", "ISG", "SHI", "SDJ", "AOJ", "AXT", "HNA", "KIJ", "IBR", "FSZ", "TOY", "KMQ", "HIJ", "OKJ", "TAK", "MYJ", "KMJ", "KOJ", "KMI"]
   min_days: 4
   max_days: 8
   prefer_days: 5
