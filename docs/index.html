@@ -177,7 +177,7 @@
   </div>
 
   <div class="card" id="mutedCard" style="display:none">
-    <h2>🙈 不再通知的行程</h2>
+    <h2 id="mutedTitle">🙈 不再通知的行程</h2>
     <div id="mutedList"></div>
   </div>
 
@@ -285,16 +285,21 @@ function dealCard(d) {
 function renderDeals() {
   // Only itineraries that pass the price thresholds belong here. Cheaper-than-nothing references
   // (right times and airlines, but above the thresholds) live in the destination table below.
-  const L = S.latest || {}, deals = L.deals || [], c = (S.cfg && S.cfg.alerts) || {};
-  const groups = { good: deals.filter(d => ["instant","digest","anomaly"].includes(d.category)),
-                   hot: deals.filter(d => d.category === "instant") };
+  // Trips the user muted move to the "不再通知的行程" card until they are restored.
+  const L = S.latest || {}, c = (S.cfg && S.cfg.alerts) || {};
+  const mutedSet = new Set((S.cfg && S.cfg.muted) || []);
+  const qualifying = (L.deals || []).filter(d => ["instant","digest","anomaly"].includes(d.category));
+  const deals = qualifying.filter(d => !mutedSet.has(d.key));
+  const hidden = qualifying.length - deals.length;
+  const groups = { good: deals, hot: deals.filter(d => d.category === "instant") };
   const labels = { good:`全部符合門檻 (${groups.good.length})`, hot:`🔥 超便宜 (${groups.hot.length})` };
   if (!groups[S.tab]) S.tab = "good";
   $("dealTabs").innerHTML = Object.keys(groups).map(k => `<button class="tab ${S.tab===k?"on":""}" data-tab="${k}">${labels[k]}</button>`).join("");
   const list = groups[S.tab].slice(0, 60);
-  $("deals").innerHTML = list.length ? list.map(dealCard).join("") :
+  const hiddenNote = hidden ? `<p class="muted" style="margin:8px 2px 0">另外有 ${hidden} 筆你設定「不再通知」的，在最下面的「🙈 不再通知的行程」，按「恢復通知」就會回到這裡。</p>` : "";
+  $("deals").innerHTML = (list.length ? list.map(dealCard).join("") :
     `<p class="empty">目前沒有符合門檻的機票（每人 ≤ ${money(c.instant_max)} 馬上寄信、≤ ${money(c.digest_max)} 或比平常便宜 ${c.anomaly_pct ?? 20}% 以上放進每日整理）。<br>
-     符合時段、但價格還太高的各地最低價，請看下面的「各目的地最低價」。</p>`;
+     符合時段、但價格還太高的各地最低價，請看下面的「各目的地最低價」。</p>`) + hiddenNote;
   $("dealsInfo").textContent = L.updated ? `（${ago(L.updated)}更新）` : "";
 }
 
@@ -315,7 +320,7 @@ function renderRoutes() {
   $("routeTable").innerHTML = rows.length ? `<tr><th>目的地</th><th style="text-align:right">最低每人</th><th>日期／航班</th><th style="text-align:right">平常</th><th>30 天走勢</th></tr>` +
     rows.map(({k,r,v,price}) => `<tr><td><b>${esc(JP[r.dest]||r.dest)}</b><div class="muted">${esc(TW[r.origin]||r.origin)}出發</div></td>
       <td class="num">${money(price)}${v ? `<div class="muted" style="font-weight:400">${v.adults} 人共 ${money(v.price_total)}</div>` : ""}</td>
-      <td class="muted">${v ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}</a>`
+      <td class="muted">${v ? `<a href="${esc(v.url)}" target="_blank" rel="noopener">${shortD(v.dep)}・${v.days} 天・${esc(v.out.flight)}/${esc(v.back.flight)}</a>${((S.cfg && S.cfg.muted) || []).includes(v.key) ? "（🙈 已設不再通知）" : ""}`
         : r.near_miss ? `參考價：還沒有完全符合時段的航班<br>（${esc(r.near_miss.why)}）` : `${shortD(r.min_dep)} 出發（參考價，航班確認中）`}</td>
       <td class="num muted">${money(r.avg30_pp)}</td><td>${spark(k)}</td></tr>`).join("")
     : `<tr><td class="empty">還在收集資料…</td></tr>`;
@@ -369,10 +374,19 @@ function renderSettings() {
   chips("dests", JP, "trip.destinations");
   chips("airlines", AIRLINES, "trip.airlines");
   const muted = S.cfg.muted || [];
+  const byKey = Object.fromEntries(((S.latest && S.latest.deals) || []).map(d => [d.key, d]));
+  const today = todayTPE();
   $("mutedCard").style.display = muted.length ? "block" : "none";
-  $("mutedList").innerHTML = muted.map(k => { const [r, d1, d2] = k.split("|"); const [o, d] = (r||"").split("-");
-    return `<div class="row" style="margin:4px 0"><span class="grow">${esc(TW[o]||o)}→${esc(JP[d]||d)}　${d1 ? shortD(d1) : ""} → ${d2 ? shortD(d2) : ""}</span>
-      <button class="ghost small" data-act="unmute" data-key="${esc(k)}">🔔 恢復通知</button></div>`; }).join("");
+  $("mutedTitle").textContent = `🙈 不再通知的行程（${muted.length}）`;
+  $("mutedList").innerHTML = [...muted].sort().map(k => {
+    const [r, d1, d2] = k.split("|"); const [o, dst] = (r||"").split("-"); const d = byKey[k];
+    const info = d ? `每人 ${money(d.price_pp)}・${esc(d.out.flight)} ${d.out.dep}／${esc(d.back.flight)} ${d.back.dep}`
+      : (d1 && d1 < today ? "已出發日期已過" : "目前沒有這個行程的最新價格");
+    return `<div class="row" style="margin:6px 0;padding:8px 0;border-bottom:1px dashed var(--line)">
+      <div class="grow"><b>${esc(TW[o]||o)} → ${esc(JP[dst]||dst)}</b>　${d1 ? shortD(d1) : ""} → ${d2 ? shortD(d2) : ""}
+        <div class="muted">${info}</div></div>
+      <button class="ghost small" data-act="unmute" data-key="${esc(k)}">🔔 恢復通知</button></div>`; }).join("") +
+    `<p class="muted">恢復後會回到上面的「符合門檻的機票」（如果價格還在門檻內）。整個目的地都不想看的話，可以在「機場與航空公司」取消勾選那個目的地。</p>`;
 }
 
 function renderAll() { renderDeals(); renderRoutes(); renderPromos(); renderPause(); renderSettings(); updateSaveBar(); }
@@ -394,17 +408,19 @@ const HEADER = "# ✈️ 日本傳統航空便宜機票提醒設定（由網頁�
   "# muted：不再通知的行程｜paused_until：暫停通知到這天（YYYY-MM-DD）\n";
 
 async function save(message) {
-  if (needToken()) return;
-  const err = validate(); if (err) { toast("⚠️ " + err, 5000); return; }
-  if (!dirty()) return;
+  if (needToken()) return false;
+  const err = validate(); if (err) { toast("⚠️ " + err, 5000); return false; }
+  if (!dirty()) return true;
   $("btnSave").disabled = true;
   try {
     const r = await gh(`/contents/config.yaml`, { method:"PUT", body: JSON.stringify({ message, branch:BRANCH, sha:S.sha, content: b64enc(HEADER + dump()) }) });
     S.sha = r.content.sha; S.orig = dump(); updateSaveBar();
     toast("✅ 已儲存，下次檢查（1 小時內）就會套用");
+    return true;
   } catch (e) {
     toast("❌ 儲存失敗：" + e.message, 6000);
     if (/409|does not match/.test(e.message)) setTimeout(init, 1500);
+    return false;
   } finally { $("btnSave").disabled = false; }
 }
 
@@ -423,7 +439,9 @@ document.addEventListener("click", async e => {
     if (needToken()) return;
     const k = el.dataset.key; S.cfg.muted = S.cfg.muted || [];
     S.cfg.muted = act === "mute" ? [...new Set([...S.cfg.muted, k])] : S.cfg.muted.filter(x => x !== k);
-    renderAll(); await save(act === "mute" ? `🙈 不再通知 ${k}` : `🔔 恢復通知 ${k}`);
+    renderAll();
+    if (await save(act === "mute" ? `🙈 不再通知 ${k}` : `🔔 恢復通知 ${k}`))
+      toast(act === "mute" ? "🙈 已移到最下面的「不再通知的行程」" : "🔔 已恢復，回到上面的「符合門檻的機票」", 3500);
   } else if (act === "pause" || act === "pauseTo") {
     if (needToken()) return;
     let until;
