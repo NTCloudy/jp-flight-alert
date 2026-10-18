@@ -33,4 +33,5 @@ inbound:
   arrive_latest: "20:00"
 promo:
   enabled: true
-muted: []
+muted:
+  - "TPE-SHI|2027-03-06|2027-03-10"
