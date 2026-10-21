@@ -58,6 +58,50 @@ def deal_text(deal: dict, icon: str = "✈️") -> str:
     return "\n".join(lines)
 
 
+# ---- grouping: same route + same flights, different dates -> one entry ----------------------
+def group_key(deal: dict) -> tuple:
+    o, b = deal["out"], deal["back"]
+    return (deal["route"], o["flight"], o["dep"], b["flight"], b["dep"])
+
+
+def group_deals(deals: list[dict]) -> list[list[dict]]:
+    """Merge itineraries that differ only by date. Keeps input order (cheapest first if input is sorted)."""
+    groups: dict[tuple, list[dict]] = {}
+    for d in deals:
+        groups.setdefault(group_key(d), []).append(d)
+    out = []
+    for items in groups.values():
+        out.append(sorted(items, key=lambda d: (d["price_pp"], d["dep"])))
+    return sorted(out, key=lambda g: g[0]["price_pp"])
+
+
+def common_flags(items: list[dict]) -> list[str]:
+    sets = [set(d.get("flags") or []) for d in items]
+    common = set.intersection(*sets) if sets else set()
+    return [f for f in (items[0].get("flags") or []) if f in common]
+
+
+def date_line(d: dict, skip: list[str] = ()) -> str:
+    extra = "".join(f" ⚠️{f}" for f in d.get("flags") or [] if f not in skip)
+    return f"{short_date(d['dep'])} → {short_date(d['ret'])}・{d['days']} 天｜每人 {money(d['price_pp'])}{extra}"
+
+
+def group_text(items: list[dict], icon: str = "✈️") -> str:
+    if len(items) == 1:
+        return deal_text(items[0], icon)
+    best = items[0]
+    common = common_flags(items)
+    lines = [f"{icon} {route_title(best)} 每人 {money(best['price_pp'])} 起・{len(items)} 個日期・{_airlines(best)}",
+             f"   {flights_line(best)}（每個日期都是這組航班）"]
+    lines += [f"   ⚠️ {f}" for f in common]
+    if len({d.get("discount_pct") for d in items}) == 1 and (best.get("discount_pct") or 0) >= 10:
+        lines.append(f"   📉 每個日期都比這條航線平常便宜 {best['discount_pct']}%")
+    for d in sorted(items, key=lambda d: d["dep"]):
+        lines.append(f"   • {date_line(d, common)}")
+        lines.append(f"     👉 {d['url']}")
+    return "\n".join(lines)
+
+
 # ---- HTML helpers --------------------------------------------------------------------------
 STYLE_BTN = ("display:inline-block;padding:7px 14px;border-radius:8px;background:#0b63ce;color:#fff;"
              "text-decoration:none;font-weight:600;font-size:14px")
@@ -103,29 +147,64 @@ def deal_html(deal: dict, highlight: bool = False) -> str:
     )
 
 
+def group_html(items: list[dict], highlight: bool = False) -> str:
+    if len(items) == 1:
+        return deal_html(items[0], highlight)
+    best = items[0]
+    common = common_flags(items)
+    border = "#f59e0b" if highlight else "#e3e7ef"
+    rows = "".join(
+        f"<tr><td style=\"padding:6px 4px;border-bottom:1px solid #eef1f6\">{escape(short_date(d['dep']))} → "
+        f"{escape(short_date(d['ret']))}・{d['days']} 天"
+        + "".join(f"<div style=\"color:#b45309;font-size:12px\">⚠️ {escape(f)}</div>" for f in d.get("flags") or []
+                  if f not in common)
+        + f"</td><td style=\"padding:6px 4px;border-bottom:1px solid #eef1f6;text-align:right;white-space:nowrap;"
+        f"color:#c2410c;font-weight:700\">{money(d['price_pp'])}</td>"
+        f"<td style=\"padding:6px 4px;border-bottom:1px solid #eef1f6;text-align:right\">"
+        f"<a href=\"{escape(d['url'])}\" style=\"color:#0b63ce;font-size:13px;white-space:nowrap\">查看／訂票</a></td></tr>"
+        for d in sorted(items, key=lambda d: d["dep"]))
+    return (
+        f"<div style=\"border:1px solid {border};border-radius:12px;padding:10px 12px;margin:8px 0\">"
+        f"<div style=\"font-size:15px;font-weight:700\">{escape(route_title(best))}"
+        f"<span style=\"float:right;color:#c2410c\">每人 {money(best['price_pp'])} 起</span></div>"
+        f"<div style=\"font-size:14px;margin-top:2px\">{len(items)} 個日期都有特價・{escape(_airlines(best))}</div>"
+        f"<div style=\"font-size:14px;color:#374151;margin-top:2px\">{escape(flights_line(best))}（每個日期都是這組航班）</div>"
+        + "".join(f"<div style=\"color:#b45309;font-size:13px\">⚠️ {escape(f)}</div>" for f in common)
+        + f"<table style=\"width:100%;border-collapse:collapse;font-size:14px;margin-top:6px\">{rows}</table>"
+        "</div>"
+    )
+
+
 # ---- instant alert -------------------------------------------------------------------------
 def instant(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
-    best = deals[0]
+    groups = group_deals(deals)
+    best = groups[0][0]
     if len(deals) == 1:
         subject = (f"🔥 超便宜機票：{airport_name(best['dest'])} 每人 {money(best['price_pp'])}"
                    f"（{_airlines(best)}）{short_date(best['dep'])}–{short_date(best['ret'])}")
+    elif len(groups) == 1:
+        subject = (f"🔥 超便宜機票：{airport_name(best['dest'])} 每人 {money(best['price_pp'])} 起"
+                   f"（{_airlines(best)}，{len(deals)} 個日期）")
     else:
-        subject = f"🔥 {len(deals)} 筆超便宜機票！最低 {airport_name(best['dest'])} 每人 {money(best['price_pp'])}"
+        subject = (f"🔥 {len(groups)} 組超便宜機票（共 {len(deals)} 個日期）！最低 {airport_name(best['dest'])} "
+                   f"每人 {money(best['price_pp'])}")
     intro = f"找到每人 {money(cfg.instant_max)} 以內、符合你時段的傳統航空直飛來回機票（{cfg.adults} 人經濟艙）："
-    text = intro + "\n\n" + "\n\n".join(deal_text(d, "🔥") for d in deals)
+    text = intro + "\n\n" + "\n\n".join(group_text(g, "🔥") for g in groups)
     text += "\n\n便宜機票常常很快賣完，建議盡快確認。\n網頁控制台：" + CONSOLE_URL
-    html = _page("🔥 超便宜機票", _section(intro, "".join(deal_html(d, True) for d in deals)))
+    html = _page("🔥 超便宜機票", _section(intro, "".join(group_html(g, True) for g in groups)))
     return subject, text, html
 
 
 # ---- daily digest --------------------------------------------------------------------------
-def _pick(deals: list[dict], per_dest: int, limit: int) -> list[dict]:
+def _pick(deals: list[dict], per_dest: int, limit: int) -> list[list[dict]]:
+    """Group same-flight itineraries first, then cap groups per destination and in total."""
     out, count = [], {}
-    for d in deals:
-        if count.get(d["dest"], 0) >= per_dest:
+    for g in group_deals(deals):
+        dest = g[0]["dest"]
+        if count.get(dest, 0) >= per_dest:
             continue
-        count[d["dest"]] = count.get(d["dest"], 0) + 1
-        out.append(d)
+        count[dest] = count.get(dest, 0) + 1
+        out.append(g)
         if len(out) >= limit:
             break
     return out
@@ -135,26 +214,25 @@ def digest(cfg: Config, latest: dict, promos: list[dict], now: datetime) -> tupl
     deals = [d for d in latest.get("deals", []) if d.get("key") not in set(cfg.muted)]
     hot = _pick([d for d in deals if d.get("category") == "instant"], 3, 10)
     good = _pick([d for d in deals if d.get("category") == "digest"], 3, 12)
-    odd = _pick(sorted([d for d in deals if d.get("category") == "anomaly"],
-                       key=lambda d: -(d.get("discount_pct") or 0)), 2, 6)
+    odd = _pick([d for d in deals if d.get("category") == "anomaly"], 2, 6)
 
     parts = []
     if hot:
-        parts.append(f"超便宜 {len(hot)} 筆")
+        parts.append(f"超便宜 {len(hot)} 組")
     if good:
         parts.append(f"{cfg.digest_max // 10000 if cfg.digest_max % 10000 == 0 else cfg.digest_max:,}"
-                     f"{'萬' if cfg.digest_max % 10000 == 0 else ''}內 {len(good)} 筆")
+                     f"{'萬' if cfg.digest_max % 10000 == 0 else ''}內 {len(good)} 組")
     if odd:
-        parts.append(f"特別便宜 {len(odd)} 筆")
+        parts.append(f"特別便宜 {len(odd)} 組")
     if promos:
         parts.append(f"促銷 {len(promos)} 則")
     subject = f"✈️ 每日機票整理 {now.month}/{now.day}：" + ("・".join(parts) if parts else "今天沒有符合門檻的機票")
 
     text_blocks, html_blocks = [], []
 
-    def add(title: str, items: list[dict], icon: str, highlight: bool = False):
-        text_blocks.append(f"【{title}】\n" + "\n\n".join(deal_text(d, icon) for d in items))
-        html_blocks.append(_section(title, "".join(deal_html(d, highlight) for d in items)))
+    def add(title: str, groups: list[list[dict]], icon: str, highlight: bool = False):
+        text_blocks.append(f"【{title}】\n" + "\n\n".join(group_text(g, icon) for g in groups))
+        html_blocks.append(_section(title, "".join(group_html(g, highlight) for g in groups)))
 
     if hot:
         add(f"🔥 超便宜（每人 {money(cfg.instant_max)} 以內）", hot, "🔥", True)

@@ -137,7 +137,7 @@ class EmailsTest(unittest.TestCase):
     def test_instant_and_digest_render(self):
         cfg = Config()
         s, t, h = emails.instant([deal(), deal("TPE-NRT|2026-12-01|2026-12-05", 7900)], cfg)
-        self.assertIn("2 筆超便宜機票", s)
+        self.assertIn("2 組超便宜機票", s)
         self.assertIn("JX870", t)
         self.assertIn("NT$7,500", h)
         latest = {"deals": [deal(), deal("TPE-NRT|2026-12-01|2026-12-05", 9500, "digest"),
@@ -145,13 +145,27 @@ class EmailsTest(unittest.TestCase):
                   "routes": {"TPE-OKA": {"origin": "TPE", "dest": "OKA", "min_pp": 7500, "min_dep": "2026-11-20"}},
                   "stats": {"requests_24h": 100, "success_rate_24h": "98%"}, "coverage": 0.8}
         s, t, h = emails.digest(cfg, latest, [{"title": "星宇85折", "link": "x", "source": "A"}], NOW)
-        self.assertIn("超便宜 1 筆", s)
-        self.assertIn("1萬內 1 筆", s)
-        self.assertIn("特別便宜 1 筆", s)
+        self.assertIn("超便宜 1 組", s)
+        self.assertIn("1萬內 1 組", s)
+        self.assertIn("特別便宜 1 組", s)
         self.assertIn("促銷 1 則", s)
         self.assertIn("比這條航線平常便宜 22%", t)
         empty = emails.digest(cfg, {"deals": [], "routes": {}}, [], NOW)
         self.assertIn("今天沒有符合門檻的機票", empty[0])
+
+    def test_same_flights_different_dates_are_grouped(self):
+        cfg = Config()
+        a = deal("TPE-OKA|2026-11-20|2026-11-24", 7500)
+        b = {**deal("TPE-OKA|2026-11-27|2026-12-01", 7800), "dep": "2026-11-27", "ret": "2026-12-01"}
+        c = deal("TPE-NRT|2026-12-01|2026-12-05", 7900)
+        groups = emails.group_deals([c, b, a])
+        self.assertEqual([len(g) for g in groups], [2, 1])
+        self.assertEqual(groups[0][0]["price_pp"], 7500)
+        s, t, h = emails.instant([a, b], cfg)
+        self.assertIn("2 個日期", s)
+        self.assertEqual(t.count("JX870"), 1)          # flights shown once for the whole group
+        self.assertIn("11/27", t)
+        self.assertIn("每個日期都是這組航班", h)
 
 
 if __name__ == "__main__":
