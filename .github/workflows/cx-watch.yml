@@ -1,0 +1,36 @@
+name: CX Typhoon Watch (temporary)
+
+# Temporary (until 2026-10-24): every 30 minutes, email me when Cathay Pacific posts a typhoon /
+# Taiwan / Japan advisory that could affect CX564 on 10/23. Delete this file after the trip.
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: cx-watch
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore what was already emailed
+        uses: actions/cache@v4
+        with:
+          path: .cx-watch
+          key: cx-watch-${{ github.run_id }}
+          restore-keys: cx-watch-
+
+      - name: Check Cathay Pacific advisories
+        env:
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: python3 scripts/cx_watch.py .cx-watch/state.json
