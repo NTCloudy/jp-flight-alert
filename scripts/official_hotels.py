@@ -21,8 +21,8 @@ def text(page) -> str:
 
 def toyoko(ctx, a) -> None:
     p = ctx.new_page()
-    p.goto("https://www.toyoko-inn.com/hotel_list/", wait_until="networkidle", timeout=90000)
-    p.wait_for_timeout(3000)
+    p.goto("https://www.toyoko-inn.com/hotel_list/", wait_until="domcontentloaded", timeout=90000)
+    p.wait_for_timeout(8000)
     codes = {}
     for el in p.locator('a[href*="/search/detail/"]').all():
         href, name = el.get_attribute("href") or "", re.sub(r"\s+", " ", el.inner_text()).strip()
@@ -35,8 +35,8 @@ def toyoko(ctx, a) -> None:
                                     "numberOfPeople": a.people, "numberOfRoom": 1})
         url = f"https://www.toyoko-inn.com/search/detail/{code}/?{q}"
         try:
-            p.goto(url, wait_until="networkidle", timeout=90000)
-            p.wait_for_timeout(4000)
+            p.goto(url, wait_until="domcontentloaded", timeout=90000)
+            p.wait_for_timeout(9000)
             t = text(p)
             prices = re.findall(r"[¥￥]\s?[\d,]{4,}|[\d,]{4,}\s?円", t)
             rooms = re.findall(r"(?:ダブル|ツイン|シングル|Double|Twin|ハリウッド|エコノミー|デラックス)[^\n]{0,40}", t)
@@ -78,7 +78,10 @@ def main() -> int:
         b = pw.chromium.launch()
         ctx = b.new_context(locale="ja-JP", timezone_id="Asia/Tokyo", viewport={"width": 1280, "height": 2000},
                             user_agent=UA)
-        toyoko(ctx, a)
+        try:
+            toyoko(ctx, a)
+        except Exception as e:  # noqa: BLE001
+            print(f"TOYOKO error {e}")
         apa(ctx, a)
         b.close()
     return 0
