@@ -11,6 +11,9 @@ on:
         required: true
       adults:
         default: "2"
+      source:
+        description: "booking / official（東橫INN、APA 官網）"
+        default: "booking"
       max_total:
         description: "總價上限（TWD）"
         default: "16000"
@@ -28,10 +31,16 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install playwright && python -m playwright install --with-deps chromium
+      - name: Search (official sites)
+        if: inputs.source == 'official'
+        run: python scripts/official_hotels.py --checkin "${{ inputs.checkin }}" --checkout "${{ inputs.checkout }}" --people "${{ inputs.adults }}"
       - name: Search
+        if: inputs.source != 'official'
         run: python scripts/hotel_search.py --area "${{ inputs.area }}" --checkin "${{ inputs.checkin }}" --checkout "${{ inputs.checkout }}" --adults "${{ inputs.adults }}" --max-total "${{ inputs.max_total }}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: hotels
-          path: hotels_*.png
+          path: |
+            hotels_*.png
+            official_*.png
