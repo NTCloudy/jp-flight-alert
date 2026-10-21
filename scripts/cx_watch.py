@@ -65,8 +65,9 @@ def summary(body: str) -> tuple[str, str]:
     m = re.search(r"(最後更新|Latest update)\s*[:：]\s*(.{6,40}?\(GMT\+8\))", body)
     stamp = m.group(2).strip() if m else ""
     start = body.find(m.group(0)) if m else 0
-    end_marks = [i for i in (body.find("聯絡客戶服務團隊", start), body.find("Contact Customer Care", start)) if i > 0]
-    text = body[start:min(end_marks) if end_marks else start + 1800]
+    end_marks = [i for i in (body.find(mark, start) for mark in ("聯絡客戶服務團隊", "Contact Customer Care", "版權所有",
+                                                                  "Copyright", "©", "Youtube")) if i > 0]
+    text = body[start:min(end_marks + [start + 1800])]
     text = re.sub(r"\s*(往返／途經航班|Flights to / from / through)", r"\n\n\1", text)
     text = re.sub(r"\s*(有關重新預訂機票的更多資訊|Please note the following|如何更改你的預訂|How to make changes)", r"\n\n\1", text)
     return stamp, text.strip()
