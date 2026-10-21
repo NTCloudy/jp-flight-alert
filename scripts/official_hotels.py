@@ -33,12 +33,13 @@ def toyoko(ctx, a) -> None:
     for code, name in codes.items():
         q = urllib.parse.urlencode({"hotelCodes": code, "checkinDate": a.checkin, "checkoutDate": a.checkout,
                                     "numberOfPeople": a.people, "numberOfRoom": 1})
-        url = f"https://www.toyoko-inn.com/search/detail/{code}/?{q}"
+        url = f"https://www.toyoko-inn.com/search/result/room_plan/?{q}&hotelCode={code}"
         try:
             p.goto(url, wait_until="domcontentloaded", timeout=90000)
             p.wait_for_timeout(9000)
             t = text(p)
             prices = re.findall(r"[¥￥]\s?[\d,]{4,}|[\d,]{4,}\s?円", t)
+            print("   PAGE: " + re.sub(r"\s+", " ", t)[:1500])
             rooms = re.findall(r"(?:ダブル|ツイン|シングル|Double|Twin|ハリウッド|エコノミー|デラックス)[^\n]{0,40}", t)
             sold = "満室" in t or "空室なし" in t
             print(f"TOYOKO | {name} | {url}\n   prices: {prices[:12]}\n   rooms: {list(dict.fromkeys(rooms))[:8]}\n   満室: {sold}")
