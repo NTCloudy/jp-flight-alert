@@ -30,7 +30,7 @@ def main() -> int:
     for day in args.dates.split(","):
         f = FlightSearchFilters(trip_type=TripType.ONE_WAY, passenger_info=PassengerInfo(adults=1),
                                 stops=MaxStops.ANY, seat_type=SeatType.ECONOMY,
-                                airlines=[L[args.airline]] if args.airline else None,
+                                airlines=None if args.airline.upper() in ("", "ALL", "ANY") else [L[args.airline]],
                                 flight_segments=[FlightSegment(departure_airport=[[A[o], 0]],
                                                                arrival_airport=[[A[d], 0]], travel_date=day)],
                                 sort_by=SortBy.CHEAPEST)
