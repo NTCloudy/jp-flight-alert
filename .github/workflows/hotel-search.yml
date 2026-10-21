@@ -1,0 +1,37 @@
+name: Hotel Search (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      area:
+        default: "Shinsaibashi, Osaka"
+      checkin:
+        required: true
+      checkout:
+        required: true
+      adults:
+        default: "2"
+      max_total:
+        description: "總價上限（TWD）"
+        default: "16000"
+
+permissions:
+  contents: read
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install playwright && python -m playwright install --with-deps chromium
+      - name: Search
+        run: python scripts/hotel_search.py --area "${{ inputs.area }}" --checkin "${{ inputs.checkin }}" --checkout "${{ inputs.checkout }}" --adults "${{ inputs.adults }}" --max-total "${{ inputs.max_total }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hotels
+          path: hotels_*.png
