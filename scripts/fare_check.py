@@ -26,7 +26,19 @@ def main() -> int:
 
     g = GoogleFlights(cfgmod.load("config.yaml"), gap=4)
     A, L = g._Airport, g._Airline
-    o, d = args.route.split("-")
+    for route in args.route.split(","):
+        run_route(g, A, L, args, route.strip())
+    return 0
+
+
+def run_route(g, A, L, args, route: str) -> None:
+    from fli.models.google_flights.base import FlightSegment, MaxStops, PassengerInfo, SeatType, SortBy, TripType
+    from fli.models.google_flights.flights import FlightSearchFilters
+
+    o, d = route.split("-")
+    if o not in A.__members__ or d not in A.__members__:
+        print(f"FARE {route} UNKNOWN AIRPORT")
+        return
     for day in args.dates.split(","):
         f = FlightSearchFilters(trip_type=TripType.ONE_WAY, passenger_info=PassengerInfo(adults=1),
                                 stops=MaxStops.ANY, seat_type=SeatType.ECONOMY,
@@ -37,16 +49,15 @@ def main() -> int:
         try:
             rows = g._flights._fetch_flights(f, capture_session=True, currency="TWD", language="zh-TW", country="TW")
         except Exception as e:  # noqa: BLE001
-            print(f"FARE {day} ERROR {type(e).__name__}: {e}")
+            print(f"FARE {route} {day} ERROR {type(e).__name__}: {str(e)[:120]}")
             continue
         rows = [r for r in rows or [] if r.legs]
         if not rows:
-            print(f"FARE {day} NONE (Google shows no bookable {args.airline} flight - possibly sold out)")
+            print(f"FARE {route} {day} NONE")
         for r in rows:
             legs = [_leg(x) for x in r.legs]
             path = " + ".join(f"{x.flight} {x.origin}{x.dep:%H:%M}->{x.dest}{x.arr:%H:%M}" for x in legs)
-            print(f"FARE {day} | {path} | {'NT$' + format(int(r.price), ',') if r.price else 'no price'}")
-    return 0
+            print(f"FARE {route} {day} | stops {len(legs) - 1} | {path} | {'NT$' + format(int(r.price), ',') if r.price else 'no price'}")
 
 
 if __name__ == "__main__":
