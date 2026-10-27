@@ -25,6 +25,8 @@ SITES = {"trip": "Trip.com", "agoda": "Agoda"}
 TRIP_CITY = {"NRT": "tyo", "HND": "tyo", "KIX": "osa", "UKB": "ukb", "CTS": "spk", "OKA": "oka"}
 RESULT_TTL_HOURS = 30          # older checks are not shown any more
 CHEAPER_BY = 300               # OTA must beat Google by this much per person to be called cheaper
+SANE_RATIO = (0.6, 1.8)        # an OTA price outside 60%-180% of Google's for the same flights is a parsing error
+DATA_VERSION = 2               # v1 stored Agoda prices that were really USD (GitHub runners are in the US)
 
 
 class SiteError(RuntimeError):
@@ -41,7 +43,7 @@ def trip_url(o: str, d: str, dep: str, ret: str, adults: int) -> str:
 def agoda_url(o: str, d: str, dep: str, ret: str, adults: int) -> str:
     return (f"https://www.agoda.com/zh-tw/flights/results?departureFrom={o}&departureFromType=1&arrivalTo={d}"
             f"&arrivalToType=1&departDate={dep}&returnDate={ret}&searchType=2&cabinType=Economy"
-            f"&adults={adults}&children=0&infants=0&sort=8")
+            f"&adults={adults}&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD")
 
 
 def search_url(site: str, deal: dict) -> str:
@@ -96,7 +98,8 @@ def trip_options(body: str) -> list[dict]:
 
 
 def agoda_options(body: str) -> tuple[list[dict], bool, bool]:
-    """(options, polling completed, a flight is already selected) from an Agoda flights-bff search answer."""
+    """(options, polling completed, a flight is already selected) from an Agoda flights-bff search answer.
+    Prices that are not in NT$ (Agoda picks the currency from the visitor's IP) are skipped."""
     try:
         d = json.loads(body)
     except json.JSONDecodeError:
@@ -108,9 +111,10 @@ def agoda_options(body: str) -> tuple[list[dict], bool, bool]:
         try:
             segs = it["slice"]["segments"]
             amount = it["totalPrice"]["priceAfterDiscount"]["amount"]
+            symbol = it["totalPrice"]["priceAfterDiscount"].get("currencySymbol", "")
         except (KeyError, TypeError):
             continue
-        if len(segs) != 1:
+        if len(segs) != 1 or symbol not in ("NT$", "TWD", "NT"):
             continue
         s = segs[0]
         out.append({"airline": s["airline"]["code"], "number": str(s["flightNumber"]).lstrip("0"),
@@ -182,6 +186,8 @@ def check_agoda(page, deal: dict) -> dict:
     page.on("response", lambda r: _keep(r, "flights-bff/search/v1/flights", bodies))
     page.goto(search_url("agoda", deal), wait_until="domcontentloaded", timeout=60000)
     _wait(page, lambda: bodies and agoda_options(bodies[-1])[1], 50, "Agoda 去程清單")
+    if not agoda_options(bodies[-1])[0] and '"items"' in bodies[-1]:
+        raise SiteError("Agoda 顯示的不是台幣價格")
     out = find(agoda_options(bodies[-1])[0], deal["out"])
     if not out:
         return {"status": "not_found", "note": f"Agoda 沒有 {deal['out']['flight']}"}
@@ -202,6 +208,13 @@ def check_agoda(page, deal: dict) -> dict:
 CHECKERS = {"trip": check_trip, "agoda": check_agoda}
 
 
+def sane(r: dict, google_pp: int) -> dict:
+    """Same flights cannot cost a fraction (or a multiple) of Google's price: treat that as a parsing error."""
+    if r.get("status") == "ok" and not SANE_RATIO[0] <= r["price_pp"] / google_pp <= SANE_RATIO[1]:
+        return {"status": "error", "note": f"價格異常（{r['price_pp']:,}，Google {google_pp:,}），可能幣別不對"}
+    return r
+
+
 def check_deal(pw, deal: dict, sites=tuple(SITES)) -> dict:
     """{site: {status ok|not_found|error, price_pp?, note?, url, at}} for one deal; never raises."""
     res = {}
@@ -217,6 +230,7 @@ def check_deal(pw, deal: dict, sites=tuple(SITES)) -> dict:
             r = {"status": "error", "note": f"{type(e).__name__}: {str(e)[:160]}"}
         finally:
             browser.close()
+        r = sane(r, deal["price_pp"])
         r.update(url=search_url(site, deal), at=now_tpe().isoformat(timespec="minutes"))
         res[site] = r
     return res
@@ -284,6 +298,8 @@ def run(cfg: Config, dry_run: bool = False, limit: int = 5, now: datetime | None
     now = now or now_tpe()
     latest = store.load("latest.json", {})
     data = store.load("ota.json", {})
+    if data.get("version") != DATA_VERSION:  # drop results / "already notified" prices from older versions
+        data = {"version": DATA_VERSION}
     state = store.load_state()
     targets = pick_targets(latest.get("deals") or [], cfg, now.date(), limit)
     print(f"[OTA] 核對 {len(targets)} 個 Google 最便宜的行程")

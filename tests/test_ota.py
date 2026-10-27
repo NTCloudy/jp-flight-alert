@@ -35,6 +35,16 @@ class ParseTest(unittest.TestCase):
         self.assertEqual(opts[0]["airline"] + opts[0]["number"], "TR874")
         self.assertEqual(opts[0]["price_pp"], 8777)
 
+    def test_agoda_prices_in_other_currencies_are_skipped(self):
+        body = json.loads((FIX / "agoda_outbound.json").read_text(encoding="utf-8"))
+        for it in body["data"]["response"]["content"]["items"]:
+            it["totalPrice"]["priceAfterDiscount"].update(currencySymbol="US$", amount="351")
+        self.assertEqual(ota.agoda_options(json.dumps(body))[0], [])
+
+    def test_implausible_prices_are_errors_not_deals(self):
+        self.assertEqual(ota.sane({"status": "ok", "price_pp": 351}, 10612)["status"], "error")
+        self.assertEqual(ota.sane({"status": "ok", "price_pp": 10079}, 10612)["status"], "ok")
+
     def test_flight_matching_ignores_leading_zeros_and_spaces(self):
         self.assertTrue(ota.same_flight("GK", "13", "GK013"))
         self.assertTrue(ota.same_flight("CI", "104", "CI 104"))
