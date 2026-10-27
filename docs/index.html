@@ -264,6 +264,20 @@ const dirty = () => dump() !== S.orig;
 function updateSaveBar() { $("saveBar").classList.toggle("show", dirty()); }
 
 // ---------- rendering ----------
+// Same-flight prices on Trip.com / Agoda (checked a few times a day for the cheapest deals)
+function otaLine(d) {
+  const o = d.ota; if (!o || !o.sites) return "";
+  const parts = [["trip","Trip.com"],["agoda","Agoda"]].filter(([s]) => o.sites[s]).map(([s,name]) => {
+    const r = o.sites[s];
+    if (r.status === "ok") {
+      const diff = d.price_pp - r.price_pp;
+      const cmp = diff > 0 ? `便宜 ${money(diff)}` : diff === 0 ? "同價" : `貴 ${money(-diff)}`;
+      return `<a href="${esc(r.url)}" target="_blank" rel="noopener"${diff > 0 ? ' style="font-weight:700"' : ""}>${name} ${money(r.price_pp)}</a>（${cmp}）`;
+    }
+    return `<a href="${esc(r.url)}" target="_blank" rel="noopener">${name}</a> ${r.status === "not_found" ? "沒有這組航班" : "這次沒查到"}`;
+  });
+  return `<div class="meta" style="margin-top:3px">🛒 同航班比價：${parts.join("｜")}・${ago(o.at)}查</div>`;
+}
 function dealCard(d) {
   const cat = d.category;
   const badge = cat === "instant" ? `<span class="badge b-hot">🔥 超便宜</span>` : cat === "digest" ? `<span class="badge b-good">👍 划算</span>`
@@ -277,7 +291,7 @@ function dealCard(d) {
     <div><div class="title">${esc(JP[d.dest]||d.dest)} <span class="muted">（${esc(TW[d.origin]||d.origin)}出發）</span> ${badge}</div>
       <div class="sub">${shortD(d.dep)} → ${shortD(d.ret)}・${d.days} 天・${esc(air)}</div>
       <div class="meta">去 ${esc(d.out.flight)} ${d.out.dep}→${d.out.arr}｜回 ${esc(d.back.flight)} ${d.back.dep}→${d.back.arr}</div>
-      <div>${flags}</div></div>
+      <div>${flags}</div>${otaLine(d)}</div>
     <div class="price">每人 ${money(d.price_pp)}<div class="meta">${d.adults} 人共 ${money(d.price_total)}</div><div class="meta">${ago(d.verified_at)}確認</div></div>
     <div class="acts"><span class="meta" style="flex-basis:100%">在 Google Flights 先選去程 ${esc(d.out.flight)}（${d.out.dep}），再選回程 ${esc(d.back.flight)}（${d.back.dep}），會看到 ${d.adults} 人總價 ${money(d.price_total)}</span>
       <a class="btn primary small" href="${esc(d.url)}" target="_blank" rel="noopener">查看航班／訂票</a>
@@ -308,7 +322,7 @@ function groupCard(g) {
   const rows = [...g].sort((a,b) => a.dep.localeCompare(b.dep)).map(x => {
     const extra = (x.flags||[]).filter(f => !common.includes(f)).map(f => `<span class="flag">⚠️ ${esc(f)}</span>`).join("") +
       (!sameDisc && x.discount_pct >= 10 ? `<span class="flag">📉 便宜 ${x.discount_pct}%</span>` : "");
-    return `<tr><td>${shortD(x.dep)} → ${shortD(x.ret)}・${x.days} 天${extra ? `<div>${extra}</div>` : ""}</td>
+    return `<tr><td>${shortD(x.dep)} → ${shortD(x.ret)}・${x.days} 天${extra ? `<div>${extra}</div>` : ""}${otaLine(x)}</td>
       <td class="p">${money(x.price_pp)}<div class="meta" style="font-weight:400">${x.adults} 人共 ${money(x.price_total)}</div></td>
       <td class="a"><a class="btn primary small" href="${esc(x.url)}" target="_blank" rel="noopener">訂票</a>
         <button class="ghost small" data-act="mute" data-key="${esc(x.key)}" title="只關掉這個日期">🙈</button></td></tr>`;

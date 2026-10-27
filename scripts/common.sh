@@ -5,7 +5,7 @@
 set -u
 export GIT_AUTHOR_NAME="flight-bot" GIT_AUTHOR_EMAIL="flight-bot@users.noreply.github.com"
 export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME" GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-DATA_FILES="state.json calendar.json history.json latest.json"
+DATA_FILES="state.json calendar.json history.json latest.json ota.json"
 
 pull_data() {
   mkdir -p data

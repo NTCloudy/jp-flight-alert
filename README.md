@@ -47,6 +47,21 @@
 4. **不重複寄信**：同一個行程只寄一次，除非每人再便宜 NT$300 以上，或下架超過 12 小時後又出現。
 5. **資料存放**：價格、通知紀錄存在這個 repo 的 `data` 分支，控制台直接讀取。
 
+## 🛒 Trip.com／Agoda 同航班比價
+
+Trip.com 和 Agoda 有時比 Google Flights 便宜，但它們沒有公開的機票 API，所以用「看不到畫面的瀏覽器」去查：
+
+- **每天 3 次**（約 09:17、15:17、21:17）挑 Google 目前**最便宜的 5 個行程**，到兩個網站各查一次。
+- **只比同一組航班**：先在網站上選 Google 找到的那班去程，再找同一班回程的價格（每人、來回、含稅）。找不到同航班就顯示「沒有這組航班」，不拿別的航班充數。
+- **OTA 比 Google 便宜 NT$300 以上、而且每人在「划算」門檻內**，會另外寄一封「🛒 OTA 比 Google 便宜」的信。
+- 通知信、每日整理和網頁控制台的機票卡片上，會多一行「🛒 同航班比價」，可以直接點去 Trip.com／Agoda。
+- OTA 票價常有**行李、退改限制**，訂票前請確認。網站改版或擋掉查詢時，這一行會顯示「這次沒查到」，不影響原本的 Google 通知。
+
+```bash
+pip install playwright && python -m playwright install chromium
+python -m flight_alert ota --dry-run --limit 3   # 核對 3 個最便宜的行程，只印出結果
+```
+
 ## 🔑 GitHub Secrets
 
 在 **Settings → Secrets and variables → Actions** 設定（已設定好）：

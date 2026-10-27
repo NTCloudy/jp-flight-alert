@@ -39,6 +39,9 @@ def main(argv=None) -> int:
         sp = sub.add_parser(name, help=help_)
         sp.add_argument("--dry-run", action="store_true", help="只印出通知，不寄信")
         sp.add_argument("--max-requests", type=int, default=None)
+    o = sub.add_parser("ota", help="到 Trip.com／Agoda 核對 Google 最便宜的幾個行程（同航班）")
+    o.add_argument("--dry-run", action="store_true", help="只印出通知，不寄信")
+    o.add_argument("--limit", type=int, default=5)
     t = sub.add_parser("test-email", help="寄一封測試信")
     t.add_argument("--dry-run", action="store_true")
     sub.add_parser("plan", help="列出目前的條件與航線")
@@ -53,6 +56,9 @@ def main(argv=None) -> int:
         return 2
     if args.cmd == "plan":
         return cmd_plan(cfg)
+    if args.cmd == "ota":
+        from . import ota
+        return ota.run(cfg, dry_run=args.dry_run, limit=args.limit)
     return app.run(cfg, mode=args.cmd, dry_run=args.dry_run, max_requests=args.max_requests)
 
 

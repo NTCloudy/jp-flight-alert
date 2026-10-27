@@ -46,6 +46,48 @@ def how_to_find(deal: dict) -> str:
             f"{deal['back']['flight']}（{deal['back']['dep']}），會看到 {deal['adults']} 人總價 {money(deal['price_total'])}")
 
 
+OTA_NOTE = "OTA 票價常有行李、退改限制，訂票前請確認"
+
+
+def ota_parts(deal: dict) -> list[tuple[str, str | None]]:
+    """[(text, url)] for the Trip.com / Agoda check of this exact itinerary (empty when not checked)."""
+    ota = deal.get("ota") or {}
+    out = []
+    for site, name in (("trip", "Trip.com"), ("agoda", "Agoda")):
+        r = (ota.get("sites") or {}).get(site)
+        if not r:
+            continue
+        if r.get("status") == "ok":
+            diff = deal["price_pp"] - r["price_pp"]
+            cmp = (f"比 Google 便宜 {money(diff)}" if diff > 0 else
+                   "和 Google 一樣" if diff == 0 else f"比 Google 貴 {money(-diff)}")
+            out.append((f"{name} 每人 {money(r['price_pp'])}（{cmp}）", r.get("url")))
+        elif r.get("status") == "not_found":
+            out.append((f"{name} 沒有這組航班", r.get("url")))
+        else:
+            out.append((f"{name} 這次沒查到", r.get("url")))
+    return out
+
+
+def ota_text(deal: dict, indent: str = "   ") -> list[str]:
+    parts = ota_parts(deal)
+    if not parts:
+        return []
+    lines = [f"{indent}🛒 同航班比價：" + "｜".join(t for t, _ in parts)]
+    lines += [f"{indent}   {t.split(' ')[0]}：{u}" for t, u in parts if u and "每人" in t]
+    return lines
+
+
+def ota_html(deal: dict) -> str:
+    parts = ota_parts(deal)
+    if not parts:
+        return ""
+    items = "｜".join(
+        (f"<a href=\"{escape(u)}\" style=\"color:#0b63ce\">{escape(t)}</a>" if u and "每人" in t else escape(t))
+        for t, u in parts)
+    return f"<div style=\"font-size:13px;margin-top:4px\">🛒 同航班比價：{items}</div>"
+
+
 def deal_text(deal: dict, icon: str = "✈️") -> str:
     lines = [
         f"{icon} {route_title(deal)} 每人 {money(deal['price_pp'])}（{deal['adults']} 人共 {money(deal['price_total'])}）",
@@ -53,6 +95,7 @@ def deal_text(deal: dict, icon: str = "✈️") -> str:
         f"   {flights_line(deal)}",
     ]
     lines += [f"   {n}" for n in notes(deal)]
+    lines += ota_text(deal)
     lines.append(f"   👉 {deal['url']}")
     lines.append(f"   （{how_to_find(deal)}）")
     return "\n".join(lines)
@@ -98,6 +141,7 @@ def group_text(items: list[dict], icon: str = "✈️") -> str:
         lines.append(f"   📉 每個日期都比這條航線平常便宜 {best['discount_pct']}%")
     for d in sorted(items, key=lambda d: d["dep"]):
         lines.append(f"   • {date_line(d, common)}")
+        lines += ota_text(d, "     ")
         lines.append(f"     👉 {d['url']}")
     return "\n".join(lines)
 
@@ -141,6 +185,7 @@ def deal_html(deal: dict, highlight: bool = False) -> str:
         f"・{deal['days']} 天・{escape(_airlines(deal))}"
         f"<span style=\"float:right;color:#6b7385;font-size:13px\">{deal['adults']} 人共 {money(deal['price_total'])}</span></div>"
         f"<div style=\"font-size:14px;color:#374151;margin-top:2px\">{escape(flights_line(deal))}</div>{note_html}"
+        f"{ota_html(deal)}"
         f"<div style=\"font-size:12px;color:#6b7385;margin-top:6px\">{escape(how_to_find(deal))}</div>"
         f"<div style=\"margin-top:8px\"><a href=\"{escape(deal['url'])}\" style=\"{STYLE_BTN}\">查看航班／訂票</a>{site_link}</div>"
         "</div>"
@@ -158,6 +203,7 @@ def group_html(items: list[dict], highlight: bool = False) -> str:
         f"{escape(short_date(d['ret']))}・{d['days']} 天"
         + "".join(f"<div style=\"color:#b45309;font-size:12px\">⚠️ {escape(f)}</div>" for f in d.get("flags") or []
                   if f not in common)
+        + ota_html(d)
         + f"</td><td style=\"padding:6px 4px;border-bottom:1px solid #eef1f6;text-align:right;white-space:nowrap;"
         f"color:#c2410c;font-weight:700\">{money(d['price_pp'])}</td>"
         f"<td style=\"padding:6px 4px;border-bottom:1px solid #eef1f6;text-align:right\">"
@@ -192,6 +238,41 @@ def instant(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
     text = intro + "\n\n" + "\n\n".join(group_text(g, "🔥") for g in groups)
     text += "\n\n便宜機票常常很快賣完，建議盡快確認。\n網頁控制台：" + CONSOLE_URL
     html = _page("🔥 超便宜機票", _section(intro, "".join(group_html(g, True) for g in groups)))
+    return subject, text, html
+
+
+# ---- OTA cheaper than Google ---------------------------------------------------------------
+def ota_cheaper(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
+    """Deals whose exact flights are cheaper on Trip.com / Agoda than on Google Flights."""
+    deals = sorted(deals, key=lambda d: d["ota"]["best"]["price_pp"])
+    b = deals[0]
+    best = b["ota"]["best"]
+    subject = (f"🛒 {best['name']} 比 Google 便宜：{airport_name(b['dest'])} 每人 {money(best['price_pp'])}"
+               f"（{_airlines(b)}）{short_date(b['dep'])}–{short_date(b['ret'])}"
+               + (f" 等 {len(deals)} 組" if len(deals) > 1 else ""))
+    intro = (f"同樣的航班，在 Trip.com／Agoda 比 Google Flights 便宜（每人來回含稅、{cfg.adults} 人經濟艙）。"
+             f"{OTA_NOTE}。")
+    blocks_t, blocks_h = [], []
+    for d in deals:
+        o = d["ota"]["best"]
+        blocks_t.append(
+            f"🛒 {route_title(d)}：{o['name']} 每人 {money(o['price_pp'])}（Google {money(d['price_pp'])}，"
+            f"便宜 {money(o['saving'])}）\n   {short_date(d['dep'])} → {short_date(d['ret'])}・{d['days']} 天・"
+            f"{_airlines(d)}\n   {flights_line(d)}\n   👉 {o['url']}")
+        blocks_h.append(
+            f"<div style=\"border:1px solid #f59e0b;border-radius:12px;padding:10px 12px;margin:8px 0\">"
+            f"<div style=\"font-size:15px;font-weight:700\">{escape(route_title(d))}"
+            f"<span style=\"float:right;color:#c2410c\">{escape(o['name'])} 每人 {money(o['price_pp'])}</span></div>"
+            f"<div style=\"font-size:14px;margin-top:2px\">{escape(short_date(d['dep']))} → {escape(short_date(d['ret']))}"
+            f"・{d['days']} 天・{escape(_airlines(d))}<span style=\"float:right;color:#6b7385;font-size:13px\">"
+            f"Google {money(d['price_pp'])}，便宜 {money(o['saving'])}</span></div>"
+            f"<div style=\"font-size:14px;color:#374151;margin-top:2px\">{escape(flights_line(d))}</div>"
+            f"<div style=\"font-size:12px;color:#6b7385;margin-top:6px\">在 {escape(o['name'])} 先選去程 "
+            f"{escape(d['out']['flight'])}（{d['out']['dep']}），再選回程 {escape(d['back']['flight'])}（{d['back']['dep']}）</div>"
+            f"<div style=\"margin-top:8px\"><a href=\"{escape(o['url'])}\" style=\"{STYLE_BTN}\">到 {escape(o['name'])} 查看／訂票</a>"
+            f" <a href=\"{escape(d['url'])}\" style=\"color:#0b63ce;font-size:13px;margin-left:8px\">Google Flights</a></div></div>")
+    text = intro + "\n\n" + "\n\n".join(blocks_t) + "\n\n網頁控制台：" + CONSOLE_URL
+    html = _page("🛒 OTA 比 Google 便宜", _section(intro, "".join(blocks_h)))
     return subject, text, html
 
 

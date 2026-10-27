@@ -6,7 +6,7 @@ import json
 import os
 from datetime import datetime, timedelta
 
-from . import emails, promo, scanner, store
+from . import emails, ota, promo, scanner, store
 from .config import TPE_TZ, Config, now_tpe
 from .notifier import send_email
 
@@ -120,6 +120,7 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
 
             source = GoogleFlights(cfg)
         res = scanner.run(cfg, source, state, calendar, history, now, max_requests=max_requests, force=(mode == "scan"))
+        ota.attach(res.deals, store.load("ota.json", {}), now)  # same-flight Trip.com / Agoda prices (if checked)
         print(f"[掃描] 完成 {res.tasks_done} 個日曆查詢、確認 {res.verified} 組航班；送出 {res.requests} 個請求、失敗 {res.failures} 次"
               f"{f'、可疑空白 {res.suspect_empty} 次' if res.suspect_empty else ''}"
               f"{'、被限流' if res.rate_limited else ''}{'、冷卻中略過' if res.skipped_cooldown else ''}；"

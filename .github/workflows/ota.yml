@@ -1,0 +1,45 @@
+name: OTA Check
+
+# Checks the few cheapest Google Flights deals on Trip.com and Agoda (same flights, headless browser),
+# three times a day. Results go to the data branch (ota.json, plus an `ota` field on deals in latest.json);
+# an email goes out when an OTA is clearly cheaper than Google.
+on:
+  schedule:
+    - cron: "17 1,7,13 * * *"   # 09:17 / 15:17 / 21:17 Taiwan (GitHub may start it late)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "核對幾個 Google 最便宜的行程"
+        default: "5"
+
+concurrency:
+  group: jp-flight-alert   # shares the data branch with Flight Scan
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  ota:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt playwright && python -m playwright install --with-deps chromium
+
+      - name: Check Trip.com / Agoda
+        env:
+          NOTIFY_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        run: |
+          source scripts/common.sh
+          pull_data
+          python -m flight_alert ota --limit "${{ github.event.inputs.limit || '5' }}" || echo "::warning::OTA check failed"
+          push_data
