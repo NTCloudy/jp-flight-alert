@@ -1,0 +1,37 @@
+name: OTA Probe (manual)
+
+# Feasibility test: can GitHub's runners read Trip.com / Agoda flight prices with a headless browser?
+on:
+  workflow_dispatch:
+    inputs:
+      route:
+        description: "航線，例如 TPE-NRT"
+        default: "TPE-NRT"
+      depart:
+        description: "去程日期"
+        default: "2026-12-10"
+      return_date:
+        description: "回程日期"
+        default: "2026-12-14"
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install playwright && python -m playwright install --with-deps chromium
+      - name: Probe Trip.com / Agoda
+        run: python scripts/ota_probe.py --route "${{ inputs.route }}" --depart "${{ inputs.depart }}" --return "${{ inputs.return_date }}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ota-probe
+          path: out/ota_probe
+          retention-days: 7
