@@ -186,7 +186,11 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
         else:
             subject, text, html = emails.digest(cfg, latest, state.get("promo_pending") or [], now)
             if _send(state, subject, text, html, dry_run):
-                state["digest_last_date"] = now.astimezone(TPE_TZ).date().isoformat()
+                local_now = now.astimezone(TPE_TZ)
+                # A manual / late digest sent before digest_hour covers yesterday, so today's
+                # regular evening digest still goes out.
+                owed = local_now.date() if local_now.hour >= cfg.digest_hour else local_now.date() - timedelta(days=1)
+                state["digest_last_date"] = max(state.get("digest_last_date") or "", owed.isoformat())
                 state["promo_pending"] = []
                 if latest:
                     latest["digest_last_date"] = state["digest_last_date"]
