@@ -50,8 +50,14 @@ def pick_instant(deals: list[dict], state: dict, cfg: Config, now: datetime) -> 
 
 
 def digest_due(cfg: Config, state: dict, now: datetime) -> bool:
+    """Due once per day after digest_hour. GitHub's hourly schedule often skips several hours,
+    so if the whole digest window of a day was missed, send the late digest at the next run."""
     local = now.astimezone(TPE_TZ)
-    return local.hour >= cfg.digest_hour and state.get("digest_last_date") != local.date().isoformat()
+    last = state.get("digest_last_date")
+    owed = local.date() if local.hour >= cfg.digest_hour else local.date() - timedelta(days=1)
+    if not last:
+        return local.hour >= cfg.digest_hour
+    return last < owed.isoformat()
 
 
 def _stats(state: dict, now: datetime) -> dict:
