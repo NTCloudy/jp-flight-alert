@@ -1,0 +1,1181 @@
+{
+ "config": {
+  "adults": 2,
+  "anomaly_pct": 50,
+  "digest_hour": 18,
+  "digest_max": 10000,
+  "instant_max": 8000,
+  "interval_hours": 3.0
+ },
+ "cooldown_until": null,
+ "coverage": 1.0,
+ "deals": [
+  {
+   "adults": 2,
+   "back": {
+    "airline": "JX",
+    "arr": "16:10",
+    "dep": "15:25",
+    "flight": "JX871",
+    "from": "OKA",
+    "to": "TPE"
+   },
+   "category": null,
+   "days": 4,
+   "dep": "2027-03-21",
+   "dest": "OKA",
+   "dest_name": "沖繩",
+   "discount_pct": 10,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-OKA|2027-03-21|2027-03-24",
+   "origin": "TPE",
+   "ota": {
+    "at": "2026-10-31T21:38+08:00",
+    "best": {
+     "name": "Trip.com",
+     "price_pp": 10227,
+     "saving": 373,
+     "site": "trip",
+     "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2027-03-21&rdate=2027-03-24&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+    },
+    "sites": {
+     "agoda": {
+      "at": "2026-10-31T21:38+08:00",
+      "price_pp": 11956,
+      "status": "ok",
+      "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=OKA&arrivalToType=1&departDate=2027-03-21&returnDate=2027-03-24&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+     },
+     "trip": {
+      "at": "2026-10-31T21:38+08:00",
+      "price_pp": 10227,
+      "status": "ok",
+      "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2027-03-21&rdate=2027-03-24&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+     }
+    }
+   },
+   "out": {
+    "airline": "JX",
+    "arr": "14:15",
+    "dep": "11:40",
+    "flight": "JX870",
+    "from": "TPE",
+    "to": "OKA"
+   },
+   "price_pp": 10600,
+   "price_total": 21200,
+   "ret": "2027-03-24",
+   "route": "TPE-OKA",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMjEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA09LQRo-EgoyMDI3LTAzLTI0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA09LQXIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T17:57+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "JX",
+    "arr": "17:40",
+    "dep": "15:05",
+    "flight": "JX1839",
+    "from": "NGO",
+    "to": "TPE"
+   },
+   "category": null,
+   "days": 8,
+   "dep": "2027-03-09",
+   "dest": "NGO",
+   "dest_name": "名古屋",
+   "discount_pct": 3,
+   "flags": [],
+   "key": "TPE-NGO|2027-03-09|2027-03-16",
+   "origin": "TPE",
+   "ota": {
+    "at": "2026-10-31T21:38+08:00",
+    "best": {
+     "name": "Trip.com",
+     "price_pp": 14200,
+     "saving": 316,
+     "site": "trip",
+     "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=ngo&ddate=2027-03-09&rdate=2027-03-16&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+    },
+    "sites": {
+     "agoda": {
+      "at": "2026-10-31T21:39+08:00",
+      "price_pp": 16459,
+      "status": "ok",
+      "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NGO&arrivalToType=1&departDate=2027-03-09&returnDate=2027-03-16&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+     },
+     "trip": {
+      "at": "2026-10-31T21:39+08:00",
+      "price_pp": 14200,
+      "status": "ok",
+      "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=ngo&ddate=2027-03-09&rdate=2027-03-16&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+     }
+    }
+   },
+   "out": {
+    "airline": "JX",
+    "arr": "13:55",
+    "dep": "10:20",
+    "flight": "JX1838",
+    "from": "TPE",
+    "to": "NGO"
+   },
+   "price_pp": 14516,
+   "price_total": 29032,
+   "ret": "2027-03-16",
+   "route": "TPE-NGO",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMDkoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05HTxo-EgoyMDI3LTAzLTE2KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05HT3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T07:42+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "JX",
+    "arr": "15:20",
+    "dep": "13:25",
+    "flight": "JX821",
+    "from": "KIX",
+    "to": "TPE"
+   },
+   "category": null,
+   "days": 4,
+   "dep": "2027-04-06",
+   "dest": "KIX",
+   "dest_name": "大阪關西",
+   "discount_pct": 13,
+   "flags": [],
+   "key": "TPE-KIX|2027-04-06|2027-04-09",
+   "origin": "TPE",
+   "ota": {
+    "at": "2026-10-31T21:38+08:00",
+    "best": {
+     "name": "Trip.com",
+     "price_pp": 14487,
+     "saving": 267,
+     "site": "trip",
+     "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-04-06&rdate=2027-04-09&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+    },
+    "sites": {
+     "agoda": {
+      "at": "2026-10-31T21:40+08:00",
+      "price_pp": 16517,
+      "status": "ok",
+      "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=KIX&arrivalToType=1&departDate=2027-04-06&returnDate=2027-04-09&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+     },
+     "trip": {
+      "at": "2026-10-31T21:39+08:00",
+      "price_pp": 14487,
+      "status": "ok",
+      "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-04-06&rdate=2027-04-09&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+     }
+    }
+   },
+   "out": {
+    "airline": "JX",
+    "arr": "14:00",
+    "dep": "10:15",
+    "flight": "JX822",
+    "from": "TPE",
+    "to": "KIX"
+   },
+   "price_pp": 14754,
+   "price_total": 29508,
+   "ret": "2027-04-09",
+   "route": "TPE-KIX",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMDYoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0tJWBo-EgoyMDI3LTA0LTA5KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0tJWHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T17:57+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "JX",
+    "arr": "16:50",
+    "dep": "14:10",
+    "flight": "JX801",
+    "from": "NRT",
+    "to": "TPE"
+   },
+   "category": null,
+   "days": 4,
+   "dep": "2027-04-19",
+   "dest": "NRT",
+   "dest_name": "東京成田",
+   "discount_pct": 6,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-NRT|2027-04-19|2027-04-22",
+   "origin": "TPE",
+   "ota": {
+    "at": "2026-10-31T21:38+08:00",
+    "best": {
+     "name": "Trip.com",
+     "price_pp": 14794,
+     "saving": 302,
+     "site": "trip",
+     "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2027-04-19&rdate=2027-04-22&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+    },
+    "sites": {
+     "agoda": {
+      "at": "2026-10-31T21:40+08:00",
+      "price_pp": 17109,
+      "status": "ok",
+      "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NRT&arrivalToType=1&departDate=2027-04-19&returnDate=2027-04-22&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+     },
+     "trip": {
+      "at": "2026-10-31T21:40+08:00",
+      "price_pp": 14794,
+      "status": "ok",
+      "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2027-04-19&rdate=2027-04-22&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+     }
+    }
+   },
+   "out": {
+    "airline": "JX",
+    "arr": "15:05",
+    "dep": "10:40",
+    "flight": "JX802",
+    "from": "TPE",
+    "to": "NRT"
+   },
+   "price_pp": 15096,
+   "price_total": 30192,
+   "ret": "2027-04-22",
+   "route": "TPE-NRT",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTkoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA0LTIyKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T17:57+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "NH",
+    "arr": "15:50",
+    "dep": "13:20",
+    "flight": "NH853",
+    "from": "HND",
+    "to": "TSA"
+   },
+   "category": null,
+   "days": 4,
+   "dep": "2027-04-17",
+   "dest": "HND",
+   "dest_name": "東京羽田",
+   "discount_pct": 34,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TSA-HND|2027-04-17|2027-04-20",
+   "origin": "TSA",
+   "ota": {
+    "at": "2026-10-31T21:38+08:00",
+    "best": {
+     "name": "Trip.com",
+     "price_pp": 14824,
+     "saving": 390,
+     "site": "trip",
+     "url": "https://tw.trip.com/flights/showfarefirst?dcity=tsa&acity=tyo&ddate=2027-04-17&rdate=2027-04-20&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+    },
+    "sites": {
+     "agoda": {
+      "at": "2026-10-31T21:41+08:00",
+      "price_pp": 17284,
+      "status": "ok",
+      "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TSA&departureFromType=1&arrivalTo=HND&arrivalToType=1&departDate=2027-04-17&returnDate=2027-04-20&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+     },
+     "trip": {
+      "at": "2026-10-31T21:41+08:00",
+      "price_pp": 14824,
+      "status": "ok",
+      "url": "https://tw.trip.com/flights/showfarefirst?dcity=tsa&acity=tyo&ddate=2027-04-17&rdate=2027-04-20&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+     }
+    }
+   },
+   "out": {
+    "airline": "NH",
+    "arr": "17:45",
+    "dep": "13:30",
+    "flight": "NH852",
+    "from": "TSA",
+    "to": "HND"
+   },
+   "price_pp": 15214,
+   "price_total": 30428,
+   "ret": "2027-04-20",
+   "route": "TSA-HND",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFNBcgUSA0hORBo-EgoyMDI3LTA0LTIwKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0hORHIFEgNUU0FCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T17:57+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 6,
+   "dep": "2027-04-23",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 54,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-23|2027-04-28",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 21193,
+   "price_total": 42386,
+   "ret": "2027-04-28",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjMoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T10:42+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 4,
+   "dep": "2027-04-25",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 54,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-25|2027-04-28",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 21193,
+   "price_total": 42386,
+   "ret": "2027-04-28",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjUoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T10:42+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 7,
+   "dep": "2027-04-22",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 54,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-22|2027-04-28",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 21193,
+   "price_total": 42386,
+   "ret": "2027-04-28",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjIoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T10:42+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 8,
+   "dep": "2027-04-21",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 54,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-21|2027-04-28",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 21193,
+   "price_total": 42386,
+   "ret": "2027-04-28",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T10:42+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 8,
+   "dep": "2027-04-27",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 54,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-27|2027-05-04",
+   "origin": "TPE",
+   "ota": {
+    "at": "2026-10-31T14:58+08:00",
+    "best": {
+     "name": "Agoda",
+     "price_pp": 24093,
+     "saving": -2900,
+     "site": "agoda",
+     "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=CTS&arrivalToType=1&departDate=2027-04-27&returnDate=2027-05-04&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+    },
+    "sites": {
+     "agoda": {
+      "at": "2026-10-31T15:01+08:00",
+      "price_pp": 24093,
+      "status": "ok",
+      "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=CTS&arrivalToType=1&departDate=2027-04-27&returnDate=2027-05-04&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+     },
+     "trip": {
+      "at": "2026-10-31T15:01+08:00",
+      "note": "TimeoutError: Locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"div\").filter(has_text=\"10:10\").filter(has_text=\"15:00\").filter(has_text=\"長榮航空\").filt",
+      "status": "error",
+      "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=spk&ddate=2027-04-27&rdate=2027-05-04&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+     }
+    }
+   },
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 21193,
+   "price_total": 42386,
+   "ret": "2027-05-04",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA1LTA0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T10:42+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 4,
+   "dep": "2027-04-26",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 50,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-26|2027-04-29",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 22873,
+   "price_total": 45746,
+   "ret": "2027-04-29",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjYoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI5KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T13:33+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 7,
+   "dep": "2027-04-28",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 50,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-28|2027-05-04",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 22873,
+   "price_total": 45746,
+   "ret": "2027-05-04",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjgoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA1LTA0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T20:18+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 8,
+   "dep": "2027-04-22",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 50,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-22|2027-04-29",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 22873,
+   "price_total": 45746,
+   "ret": "2027-04-29",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjIoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI5KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T20:18+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 8,
+   "dep": "2027-04-23",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 50,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-23|2027-04-30",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 22873,
+   "price_total": 45746,
+   "ret": "2027-04-30",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjMoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTMwKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T20:18+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "BR",
+    "arr": "16:20",
+    "dep": "13:00",
+    "flight": "BR165",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "category": "anomaly",
+   "days": 8,
+   "dep": "2027-04-28",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": 50,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2027-04-28|2027-05-05",
+   "origin": "TPE",
+   "out": {
+    "airline": "BR",
+    "arr": "15:00",
+    "dep": "10:10",
+    "flight": "BR116",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 22873,
+   "price_total": 45746,
+   "ret": "2027-05-05",
+   "route": "TPE-CTS",
+   "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjgoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA1LTA1KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-10-31T20:18+08:00"
+  }
+ ],
+ "digest_last_date": "2026-10-31",
+ "errors": [],
+ "notified": [],
+ "promos": [
+  {
+   "airlines": [
+    "CI",
+    "BR",
+    "JX"
+   ],
+   "found_at": "2026-10-26T16:06+08:00",
+   "id": "a36ec776af37",
+   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBRN09ma245RDFpQ2tIVkVWbkhvcFJfZ09oVUlBN0NhZnVMeDJ4Y1dyZFNHTlJmblhjTklNNTFoVEFGTmVtVEdaVTM3RTBvTDZoZjRUaHF1UUlLdGxIY1HSAUtBVV95cUxNSXNwLXh5akdwSktzTlRoVHhWMFFsY0RBN3BtTVlzM1NPR05PVmJ6ejE1ZndGUkNqak5HcnVvRzhISHg5VDU2Qy1zbm8?oc=5",
+   "published": "2026-10-26T01:00+00:00",
+   "source": "ETtoday新聞雲",
+   "title": "華航熱門航線76折起　長榮飛日韓免萬元「星宇送蔡依林周邊」"
+  },
+  {
+   "airlines": [
+    "CI",
+    "JX"
+   ],
+   "found_at": "2026-10-23T15:56+08:00",
+   "id": "3dd20fe62251",
+   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE80T0dsaHhlMU1zTFFIU3NIc29WTk1SZ1laWHRCcG94bE1rNG5XTjdQbDl6UmhXcC1XQUJ2UGx3eGRocElqUkIydWNnN2NFRVhuM25GVVFWV19DUdIBWkFVX3lxTE80T0dsaHhlMU1zTFFIU3NIc29WTk1SZ1laWHRCcG94bE1rNG5XTjdQbDl6UmhXcC1XQUJ2UGx3eGRocElqUkIydWNnN2NFRVhuM25GVVFWV19DUQ?oc=5",
+   "published": "2026-10-23T05:52+00:00",
+   "source": "食尚玩家",
+   "title": "航空線上旅展開搶！６大航空優惠一次看：華航76折、5994元飛釜山，星宇全航線85折"
+  },
+  {
+   "airlines": [
+    "JL"
+   ],
+   "found_at": "2026-10-22T09:50+08:00",
+   "id": "bbc69b1a8890",
+   "link": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE5WT04xRlpFNHZpOVRIY1JUa1ZmZ0xmVkRjalVNdF96TTJHRjFBM0tyUHBJNmdnZ056WDV6eDczRzBVRTduOWxyVnJ6WVBtT2V2Sl8yX1JPaFEyN2p2SERQRkRxTFo?oc=5",
+   "published": "2026-10-21T23:29+00:00",
+   "source": "LINE TODAY",
+   "title": "討論牆 | 限時促銷日航機票！飛東京／名古屋來回只要7,315元起 再送兩件免費行李+飛機餐"
+  },
+  {
+   "airlines": [
+    "CI"
+   ],
+   "found_at": "2026-10-22T09:50+08:00",
+   "id": "c8f20d88c577",
+   "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE54QmcyX1FNYVhINEtEWFdlS0ZwdVg1bkZ2R2dPNEQ5REhrSXdNMFhJd2o4dlRZTzQ5aXBKOGY5NU9oVEdiLWlncNIBTEFVX3lxTFBucjBXdXYxV2g3YVZsTkRETU5YU1B0Yy1ybUNlbmN3UjU1WnJGSkppRngxRjE1aDJ2cnQ3M0FwMlc0c3JRMF82YV9PUjQ?oc=5",
+   "published": "2026-10-20T20:47+00:00",
+   "source": "三立新聞",
+   "title": "攻略曝光！易遊網開催線上旅展　搶1元日韓機票、1元飯店、華航75折"
+  },
+  {
+   "airlines": [
+    "CI",
+    "JX"
+   ],
+   "found_at": "2026-10-21T13:18+08:00",
+   "id": "1c4ecf3e0292",
+   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE56SWppVWZBV1VlNjFOQU5sbU9ZeVcxTVZYZERLdFMxUDRpRG9PZGdJeGZ2RWpiQlJZZlBEYlY1cW92alB2c2JlR082TWNxdGFlRk5GRUJiSS1IZ18xNWc?oc=5",
+   "published": "2026-10-21T04:00+00:00",
+   "source": "上報",
+   "title": "2026 航空線上旅展優惠懶人包！星宇全航線 85 折、華航人氣航點 76 折 飛韓國 6 千起"
+  },
+  {
+   "airlines": [
+    "BR"
+   ],
+   "found_at": "2026-10-21T13:18+08:00",
+   "id": "15382666fdf2",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBpWnNST2tENTJfMW1sWENPeU9kajdsZWVqbkVtSlc3T21FMTRMbnhLb2pOaVdsbUEyd3o0WnZFVldzVnFDUkU2N2pMaXhkNWk3RGc?oc=5",
+   "published": "2026-10-21T02:44+00:00",
+   "source": "蕃新聞",
+   "title": "長榮航空線上旅展82折起 最大獎抽全球不限航點商務艙機票"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-10-20T14:35+08:00",
+   "id": "b8046b2e3278",
+   "link": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBhU2FCcWFjZUZEMHVra2NjV2VZWFNHdjhJU0ktZFh2QThwUktpSGdyMW5feFRoN2RoOEhHM1BpbHAyUG83d1FJUURzX3hCUm1aU09sS1B3THpGbm1hekpINEJJWERvQ3ZIcDd3Yi1wcw?oc=5",
+   "published": "2026-10-20T05:10+00:00",
+   "source": "知新聞",
+   "title": "ITF旅展｜16大航空機票全面95折 日韓999元起、星宇大阪來回6999元"
+  },
+  {
+   "airlines": [
+    "CI"
+   ],
+   "found_at": "2026-10-19T13:18+08:00",
+   "id": "91d0be7b640a",
+   "link": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBtd3RXWHk3Wk9IMnAwYXAwVVFsTkVuMy1NUGlDYWMtZmNHeFFmQWo0Ums2eUdBRUNzRkRTOXNKazJUWU1vaUt1Nk81WkoxV3hHUVHSAVJBVV95cUxQbXd0V1h5N1pPSDJwMGFwMFVRbE5FbjMtTVBpQ2FjLWZjR3hRZkFqNFJrNnlHQUVDc0ZEUzlzSmsyVFlNb2lLdTZPNVpKMVd4R1FR?oc=5",
+   "published": "2026-10-19T03:02+00:00",
+   "source": "NOWnews今日新聞",
+   "title": "華航ITF旅展優惠開搶！全球航線76折起　最高送6張商務艙機票"
+  },
+  {
+   "airlines": [
+    "CX"
+   ],
+   "found_at": "2026-10-17T21:31+08:00",
+   "id": "866594744350",
+   "link": "https://news.google.com/rss/articles/CBMizwJBVV95cUxONnQ3OWVRTkdZd05VMUoyNW1xeWF6UzFGbTk1TVI0Uy1oWFo5a1FyVGZlLTdmYUdlRnRmS19SbFRSSGs5MDFseXBoZzRMaW9GSlNfd0lRcklKb0xWVkEydzNqcFo3a29tQ2dRZHFIazY1dUt0ZkV1Y3g2YXRRZ1RXOTEtUDdwaWxkanhVRXROYXF0bEowdS13OHZ5RFB0M192UjVabFF4MjNXTHBWNXBubWdVZnlldVlhcS1Dd09KX3dPTkpDNU1yaTlLTjNvLWExR2pYY21yR1ExUnFTNGUwbm9Bc1BqeEtqY3htM0pyWHdrUkxPNjZ6WGdlQXV3NXZ0UW0xa3RGNmtOOU1yRjBkcEdFdkxiODBOS1B2OGtKS21Yd3NSVGp5U2RqMmRFMXNhUVY4MVFuWXVVRElUOXl6c0NBa19CaFRmT055Y2R0UQ?oc=5",
+   "published": "2026-10-16T14:15+00:00",
+   "source": "Life 生活網",
+   "title": "讓期待即刻成行！國泰航空2026線上旅展開跑 全球70+ 精選航點最優8折起"
+  },
+  {
+   "airlines": [
+    "CX"
+   ],
+   "found_at": "2026-10-17T21:31+08:00",
+   "id": "efbbf73205bf",
+   "link": "https://news.google.com/rss/articles/CBMimANBVV95cUxPM2RXRUFlV3FoTkxoRFZMV0VqeUp0Y3VET1YtS2h5eG5vbVV4SGExbzk4X3pfLUFEZFNidGltWTNvcXQ0RlVrbjlIbFRKaUdoWGRFMnM0ZEdCWVJNaWFGUWMza3A1ZE5jRkJvZTRlYlJZSzhFR050YUU1eTM0d0JBUy15M2EzUHNJcHN3OWs4Y0hoQjhLSDJEcHU1SVBUQjI0YWU5U3JGQnBNZEFCWjEtNE1hNUFjQm4zRTg0b3hQSVVQOHlzbm5QR2RjTG9vbzNISC1jU3FHNHdzaEtTZnlQWEEzZlptYmtzNW1EakZMTDVsMThLMVFQN3gwbm1qMXZZTDkxenp3WC1zVzlaajFPVV9YNEtmTENIMjFuU3FuYVFSYlR4QUk0dFZ1WldoSU1YMDRRdktxeDlQTW9mNDJmckdWb0VxWkw5NUdmQUdVSFM2Y3dSNmdoUlJxWHpYRXJhZ1Q5WVZRU19NTTEzT2VhMXAwUTQ3RXRvZHp0ZkEzNVV4MVZSMjk1MG1HbFVGbFhlWU9fdkpBU3A?oc=5",
+   "published": "2026-10-16T07:39+00:00",
+   "source": "Life 生活網",
+   "title": "全球熱門航點折扣戰開打！國泰航空線上旅展推限定訂票專屬好禮"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-10-17T21:31+08:00",
+   "id": "dd6f27b0bd9f",
+   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE1MejRQWm5PdTFKalpkRFB6czluWGhNWG1lZGlXLXhrdm1XVXVGcTBTLWhRaTdQS3puNmhHbTRzUm5WLVJZZEhVMzY5NnQ3UzdUYWwtVVNWYlUyZjQ3eGc?oc=5",
+   "published": "2026-10-16T06:50+00:00",
+   "source": "鉅聞天下",
+   "title": "ITF旅展優惠開搶！星宇航空全航線85折起「滿2萬再抽商務艙機票」"
+  },
+  {
+   "airlines": [
+    "CI",
+    "JX"
+   ],
+   "found_at": "2026-10-17T21:31+08:00",
+   "id": "7d1c86732343",
+   "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE55RThkOWhRUHJDMjJncVhmYmd5YXU1SFlBU0tud04tZXhMdzlybHdzOFJMdDJOMENYU1V4UWIxVlE2eTBUS3l2cmVtQ2ZXeXR0X1RNTktHTVA4c0NHYzFr?oc=5",
+   "published": "2026-10-15T04:52+00:00",
+   "source": "工商時報",
+   "title": "星宇線上旅展全航線85折！華航推環保集點享購票優惠- 生活"
+  }
+ ],
+ "routes": {
+  "TPE-AOJ": {
+   "dest": "AOJ",
+   "name": "青森",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-AXT": {
+   "dest": "AXT",
+   "name": "秋田",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-CTS": {
+   "avg30_pp": 45733,
+   "by_days": {
+    "4": 21178,
+    "5": 22873,
+    "6": 21178,
+    "7": 21178,
+    "8": 21178
+   },
+   "by_month": {
+    "2027-03": 24071,
+    "2027-04": 21178
+   },
+   "dates": 165,
+   "dest": "CTS",
+   "med_pp": 35090,
+   "min_dep": "2027-04-25",
+   "min_pp": 21178,
+   "min_ret": "2027-04-28",
+   "name": "札幌",
+   "origin": "TPE",
+   "updated": "2026-10-31T20:18+08:00"
+  },
+  "TPE-FSZ": {
+   "dest": "FSZ",
+   "name": "靜岡",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-FUK": {
+   "avg30_pp": 23536,
+   "by_days": {
+    "4": 18858,
+    "5": 18860,
+    "6": 18601,
+    "7": 18601,
+    "8": 16345
+   },
+   "by_month": {
+    "2027-03": 16345,
+    "2027-04": 18858
+   },
+   "dates": 76,
+   "dest": "FUK",
+   "med_pp": 23023,
+   "min_dep": "2027-03-21",
+   "min_pp": 16345,
+   "min_ret": "2027-03-28",
+   "name": "福岡",
+   "near_miss": {
+    "dep": "2027-03-21",
+    "pp": 16345,
+    "ret": "2027-03-28",
+    "why": "Google 目前查不到可訂的航班（可能已售完）"
+   },
+   "origin": "TPE",
+   "updated": "2026-10-31T20:18+08:00"
+  },
+  "TPE-HIJ": {
+   "dest": "HIJ",
+   "name": "廣島",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-HKD": {
+   "dest": "HKD",
+   "name": "函館",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-HNA": {
+   "dest": "HNA",
+   "name": "花卷",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-HND": {
+   "dest": "HND",
+   "name": "東京羽田",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-IBR": {
+   "dest": "IBR",
+   "name": "茨城",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-KIJ": {
+   "dest": "KIJ",
+   "name": "新潟",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-KIX": {
+   "avg30_pp": 16941,
+   "by_days": {
+    "4": 14738,
+    "5": 14754,
+    "6": 14738,
+    "7": 14738,
+    "8": 14738
+   },
+   "by_month": {
+    "2026-11": 14949,
+    "2026-12": 14852,
+    "2027-01": 14852,
+    "2027-02": 14837,
+    "2027-03": 14934,
+    "2027-04": 14738
+   },
+   "dates": 867,
+   "dest": "KIX",
+   "med_pp": 16820,
+   "min_dep": "2027-04-06",
+   "min_pp": 14738,
+   "min_ret": "2027-04-09",
+   "name": "大阪關西",
+   "origin": "TPE",
+   "updated": "2026-10-31T20:18+08:00"
+  },
+  "TPE-KKJ": {
+   "dest": "KKJ",
+   "name": "北九州",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-KMI": {
+   "dest": "KMI",
+   "name": "宮崎",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-KMJ": {
+   "dest": "KMJ",
+   "name": "熊本",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-KMQ": {
+   "dest": "KMQ",
+   "name": "小松",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-KOJ": {
+   "dest": "KOJ",
+   "name": "鹿兒島",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-MYJ": {
+   "dest": "MYJ",
+   "name": "松山（愛媛）",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-NGO": {
+   "avg30_pp": 15038,
+   "by_days": {
+    "4": 14516,
+    "5": 14516,
+    "6": 14516,
+    "7": 14501,
+    "8": 14501
+   },
+   "by_month": {
+    "2026-12": 14516,
+    "2027-01": 14516,
+    "2027-02": 14516,
+    "2027-03": 14501
+   },
+   "dates": 55,
+   "dest": "NGO",
+   "med_pp": 15010,
+   "min_dep": "2027-03-10",
+   "min_pp": 14501,
+   "min_ret": "2027-03-16",
+   "name": "名古屋",
+   "origin": "TPE",
+   "updated": "2026-10-31T20:18+08:00"
+  },
+  "TPE-NRT": {
+   "avg30_pp": 16084,
+   "by_days": {
+    "4": 13677,
+    "5": 13692,
+    "6": 13692,
+    "7": 13692,
+    "8": 13677
+   },
+   "by_month": {
+    "2026-11": 13692,
+    "2026-12": 13692,
+    "2027-01": 14457,
+    "2027-02": 13902,
+    "2027-03": 13677,
+    "2027-04": 13677
+   },
+   "dates": 870,
+   "dest": "NRT",
+   "med_pp": 16019,
+   "min_dep": "2027-04-19",
+   "min_pp": 13677,
+   "min_ret": "2027-04-22",
+   "name": "東京成田",
+   "origin": "TPE",
+   "updated": "2026-10-31T20:18+08:00"
+  },
+  "TPE-OKA": {
+   "avg30_pp": 11763,
+   "by_days": {
+    "4": 10586,
+    "5": 10600,
+    "6": 10586,
+    "7": 10586,
+    "8": 10586
+   },
+   "by_month": {
+    "2026-11": 10600,
+    "2026-12": 10600,
+    "2027-01": 10600,
+    "2027-02": 10600,
+    "2027-03": 10586,
+    "2027-04": 11795
+   },
+   "dates": 854,
+   "dest": "OKA",
+   "med_pp": 11809,
+   "min_dep": "2027-03-21",
+   "min_pp": 10586,
+   "min_ret": "2027-03-24",
+   "name": "沖繩",
+   "origin": "TPE",
+   "updated": "2026-10-31T20:18+08:00"
+  },
+  "TPE-OKJ": {
+   "dest": "OKJ",
+   "name": "岡山",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-SDJ": {
+   "dest": "SDJ",
+   "name": "仙台",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-TAK": {
+   "dest": "TAK",
+   "name": "高松",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-TOY": {
+   "dest": "TOY",
+   "name": "富山",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TPE-UKB": {
+   "dest": "UKB",
+   "name": "神戶",
+   "no_service": true,
+   "origin": "TPE",
+   "recheck": "2026-11-03"
+  },
+  "TSA-HND": {
+   "avg30_pp": 23191,
+   "by_days": {
+    "4": 15189,
+    "5": 15214,
+    "6": 15189,
+    "7": 15189,
+    "8": 15189
+   },
+   "by_month": {
+    "2026-11": 27678,
+    "2026-12": 62865,
+    "2027-01": 62865,
+    "2027-02": 27678,
+    "2027-03": 17964,
+    "2027-04": 15189
+   },
+   "dates": 242,
+   "dest": "HND",
+   "med_pp": 19439,
+   "min_dep": "2027-04-17",
+   "min_pp": 15189,
+   "min_ret": "2027-04-20",
+   "name": "東京羽田",
+   "origin": "TSA",
+   "updated": "2026-10-31T20:18+08:00"
+  }
+ },
+ "run": {
+  "failures": 0,
+  "ok": true,
+  "rate_limited": false,
+  "requests": 35,
+  "skipped_cooldown": false,
+  "suspect_empty": 0,
+  "tasks_done": 26,
+  "tasks_due": 0,
+  "verified": 5
+ },
+ "stats": {
+  "rate_limited_24h": 0,
+  "requests_24h": 451,
+  "runs_24h": 10,
+  "success_rate_24h": "100%"
+ },
+ "updated": "2026-10-31T20:18+08:00"
+}

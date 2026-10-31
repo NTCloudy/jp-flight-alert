@@ -1,0 +1,271 @@
+{
+ "checked": {
+  "TPE-CTS|2027-04-24|2027-04-28": {
+   "agoda": {
+    "at": "2026-10-30T22:13+08:00",
+    "price_pp": 25739,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=CTS&arrivalToType=1&departDate=2027-04-24&returnDate=2027-04-28&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-30T22:10+08:00",
+   "google_pp": 22858,
+   "trip": {
+    "at": "2026-10-30T22:13+08:00",
+    "price_pp": 22213,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=spk&ddate=2027-04-24&rdate=2027-04-28&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-CTS|2027-04-27|2027-05-04": {
+   "agoda": {
+    "at": "2026-10-31T15:01+08:00",
+    "price_pp": 24093,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=CTS&arrivalToType=1&departDate=2027-04-27&returnDate=2027-05-04&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T14:58+08:00",
+   "google_pp": 21193,
+   "trip": {
+    "at": "2026-10-31T15:01+08:00",
+    "note": "TimeoutError: Locator.click: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator(\"div\").filter(has_text=\"10:10\").filter(has_text=\"15:00\").filter(has_text=\"長榮航空\").filt",
+    "status": "error",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=spk&ddate=2027-04-27&rdate=2027-05-04&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-KIX|2027-04-06|2027-04-09": {
+   "agoda": {
+    "at": "2026-10-31T21:40+08:00",
+    "price_pp": 16517,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=KIX&arrivalToType=1&departDate=2027-04-06&returnDate=2027-04-09&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T21:38+08:00",
+   "google_pp": 14754,
+   "trip": {
+    "at": "2026-10-31T21:39+08:00",
+    "price_pp": 14487,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-04-06&rdate=2027-04-09&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-KIX|2027-04-09|2027-04-13": {
+   "agoda": {
+    "at": "2026-10-30T22:12+08:00",
+    "price_pp": 16614,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=KIX&arrivalToType=1&departDate=2027-04-09&returnDate=2027-04-13&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-30T22:10+08:00",
+   "google_pp": 14738,
+   "trip": {
+    "at": "2026-10-30T22:12+08:00",
+    "price_pp": 14475,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-04-09&rdate=2027-04-13&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-KIX|2027-04-13|2027-04-17": {
+   "agoda": {
+    "at": "2026-10-31T15:00+08:00",
+    "price_pp": 16644,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=KIX&arrivalToType=1&departDate=2027-04-13&returnDate=2027-04-17&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T14:58+08:00",
+   "google_pp": 14754,
+   "trip": {
+    "at": "2026-10-31T15:00+08:00",
+    "price_pp": 14487,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-04-13&rdate=2027-04-17&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-NGO|2027-03-09|2027-03-16": {
+   "agoda": {
+    "at": "2026-10-31T21:39+08:00",
+    "price_pp": 16459,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NGO&arrivalToType=1&departDate=2027-03-09&returnDate=2027-03-16&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T21:38+08:00",
+   "google_pp": 14516,
+   "trip": {
+    "at": "2026-10-31T21:39+08:00",
+    "price_pp": 14200,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=ngo&ddate=2027-03-09&rdate=2027-03-16&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-NRT|2026-12-14|2026-12-18": {
+   "agoda": {
+    "at": "2026-10-30T22:11+08:00",
+    "price_pp": 15565,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NRT&arrivalToType=1&departDate=2026-12-14&returnDate=2026-12-18&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-30T22:10+08:00",
+   "google_pp": 13677,
+   "trip": {
+    "at": "2026-10-30T22:11+08:00",
+    "price_pp": 13302,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2026-12-14&rdate=2026-12-18&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-NRT|2027-04-05|2027-04-09": {
+   "agoda": {
+    "at": "2026-10-31T15:01+08:00",
+    "price_pp": 18207,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NRT&arrivalToType=1&departDate=2027-04-05&returnDate=2027-04-09&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T14:58+08:00",
+   "google_pp": 17214,
+   "trip": {
+    "at": "2026-10-31T15:00+08:00",
+    "price_pp": 15294,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2027-04-05&rdate=2027-04-09&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-NRT|2027-04-19|2027-04-22": {
+   "agoda": {
+    "at": "2026-10-31T21:40+08:00",
+    "price_pp": 17109,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NRT&arrivalToType=1&departDate=2027-04-19&returnDate=2027-04-22&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T21:38+08:00",
+   "google_pp": 15096,
+   "trip": {
+    "at": "2026-10-31T21:40+08:00",
+    "price_pp": 14794,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2027-04-19&rdate=2027-04-22&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-OKA|2026-11-08|2026-11-12": {
+   "agoda": {
+    "at": "2026-10-30T22:11+08:00",
+    "price_pp": 11520,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=OKA&arrivalToType=1&departDate=2026-11-08&returnDate=2026-11-12&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-30T22:10+08:00",
+   "google_pp": 10586,
+   "trip": {
+    "at": "2026-10-30T22:10+08:00",
+    "price_pp": 10212,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2026-11-08&rdate=2026-11-12&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-OKA|2027-03-20|2027-03-24": {
+   "agoda": {
+    "at": "2026-10-31T14:59+08:00",
+    "price_pp": 11731,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=OKA&arrivalToType=1&departDate=2027-03-20&returnDate=2027-03-24&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T14:58+08:00",
+   "google_pp": 10600,
+   "trip": {
+    "at": "2026-10-31T14:58+08:00",
+    "price_pp": 10210,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2027-03-20&rdate=2027-03-24&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-OKA|2027-03-21|2027-03-24": {
+   "agoda": {
+    "at": "2026-10-31T21:38+08:00",
+    "price_pp": 11956,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=OKA&arrivalToType=1&departDate=2027-03-21&returnDate=2027-03-24&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T21:38+08:00",
+   "google_pp": 10600,
+   "trip": {
+    "at": "2026-10-31T21:38+08:00",
+    "price_pp": 10227,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2027-03-21&rdate=2027-03-24&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TSA-HND|2027-04-17|2027-04-20": {
+   "agoda": {
+    "at": "2026-10-31T21:41+08:00",
+    "price_pp": 17284,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TSA&departureFromType=1&arrivalTo=HND&arrivalToType=1&departDate=2027-04-17&returnDate=2027-04-20&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-10-31T21:38+08:00",
+   "google_pp": 15214,
+   "trip": {
+    "at": "2026-10-31T21:41+08:00",
+    "price_pp": 14824,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tsa&acity=tyo&ddate=2027-04-17&rdate=2027-04-20&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  }
+ },
+ "last_run": {
+  "at": "2026-10-31T21:38+08:00",
+  "errors": 0,
+  "targets": 5
+ },
+ "log": [
+  {
+   "at": "2026-10-27T21:00+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-10-28T02:41+08:00",
+   "errors": 0,
+   "targets": 4
+  },
+  {
+   "at": "2026-10-28T14:51+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-10-28T22:00+08:00",
+   "errors": 1,
+   "targets": 4
+  },
+  {
+   "at": "2026-10-29T15:02+08:00",
+   "errors": 0,
+   "targets": 3
+  },
+  {
+   "at": "2026-10-29T22:15+08:00",
+   "errors": 1,
+   "targets": 5
+  },
+  {
+   "at": "2026-10-30T15:06+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-10-30T22:10+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-10-31T14:58+08:00",
+   "errors": 1,
+   "targets": 5
+  },
+  {
+   "at": "2026-10-31T21:38+08:00",
+   "errors": 0,
+   "targets": 5
+  }
+ ],
+ "notified": {},
+ "version": 2
+}
