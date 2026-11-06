@@ -1,12 +1,12 @@
 # ✈️ 日本傳統航空便宜機票提醒設定（由網頁控制台產生：https://ntcloudy.github.io/jp-flight-alert/）
-# 價格＝每人、來回、含稅（新台幣）｜時間＝當地時間｜instant_max 馬上寄、digest_max 每日整理、anomaly_pct 比平常便宜幾 %｜digest_only_hot：只有超便宜時才寄每日整理
+# 價格＝每人、來回、含稅（新台幣）｜時間＝當地時間｜instant_max 馬上寄、digest_max 每日整理、anomaly_pct 比平常便宜幾 %｜digest_enabled：要不要寄每日整理
 # muted：不再通知的行程｜paused_until：暫停通知到這天（YYYY-MM-DD）
 alerts:
   instant_max: 8000
   digest_max: 10000
   anomaly_pct: 50
   digest_hour: 18
-  digest_only_hot: true
+  digest_enabled: false
   renotify_drop: 2000
   paused_until: ""
 schedule:

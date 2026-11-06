@@ -141,7 +141,7 @@
       <label>👍 划算：每人 ≤（每日整理）<input type="number" step="100" min="1000" data-k="alerts.digest_max"></label>
       <label>📉 特別便宜：比平常便宜 %（每日整理）<input type="number" step="1" min="5" max="80" data-k="alerts.anomaly_pct"></label>
       <label>每日整理寄送時間（台灣時間）<select data-k="alerts.digest_hour"></select></label>
-      <label><input type="checkbox" data-k="alerts.digest_only_hot"> 只有當天有 🔥 超便宜機票才寄每日整理</label>
+      <label><input type="checkbox" data-k="alerts.digest_enabled"> 每天寄「每日整理」信（超便宜的機票不管怎樣都會馬上寄）</label>
       <label>已通知的行程再降多少才再寄<input type="number" step="100" min="0" data-k="alerts.renotify_drop"></label>
       <label>多久查一次（小時）<select data-k="schedule.interval_hours"><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="6">6</option></select></label>
     </div>
@@ -422,7 +422,7 @@ function renderPause() {
 function renderSettings() {
   document.querySelectorAll("[data-k]").forEach(el => {
     const v = get(el.dataset.k);
-    if (el.type === "checkbox") el.checked = v === undefined ? true : !!v;
+    if (el.type === "checkbox") el.checked = v === undefined ? el.dataset.k !== "alerts.digest_enabled" : !!v;
     else el.value = v ?? "";
   });
   const chips = (id, map, path) => {
@@ -470,7 +470,7 @@ function validate() {
   return null;
 }
 const HEADER = "# ✈️ 日本傳統航空便宜機票提醒設定（由網頁控制台產生：https://ntcloudy.github.io/jp-flight-alert/）\n" +
-  "# 價格＝每人、來回、含稅（新台幣）｜時間＝當地時間｜instant_max 馬上寄、digest_max 每日整理、anomaly_pct 比平常便宜幾 %｜digest_only_hot：只有超便宜時才寄每日整理\n" +
+  "# 價格＝每人、來回、含稅（新台幣）｜時間＝當地時間｜instant_max 馬上寄、digest_max 每日整理、anomaly_pct 比平常便宜幾 %｜digest_enabled：要不要寄每日整理\n" +
   "# muted：不再通知的行程｜paused_until：暫停通知到這天（YYYY-MM-DD）\n";
 
 async function save(message) {
