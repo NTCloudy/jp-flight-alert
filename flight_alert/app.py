@@ -181,8 +181,15 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
         latest = store.load("latest.json", {})
 
     if mode == "digest" or (mode in ("auto", "scan") and digest_due(cfg, state, now)):
+        muted = set(cfg.muted)
+        hot = [d for d in (latest or {}).get("deals", []) if d.get("category") == "instant" and d.get("key") not in muted]
         if paused and mode != "digest":
             print("[整理] 通知暫停中，略過每日整理")
+        elif cfg.digest_only_hot and not hot and mode != "digest":
+            # only send the digest on days with a super-cheap deal; promos wait for the next digest
+            print("[整理] 今天沒有超便宜機票，不寄每日整理")
+            state["digest_last_date"] = now.astimezone(TPE_TZ).date().isoformat()
+            state["promo_pending"] = (state.get("promo_pending") or [])[-20:]
         else:
             subject, text, html = emails.digest(cfg, latest, state.get("promo_pending") or [], now)
             if _send(state, subject, text, html, dry_run):

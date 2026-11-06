@@ -59,6 +59,7 @@ class Config:
     digest_max: int = 10000
     anomaly_pct: int = 20
     digest_hour: int = 8
+    digest_only_hot: bool = True   # daily digest only on days with at least one 🔥 super-cheap deal
     renotify_drop: int = 300
     paused_until: date | None = None
     interval_hours: float = 3
@@ -145,6 +146,7 @@ def parse(data: dict) -> Config:
         digest_max=int(alerts.get("digest_max", base.digest_max)),
         anomaly_pct=int(alerts.get("anomaly_pct", base.anomaly_pct)),
         digest_hour=int(alerts.get("digest_hour", base.digest_hour)),
+        digest_only_hot=bool(alerts.get("digest_only_hot", base.digest_only_hot)),
         renotify_drop=int(alerts.get("renotify_drop", base.renotify_drop)),
         paused_until=paused_until,
         interval_hours=float(sched.get("interval_hours", base.interval_hours)),

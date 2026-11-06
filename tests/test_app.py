@@ -95,6 +95,22 @@ class AppRunTest(unittest.TestCase):
         app.run(cfg, "auto", source=self._source(), now=NOW + timedelta(hours=1), max_requests=50)
         self.assertTrue(any(s.startswith("🔥") for s in self.sent))
 
+    def test_digest_only_when_super_cheap(self):
+        dep, ret = day(20), day(24)
+        good = lambda: FakeSource(calendar_prices={"TPE-OKA": {(dep, ret): 18000.0}},          # 9,000 pp: "good", not "hot"
+                                  itins={("TPE-OKA", dep, ret): [itin(dep, ret, 18000.0)]})
+        morning = NOW.replace(hour=8, minute=41) + timedelta(days=1)
+        cfg = small_config(destinations=["OKA"], digest_hour=8)
+        app.run(cfg, "auto", source=good(), now=NOW, max_requests=50)
+        app.run(cfg, "auto", source=good(), now=morning, max_requests=50)
+        self.assertFalse(any(s.startswith("✈️") for s in self.sent))   # default: no hot deal -> no digest
+        app.run(cfg, "digest", source=good(), now=morning + timedelta(hours=1), max_requests=50)
+        self.assertTrue(any(s.startswith("✈️") for s in self.sent))    # manual digest still works
+        self.sent.clear()
+        cfg2 = small_config(destinations=["OKA"], digest_hour=8, digest_only_hot=False)
+        app.run(cfg2, "auto", source=good(), now=morning + timedelta(days=1), max_requests=50)
+        self.assertTrue(any(s.startswith("✈️") for s in self.sent))    # setting off: daily as before
+
     def test_digest_before_hour_not_sent(self):
         cfg = small_config(destinations=["OKA"], digest_hour=23)
         app.run(cfg, "auto", source=self._source(), now=NOW, max_requests=50)
