@@ -1,0 +1,1849 @@
+{
+ "digest_last_date": "2026-11-06",
+ "fail_streak": 0,
+ "fp_exact": "[{\"arrive_ideal\": 840, \"arrive_latest\": 1110, \"depart_earliest\": 600, \"depart_latest\": 840}, {\"arrive_ideal\": 1080, \"arrive_latest\": 1200, \"depart_earliest\": 780, \"depart_latest\": 930}, [\"AE\", \"BR\", \"CI\", \"CX\", \"JL\", \"JX\", \"NH\"], true, 2]",
+ "fp_server": "[[10, 14, 18], [13, 15, 20], [\"AE\", \"BR\", \"CI\", \"CX\", \"JL\", \"JX\", \"NH\"], true, 2]",
+ "health_alert_at": null,
+ "last_run": "2026-11-07T17:59+08:00",
+ "last_scan": null,
+ "last_scan_ok": null,
+ "notified": {},
+ "promo_checked_at": "2026-11-07T17:59+08:00",
+ "promo_pending": [
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-06T15:23+08:00",
+   "id": "ee4a0630a4c8",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5VZ3NxZXB6YlZRenZLSFJTUmdFYVZVNnF1NkFLVWg5bU15bW9FYTZFaC1uaHNLN2Z2U1IzVjdOMFR4RW9FZ0F0X3JqMUhEaHliU3VlZ0UxdFZsd2djSkR1ZElwNENnN0FGN3RfY0Q0TktkemRp0gFYQVVfeXFMTWdmZnpGaWJtYU9PT0xqX042NUliMF9XMl9taWc5M1Z3X2tYUW81RHhDLWNLUEhBRWs4dVBnaEpIdUZ4Qy1uZVZ5cDNMZjZSUVdjRnpPWFgwMg?oc=5",
+   "published": "2026-11-06T03:45+00:00",
+   "source": "UDN",
+   "title": "星宇航空ITF旅展祭優惠 全航線85折起 7千元不到飛日本宮古島"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-06T15:23+08:00",
+   "id": "d36be09f9f38",
+   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE53djFQN1dqWktka3VYOXNGLTBiUHY3T2tfeUhWSTBVOENOajJzZDRuZWNQaVg1bW5aNmJ6T2UxSVo4TVBQb3U2ZUNYU1h4NWEt?oc=5",
+   "published": "2026-11-06T03:36+00:00",
+   "source": "XINMEDIA欣傳媒",
+   "title": "星宇航空ITF旅展優惠太狂！日本宮古島機票7字頭、蔡依林限定禮，聯名籃球與空山基飛機模型搶收藏"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-06T17:19+08:00",
+   "id": "b7e5d1a81722",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNQUdBSlp1YmZpZmYzOUVyZzZxX1E2X2RfWTh0aDNvUVo2SWhUUmdHNHpoREo4R19xc3ZsZ09TV3NnTmNtTmhiWlg3T0hjSXh5TEktYnAxVVJHSnhqMlZKNmFOcFZ0VlVSYlhkNm83elhwLWNjZmY1SkM5emJDNmI4RDdVY19UM3hz?oc=5",
+   "published": "2026-11-06T08:08+00:00",
+   "source": "富聯網",
+   "title": "《航運股》星宇航空ITF旅展祭優惠 日本航線機票下殺7字頭"
+  },
+  {
+   "airlines": [
+    "CI",
+    "BR",
+    "JX"
+   ],
+   "found_at": "2026-11-06T23:23+08:00",
+   "id": "3bdee4c0cafe",
+   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9nYXhqU1VhUGhHV3BWMWVLVjJyTkl1UlFkR2RFcUxpSlZmM05zZWIxZzJsS2R1N1g2TzlkSzUwYVFwdk5MU0ZHN0xvd0kxNk5M?oc=5",
+   "published": "2026-11-06T12:56+00:00",
+   "source": "客新聞",
+   "title": "旅展首日湧7萬人！華航、長榮、星宇全航線促銷、五星自助餐4.1折起"
+  },
+  {
+   "airlines": [
+    "CI"
+   ],
+   "found_at": "2026-11-07T01:27+08:00",
+   "id": "7df14563e38c",
+   "link": "https://news.google.com/rss/articles/CBMi7wJBVV95cUxNemZyeldnRFFicGRJWjRXbi1DTWlaa0l2MWN4RHVDak4tRlFwcHIwWXhIN2hpdGh5M3pmUjhwaWthaXR3VkFqcjdUOFI4N1BIRWJUMUsyY0Y5WnNuVnd6M3F2bzh0dGRVVk52YXZQcFhfdXVBZlF3WVBFdGtfdzJOT0R1WENyR3NlWlp4LXJhdVhpOTZhX3FyWGtIc1J4WGhIdDVCOHJjanJ4cFFXV0NEUkp5dUxSLW1BTDU0a0RqRGhyTUFQdEhuUTZJYWJmaG9FX1VJVGdtLTNiZkFiUl9zaDNPSGdVZmhuX0VLUkozbkZDVnJCZjlUZXZxb19qc1FhekJWa0Qxakh2VFR2dEttbUE2dkdWMW1sVGZMVHVHWHl2RHYyU3NIT0pRY01veHRPNjVNZDhOMF9xaG80Q082MVdsbE5vVmNmdW1VZEtzam5RNXpXMVZndV9OTUMtQ1hGbHpwdEo0MFphR05IcFV3?oc=5",
+   "published": "2026-11-06T14:01+00:00",
+   "source": "Life 生活網",
+   "title": "ITF台灣國際旅展首日湧入7萬人！華航皮卡丘彩繪機吸睛 日韓旅遊轉攻深度二線城市"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-07T09:11+08:00",
+   "id": "4024761360ef",
+   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZQkFVanZjOTlRSndwZEdabXU5Zm01bU9OQkhBNVR3dTZ1NDhwUHRpN2VZTS1tZnZPZkN1Q2xCOWdsTjBQeEdJMDFOU0d1T18tUElGdlFweUhHd9IBX0FVX3lxTE95V3ltcUhZODljSS1ScXMyenc1UVJKeFdZX1AyNDg0OV9qdnFzYl95YzlQOWNHSUduWkp0cVktSzZqOENpUEtwUmV5Wl9nMFFPSGlvY2R5ZjFfNXhXZVNJ?oc=5",
+   "published": "2026-11-06T03:32+00:00",
+   "source": "經濟日報",
+   "title": "星宇航空 ITF 台灣國際旅展 日本航線下殺七字頭"
+  }
+ ],
+ "promo_recent": [
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-07T09:11+08:00",
+   "id": "4024761360ef",
+   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5ZQkFVanZjOTlRSndwZEdabXU5Zm01bU9OQkhBNVR3dTZ1NDhwUHRpN2VZTS1tZnZPZkN1Q2xCOWdsTjBQeEdJMDFOU0d1T18tUElGdlFweUhHd9IBX0FVX3lxTE95V3ltcUhZODljSS1ScXMyenc1UVJKeFdZX1AyNDg0OV9qdnFzYl95YzlQOWNHSUduWkp0cVktSzZqOENpUEtwUmV5Wl9nMFFPSGlvY2R5ZjFfNXhXZVNJ?oc=5",
+   "published": "2026-11-06T03:32+00:00",
+   "source": "經濟日報",
+   "title": "星宇航空 ITF 台灣國際旅展 日本航線下殺七字頭"
+  },
+  {
+   "airlines": [
+    "CI"
+   ],
+   "found_at": "2026-11-07T01:27+08:00",
+   "id": "7df14563e38c",
+   "link": "https://news.google.com/rss/articles/CBMi7wJBVV95cUxNemZyeldnRFFicGRJWjRXbi1DTWlaa0l2MWN4RHVDak4tRlFwcHIwWXhIN2hpdGh5M3pmUjhwaWthaXR3VkFqcjdUOFI4N1BIRWJUMUsyY0Y5WnNuVnd6M3F2bzh0dGRVVk52YXZQcFhfdXVBZlF3WVBFdGtfdzJOT0R1WENyR3NlWlp4LXJhdVhpOTZhX3FyWGtIc1J4WGhIdDVCOHJjanJ4cFFXV0NEUkp5dUxSLW1BTDU0a0RqRGhyTUFQdEhuUTZJYWJmaG9FX1VJVGdtLTNiZkFiUl9zaDNPSGdVZmhuX0VLUkozbkZDVnJCZjlUZXZxb19qc1FhekJWa0Qxakh2VFR2dEttbUE2dkdWMW1sVGZMVHVHWHl2RHYyU3NIT0pRY01veHRPNjVNZDhOMF9xaG80Q082MVdsbE5vVmNmdW1VZEtzam5RNXpXMVZndV9OTUMtQ1hGbHpwdEo0MFphR05IcFV3?oc=5",
+   "published": "2026-11-06T14:01+00:00",
+   "source": "Life 生活網",
+   "title": "ITF台灣國際旅展首日湧入7萬人！華航皮卡丘彩繪機吸睛 日韓旅遊轉攻深度二線城市"
+  },
+  {
+   "airlines": [
+    "CI",
+    "BR",
+    "JX"
+   ],
+   "found_at": "2026-11-06T23:23+08:00",
+   "id": "3bdee4c0cafe",
+   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9nYXhqU1VhUGhHV3BWMWVLVjJyTkl1UlFkR2RFcUxpSlZmM05zZWIxZzJsS2R1N1g2TzlkSzUwYVFwdk5MU0ZHN0xvd0kxNk5M?oc=5",
+   "published": "2026-11-06T12:56+00:00",
+   "source": "客新聞",
+   "title": "旅展首日湧7萬人！華航、長榮、星宇全航線促銷、五星自助餐4.1折起"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-06T17:19+08:00",
+   "id": "b7e5d1a81722",
+   "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNQUdBSlp1YmZpZmYzOUVyZzZxX1E2X2RfWTh0aDNvUVo2SWhUUmdHNHpoREo4R19xc3ZsZ09TV3NnTmNtTmhiWlg3T0hjSXh5TEktYnAxVVJHSnhqMlZKNmFOcFZ0VlVSYlhkNm83elhwLWNjZmY1SkM5emJDNmI4RDdVY19UM3hz?oc=5",
+   "published": "2026-11-06T08:08+00:00",
+   "source": "富聯網",
+   "title": "《航運股》星宇航空ITF旅展祭優惠 日本航線機票下殺7字頭"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-06T15:23+08:00",
+   "id": "ee4a0630a4c8",
+   "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTE5VZ3NxZXB6YlZRenZLSFJTUmdFYVZVNnF1NkFLVWg5bU15bW9FYTZFaC1uaHNLN2Z2U1IzVjdOMFR4RW9FZ0F0X3JqMUhEaHliU3VlZ0UxdFZsd2djSkR1ZElwNENnN0FGN3RfY0Q0TktkemRp0gFYQVVfeXFMTWdmZnpGaWJtYU9PT0xqX042NUliMF9XMl9taWc5M1Z3X2tYUW81RHhDLWNLUEhBRWs4dVBnaEpIdUZ4Qy1uZVZ5cDNMZjZSUVdjRnpPWFgwMg?oc=5",
+   "published": "2026-11-06T03:45+00:00",
+   "source": "UDN",
+   "title": "星宇航空ITF旅展祭優惠 全航線85折起 7千元不到飛日本宮古島"
+  },
+  {
+   "airlines": [
+    "JX"
+   ],
+   "found_at": "2026-11-06T15:23+08:00",
+   "id": "d36be09f9f38",
+   "link": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE53djFQN1dqWktka3VYOXNGLTBiUHY3T2tfeUhWSTBVOENOajJzZDRuZWNQaVg1bW5aNmJ6T2UxSVo4TVBQb3U2ZUNYU1h4NWEt?oc=5",
+   "published": "2026-11-06T03:36+00:00",
+   "source": "XINMEDIA欣傳媒",
+   "title": "星宇航空ITF旅展優惠太狂！日本宮古島機票7字頭、蔡依林限定禮，聯名籃球與空山基飛機模型搶收藏"
+  },
+  {
+   "airlines": [
+    "CI"
+   ],
+   "found_at": "2026-11-05T19:29+08:00",
+   "id": "53c7971fd72a",
+   "link": "https://news.google.com/rss/articles/CBMipgNBVV95cUxNMzVUWjE5a01BeDNEdVZTXzdzZngyRzBjQkVpd2ljWjg4c2VXUzlXMElJZXZObW96dHoxQzBQbzVtUHVHcEFxLV95NjFVQ0F6am1SOUducWFaeHdzUkpVcDhSb200NUF3M296X2hNNm5qcnoxeThUZzVfTnFtQmR6VjFDb2dBVmw4SUpkY05aUUxGQ0F4THpscWl0V1l4Z3hXNENDTU84R0VISjBYRnRLN1JpQzJkMTc1dU5qUnl1Y240OU1LUl9iOTV1WkY0T2FuaUI5VEpQem14SlI0cmE3QTJtZWY0dmotVTdMVEdDT1RMeXhrZnAyVHo1Q2dveEVKNm01LVRYOWNVWDAxckpZUElhNUlaN01rVjktaDl3bjdKcWdZejdQZFlzQzBKTFlETmtKbHhLMFZGUmJ2dXc2LXBYcHQ4bnR6dTIxOG5aT2Y4VEwwd2ZKRVJVVGFmdFJuN3hoYnU5Vzhzci0wY3JnUkQtdnlnRWhtdVJMVVVkTGpBbUpwZ2U5UmVuUFVFd3VFTUpNUkItX3FmR1pyUURxb3I0N1k2QQ?oc=5",
+   "published": "2026-11-05T04:32+00:00",
+   "source": "U Travel",
+   "title": "中華航空突發日韓機票優惠！$1490起飛東京/福岡/首爾等8大航點 包23KG行李"
+  },
+  {
+   "airlines": [
+    "CX"
+   ],
+   "found_at": "2026-11-02T19:40+08:00",
+   "id": "c6c1e129a317",
+   "link": "https://news.google.com/rss/articles/CBMi9gNBVV95cUxQWl9kZ191RmUycnRTYkxXcGpaNVl0bU13cDQwSFVrbERxN0xTZG5nOWdGdnN2clFkRGxjZnU4anRHMTFyMlVJT0tiZWgwNy13bTdLZ2xOdkZVZDFwRHExLTlQOV9qV0IxX1UyZFBtQVhnYkh6RXVMY1FuaWxoaXlKN0VMWFltZW81cVVaQmprOTRKLTVuSlBDSG0zVWZCSVdoVURWOG02OTBsUWdfZm01eEIxWHp5LUFxbzVBTlFCT0VoUW13M0lkSUE3Mk1TTG1VT2J2Wk8tTGtZa0FBdDJzSDctU0cteFc4VmFnMjhLOG42cm9UNXdrTXZpQ1VGczd3bWhBR2tUa1lRdDdNNTQzVnBvclFuTXRuMC0tTDlGSG4wenBaT082akhCNnlOSDROTGxNcmlfMXF6OEU0OUhJTS16NkVUSXRySlFfY2MwQXIwbURnNzlKSkgxX3lvdWoyRm9EbkF6NzFQdU9KbW5GR0JoYTRpTDJSVzJyTjBJSmFYWnJpOV9BSVhWQUJRNE1yS21lU0F3cy1SYkRiTXJBYXdLRnRLWElzNVV0SE1FNDRXTl9nWERJTldDenpKZHltOHB3MzI2Tmhwc1ltTnF1ZnVsekNjNjJfbTVnOWpXVlAzZVpqSHpaVHpoX1BqZ0JiT1JzT3B3?oc=5",
+   "published": "2026-11-02T05:47+00:00",
+   "source": "U Travel",
+   "title": "國泰航空限時機票優惠！三人同行起可享高達75折 涵蓋東京大阪等29航點！即睇優惠碼"
+  },
+  {
+   "airlines": [
+    "CI",
+    "BR",
+    "JX"
+   ],
+   "found_at": "2026-10-26T16:06+08:00",
+   "id": "a36ec776af37",
+   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTFBRN09ma245RDFpQ2tIVkVWbkhvcFJfZ09oVUlBN0NhZnVMeDJ4Y1dyZFNHTlJmblhjTklNNTFoVEFGTmVtVEdaVTM3RTBvTDZoZjRUaHF1UUlLdGxIY1HSAUtBVV95cUxNSXNwLXh5akdwSktzTlRoVHhWMFFsY0RBN3BtTVlzM1NPR05PVmJ6ejE1ZndGUkNqak5HcnVvRzhISHg5VDU2Qy1zbm8?oc=5",
+   "published": "2026-10-26T01:00+00:00",
+   "source": "ETtoday新聞雲",
+   "title": "華航熱門航線76折起　長榮飛日韓免萬元「星宇送蔡依林周邊」"
+  }
+ ],
+ "promo_seen": {
+  "15382666fdf2": "2026-10-21",
+  "1c4ecf3e0292": "2026-10-21",
+  "3bdee4c0cafe": "2026-11-06",
+  "3dd20fe62251": "2026-10-23",
+  "4024761360ef": "2026-11-07",
+  "53c7971fd72a": "2026-11-05",
+  "7d1c86732343": "2026-10-17",
+  "7df14563e38c": "2026-11-07",
+  "866594744350": "2026-10-17",
+  "91d0be7b640a": "2026-10-19",
+  "a36ec776af37": "2026-10-26",
+  "b7e5d1a81722": "2026-11-06",
+  "b8046b2e3278": "2026-10-20",
+  "bbc69b1a8890": "2026-10-22",
+  "c6c1e129a317": "2026-11-02",
+  "c8f20d88c577": "2026-10-22",
+  "d36be09f9f38": "2026-11-06",
+  "dd6f27b0bd9f": "2026-10-17",
+  "ee4a0630a4c8": "2026-11-06",
+  "efbbf73205bf": "2026-10-17"
+ },
+ "rate_limit_streak": 0,
+ "routes": {
+  "TPE-AOJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-AXT": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-FSZ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-HIJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-HKD": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-HNA": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-HND": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-IBR": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-ISG": {
+   "no_service_until": "2026-10-26"
+  },
+  "TPE-KIJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-KKJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-KMI": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-KMJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-KMQ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-KOJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-MYJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-OKJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-SDJ": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-TAK": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-TOY": {
+   "no_service_until": "2026-11-11"
+  },
+  "TPE-UKB": {
+   "no_service_until": "2026-11-11"
+  }
+ },
+ "scan_log": [
+  {
+   "at": "2026-11-01T07:43+08:00",
+   "deals": 9,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 14,
+   "tasks_done": 12,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-01T09:06+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 4,
+   "tasks_done": 0,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-01T14:49+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 42,
+   "tasks_done": 39,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-01T15:29+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 25,
+   "tasks_done": 24,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-01T22:30+08:00",
+   "deals": 11,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 43,
+   "tasks_done": 28,
+   "verified": 6
+  },
+  {
+   "at": "2026-11-01T23:03+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 1,
+   "tasks_done": 0,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-02T03:11+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 45,
+   "verified": 4
+  },
+  {
+   "at": "2026-11-02T03:38+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 52,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-02T07:04+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 20,
+   "tasks_done": 15,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-02T07:33+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 2,
+   "tasks_done": 0,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-02T10:44+08:00",
+   "deals": 10,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 45,
+   "tasks_done": 28,
+   "verified": 8
+  },
+  {
+   "at": "2026-11-02T13:55+08:00",
+   "deals": 9,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 9,
+   "tasks_done": 7,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-02T19:40+08:00",
+   "deals": 9,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 54,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-02T23:41+08:00",
+   "deals": 9,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 35,
+   "tasks_done": 16,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-03T04:53+08:00",
+   "deals": 8,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 38,
+   "verified": 9
+  },
+  {
+   "at": "2026-11-03T07:28+08:00",
+   "deals": 11,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 61,
+   "tasks_done": 33,
+   "verified": 6
+  },
+  {
+   "at": "2026-11-03T11:04+08:00",
+   "deals": 15,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 29,
+   "verified": 6
+  },
+  {
+   "at": "2026-11-03T14:42+08:00",
+   "deals": 14,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 36,
+   "tasks_done": 18,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-03T19:19+08:00",
+   "deals": 12,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 61,
+   "tasks_done": 40,
+   "verified": 5
+  },
+  {
+   "at": "2026-11-03T23:04+08:00",
+   "deals": 12,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 56,
+   "tasks_done": 30,
+   "verified": 9
+  },
+  {
+   "at": "2026-11-04T02:39+08:00",
+   "deals": 15,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 40,
+   "verified": 5
+  },
+  {
+   "at": "2026-11-04T04:57+08:00",
+   "deals": 15,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 38,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-04T07:42+08:00",
+   "deals": 8,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 39,
+   "verified": 10
+  },
+  {
+   "at": "2026-11-04T09:19+08:00",
+   "deals": 9,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 61,
+   "tasks_done": 38,
+   "verified": 10
+  },
+  {
+   "at": "2026-11-04T14:57+08:00",
+   "deals": 12,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 61,
+   "tasks_done": 39,
+   "verified": 8
+  },
+  {
+   "at": "2026-11-04T17:05+08:00",
+   "deals": 14,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 28,
+   "verified": 8
+  },
+  {
+   "at": "2026-11-04T23:45+08:00",
+   "deals": 11,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 61,
+   "tasks_done": 30,
+   "verified": 8
+  },
+  {
+   "at": "2026-11-05T01:11+08:00",
+   "deals": 7,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 33,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-05T06:11+08:00",
+   "deals": 8,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 37,
+   "verified": 5
+  },
+  {
+   "at": "2026-11-05T06:38+08:00",
+   "deals": 13,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 61,
+   "tasks_done": 35,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-05T10:45+08:00",
+   "deals": 18,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 41,
+   "tasks_done": 7,
+   "verified": 11
+  },
+  {
+   "at": "2026-11-05T11:28+08:00",
+   "deals": 18,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 30,
+   "tasks_done": 0,
+   "verified": 8
+  },
+  {
+   "at": "2026-11-05T19:29+08:00",
+   "deals": 14,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 21,
+   "verified": 6
+  },
+  {
+   "at": "2026-11-05T20:15+08:00",
+   "deals": 11,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 37,
+   "verified": 5
+  },
+  {
+   "at": "2026-11-06T02:57+08:00",
+   "deals": 4,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 39,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-06T04:38+08:00",
+   "deals": 5,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 45,
+   "verified": 5
+  },
+  {
+   "at": "2026-11-06T08:33+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 37,
+   "tasks_done": 28,
+   "verified": 4
+  },
+  {
+   "at": "2026-11-06T09:30+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 1,
+   "tasks_done": 0,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-06T15:23+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 46,
+   "tasks_done": 35,
+   "verified": 4
+  },
+  {
+   "at": "2026-11-06T17:19+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 44,
+   "tasks_done": 23,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-06T23:23+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 45,
+   "tasks_done": 31,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-07T01:27+08:00",
+   "deals": 4,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 38,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-07T05:03+08:00",
+   "deals": 5,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 60,
+   "tasks_done": 40,
+   "verified": 4
+  },
+  {
+   "at": "2026-11-07T07:05+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 34,
+   "tasks_done": 28,
+   "verified": 3
+  },
+  {
+   "at": "2026-11-07T09:11+08:00",
+   "deals": 5,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 10,
+   "tasks_done": 6,
+   "verified": 2
+  },
+  {
+   "at": "2026-11-07T10:46+08:00",
+   "deals": 6,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 38,
+   "tasks_done": 6,
+   "verified": 1
+  },
+  {
+   "at": "2026-11-07T15:45+08:00",
+   "deals": 3,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 56,
+   "tasks_done": 30,
+   "verified": 7
+  },
+  {
+   "at": "2026-11-07T17:59+08:00",
+   "deals": 5,
+   "failures": 0,
+   "ok": true,
+   "rate_limited": false,
+   "requests": 42,
+   "tasks_done": 33,
+   "verified": 3
+  }
+ ],
+ "verify_cache": {
+  "TPE-CTS|2027-04-25|2027-04-28": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 42474,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "BR",
+     "arr": "16:20",
+     "dep": "13:00",
+     "flight": "BR165",
+     "from": "CTS",
+     "to": "TPE"
+    },
+    "days": 4,
+    "dep": "2027-04-25",
+    "dest": "CTS",
+    "dest_name": "札幌",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-CTS|2027-04-25|2027-04-28",
+    "origin": "TPE",
+    "out": {
+     "airline": "BR",
+     "arr": "15:00",
+     "dep": "10:10",
+     "flight": "BR116",
+     "from": "TPE",
+     "to": "CTS"
+    },
+    "price_pp": 21258,
+    "price_total": 42516,
+    "ret": "2027-04-28",
+    "route": "TPE-CTS",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjUoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA0LTI4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T15:45+08:00"
+   }
+  },
+  "TPE-CTS|2027-05-02|2027-05-06": {
+   "at": "2026-11-07T05:03+08:00",
+   "cal_total": 42474,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "BR",
+     "arr": "16:20",
+     "dep": "13:00",
+     "flight": "BR165",
+     "from": "CTS",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-05-02",
+    "dest": "CTS",
+    "dest_name": "札幌",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-CTS|2027-05-02|2027-05-06",
+    "origin": "TPE",
+    "out": {
+     "airline": "BR",
+     "arr": "15:00",
+     "dep": "10:10",
+     "flight": "BR116",
+     "from": "TPE",
+     "to": "CTS"
+    },
+    "price_pp": 21237,
+    "price_total": 42474,
+    "ret": "2027-05-06",
+    "route": "TPE-CTS",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDUtMDIoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0NUUxo-EgoyMDI3LTA1LTA2KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0NUU3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T05:03+08:00"
+   }
+  },
+  "TPE-FUK|2027-03-21|2027-03-28": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 35898,
+   "deal": null,
+   "short": true,
+   "why": "去程沒有符合時段的航班（最便宜的 JX840 14:45 起飛、18:00 抵達）"
+  },
+  "TPE-FUK|2027-03-23|2027-03-30": {
+   "at": "2026-11-07T17:59+08:00",
+   "cal_total": 36272,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-KIX|2027-04-09|2027-04-13": {
+   "at": "2026-11-07T01:27+08:00",
+   "cal_total": 29598,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "15:20",
+     "dep": "13:25",
+     "flight": "JX821",
+     "from": "KIX",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-04-09",
+    "dest": "KIX",
+    "dest_name": "大阪關西",
+    "flags": [],
+    "key": "TPE-KIX|2027-04-09|2027-04-13",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:00",
+     "dep": "10:15",
+     "flight": "JX822",
+     "from": "TPE",
+     "to": "KIX"
+    },
+    "price_pp": 14799,
+    "price_total": 29598,
+    "ret": "2027-04-13",
+    "route": "TPE-KIX",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMDkoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0tJWBo-EgoyMDI3LTA0LTEzKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0tJWHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T01:27+08:00"
+   }
+  },
+  "TPE-KIX|2027-04-11|2027-04-14": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 29598,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "15:20",
+     "dep": "13:25",
+     "flight": "JX821",
+     "from": "KIX",
+     "to": "TPE"
+    },
+    "days": 4,
+    "dep": "2027-04-11",
+    "dest": "KIX",
+    "dest_name": "大阪關西",
+    "flags": [],
+    "key": "TPE-KIX|2027-04-11|2027-04-14",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:00",
+     "dep": "10:15",
+     "flight": "JX822",
+     "from": "TPE",
+     "to": "KIX"
+    },
+    "price_pp": 14818,
+    "price_total": 29636,
+    "ret": "2027-04-14",
+    "route": "TPE-KIX",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0tJWBo-EgoyMDI3LTA0LTE0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0tJWHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T15:45+08:00"
+   }
+  },
+  "TPE-KIX|2027-04-19|2027-04-22": {
+   "at": "2026-11-06T15:23+08:00",
+   "cal_total": 29574,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "15:20",
+     "dep": "13:25",
+     "flight": "JX821",
+     "from": "KIX",
+     "to": "TPE"
+    },
+    "days": 4,
+    "dep": "2027-04-19",
+    "dest": "KIX",
+    "dest_name": "大阪關西",
+    "flags": [],
+    "key": "TPE-KIX|2027-04-19|2027-04-22",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:00",
+     "dep": "10:15",
+     "flight": "JX822",
+     "from": "TPE",
+     "to": "KIX"
+    },
+    "price_pp": 14799,
+    "price_total": 29598,
+    "ret": "2027-04-22",
+    "route": "TPE-KIX",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTkoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0tJWBo-EgoyMDI3LTA0LTIyKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0tJWHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T15:23+08:00"
+   }
+  },
+  "TPE-KIX|2027-04-19|2027-04-23": {
+   "at": "2026-11-06T02:57+08:00",
+   "cal_total": 29574,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "15:20",
+     "dep": "13:25",
+     "flight": "JX821",
+     "from": "KIX",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-04-19",
+    "dest": "KIX",
+    "dest_name": "大阪關西",
+    "flags": [],
+    "key": "TPE-KIX|2027-04-19|2027-04-23",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:00",
+     "dep": "10:15",
+     "flight": "JX822",
+     "from": "TPE",
+     "to": "KIX"
+    },
+    "price_pp": 14799,
+    "price_total": 29598,
+    "ret": "2027-04-23",
+    "route": "TPE-KIX",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTkoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA0tJWBo-EgoyMDI3LTA0LTIzKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0tJWHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T02:57+08:00"
+   }
+  },
+  "TPE-NGO|2027-01-02|2027-01-05": {
+   "at": "2026-11-06T04:38+08:00",
+   "cal_total": 29098,
+   "deal": null,
+   "short": true,
+   "why": "去程沒有符合時段的航班（最便宜的 JX838 14:55 起飛、18:30 抵達）"
+  },
+  "TPE-NGO|2027-01-08|2027-01-12": {
+   "at": "2026-11-07T01:27+08:00",
+   "cal_total": 29120,
+   "deal": null,
+   "short": true,
+   "why": "去程沒有符合時段的航班（最便宜的 JX838 14:55 起飛、18:30 抵達）"
+  },
+  "TPE-NGO|2027-03-05|2027-03-09": {
+   "at": "2026-11-06T02:57+08:00",
+   "cal_total": 29098,
+   "deal": null,
+   "short": true,
+   "why": "去程沒有符合時段的航班（最便宜的 JX838 14:55 起飛、18:30 抵達）"
+  },
+  "TPE-NGO|2027-03-17|2027-03-23": {
+   "at": "2026-11-07T07:05+08:00",
+   "cal_total": 29120,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "17:40",
+     "dep": "15:05",
+     "flight": "JX1839",
+     "from": "NGO",
+     "to": "TPE"
+    },
+    "days": 7,
+    "dep": "2027-03-17",
+    "dest": "NGO",
+    "dest_name": "名古屋",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NGO|2027-03-17|2027-03-23",
+    "origin": "TPE",
+    "out": {
+     "airline": "CX",
+     "arr": "15:35",
+     "dep": "12:00",
+     "flight": "CX530",
+     "from": "TPE",
+     "to": "NGO"
+    },
+    "price_pp": 24904,
+    "price_total": 49808,
+    "ret": "2027-03-23",
+    "route": "TPE-NGO",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMTcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05HTxo-EgoyMDI3LTAzLTIzKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05HT3IFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T07:05+08:00"
+   }
+  },
+  "TPE-NGO|2027-03-18|2027-03-23": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 29120,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2026-11-22|2026-11-26": {
+   "at": "2026-11-07T01:27+08:00",
+   "cal_total": 27460,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CX",
+     "arr": "18:35",
+     "dep": "15:30",
+     "flight": "CX451",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2026-11-22",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達",
+     "回程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2026-11-22|2026-11-26",
+    "origin": "TPE",
+    "out": {
+     "airline": "CX",
+     "arr": "16:50",
+     "dep": "12:50",
+     "flight": "CX450",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 13748,
+    "price_total": 27496,
+    "ret": "2026-11-26",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjYtMTEtMjIoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI2LTExLTI2KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T01:27+08:00"
+   }
+  },
+  "TPE-NRT|2027-03-14|2027-03-18": {
+   "at": "2026-11-06T02:57+08:00",
+   "cal_total": 27442,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CX",
+     "arr": "18:35",
+     "dep": "15:30",
+     "flight": "CX451",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-03-14",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達",
+     "回程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-03-14|2027-03-18",
+    "origin": "TPE",
+    "out": {
+     "airline": "CX",
+     "arr": "16:50",
+     "dep": "12:50",
+     "flight": "CX450",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 13721,
+    "price_total": 27442,
+    "ret": "2027-03-18",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMTQoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTAzLTE4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T02:57+08:00"
+   }
+  },
+  "TPE-NRT|2027-03-14|2027-03-21": {
+   "at": "2026-11-06T02:57+08:00",
+   "cal_total": 974,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CX",
+     "arr": "18:35",
+     "dep": "15:30",
+     "flight": "CX451",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 8,
+    "dep": "2027-03-14",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達",
+     "回程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-03-14|2027-03-21",
+    "origin": "TPE",
+    "out": {
+     "airline": "CX",
+     "arr": "16:50",
+     "dep": "12:50",
+     "flight": "CX450",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 16050,
+    "price_total": 32100,
+    "ret": "2027-03-21",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMTQoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTAzLTIxKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T02:57+08:00"
+   }
+  },
+  "TPE-NRT|2027-03-16|2027-03-23": {
+   "at": "2026-11-05T20:15+08:00",
+   "cal_total": 859,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2027-03-17|2027-03-24": {
+   "at": "2026-11-05T19:29+08:00",
+   "cal_total": 834,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CX",
+     "arr": "18:35",
+     "dep": "15:30",
+     "flight": "CX451",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 8,
+    "dep": "2027-03-17",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達",
+     "回程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-03-17|2027-03-24",
+    "origin": "TPE",
+    "out": {
+     "airline": "CX",
+     "arr": "16:50",
+     "dep": "12:50",
+     "flight": "CX450",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 13721,
+    "price_total": 27442,
+    "ret": "2027-03-24",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMTcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTAzLTI0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-05T19:29+08:00"
+   }
+  },
+  "TPE-NRT|2027-04-05|2027-04-09": {
+   "at": "2026-11-06T08:33+08:00",
+   "cal_total": 27442,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CI",
+     "arr": "17:15",
+     "dep": "14:30",
+     "flight": "CI101",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-04-05",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-04-05|2027-04-09",
+    "origin": "TPE",
+    "out": {
+     "airline": "CI",
+     "arr": "16:35",
+     "dep": "12:15",
+     "flight": "CI104",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 17273,
+    "price_total": 34546,
+    "ret": "2027-04-09",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMDUoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA0LTA5KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T08:33+08:00"
+   }
+  },
+  "TPE-NRT|2027-04-05|2027-04-12": {
+   "at": "2026-11-05T19:29+08:00",
+   "cal_total": 834,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2027-04-07|2027-04-14": {
+   "at": "2026-11-05T20:15+08:00",
+   "cal_total": 860,
+   "deal": null,
+   "short": true,
+   "why": "回程目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2027-04-08|2027-04-15": {
+   "at": "2026-11-05T19:29+08:00",
+   "cal_total": 833,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2027-04-14|2027-04-21": {
+   "at": "2026-11-05T19:29+08:00",
+   "cal_total": 846,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2027-04-15|2027-04-22": {
+   "at": "2026-11-05T20:15+08:00",
+   "cal_total": 859,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:50",
+     "dep": "14:10",
+     "flight": "JX801",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 8,
+    "dep": "2027-04-15",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-04-15|2027-04-22",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "15:05",
+     "dep": "10:40",
+     "flight": "JX802",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15127,
+    "price_total": 30254,
+    "ret": "2027-04-22",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTUoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA0LTIyKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-05T20:15+08:00"
+   }
+  },
+  "TPE-NRT|2027-04-18|2027-04-22": {
+   "at": "2026-11-07T05:03+08:00",
+   "cal_total": 27460,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:50",
+     "dep": "14:10",
+     "flight": "JX801",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-04-18",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-04-18|2027-04-22",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "15:05",
+     "dep": "10:40",
+     "flight": "JX802",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15159,
+    "price_total": 30318,
+    "ret": "2027-04-22",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTgoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA0LTIyKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T05:03+08:00"
+   }
+  },
+  "TPE-NRT|2027-04-19|2027-04-22": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 27460,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-NRT|2027-04-27|2027-05-04": {
+   "at": "2026-11-05T19:29+08:00",
+   "cal_total": 834,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:50",
+     "dep": "14:10",
+     "flight": "JX801",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 8,
+    "dep": "2027-04-27",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-04-27|2027-05-04",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "15:05",
+     "dep": "10:40",
+     "flight": "JX802",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15127,
+    "price_total": 30254,
+    "ret": "2027-05-04",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA1LTA0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-05T19:29+08:00"
+   }
+  },
+  "TPE-NRT|2027-05-01|2027-05-04": {
+   "at": "2026-11-07T17:59+08:00",
+   "cal_total": 27460,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CI",
+     "arr": "17:15",
+     "dep": "14:30",
+     "flight": "CI101",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 4,
+    "dep": "2027-05-01",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-05-01|2027-05-04",
+    "origin": "TPE",
+    "out": {
+     "airline": "CI",
+     "arr": "16:35",
+     "dep": "12:15",
+     "flight": "CI104",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15160,
+    "price_total": 30320,
+    "ret": "2027-05-04",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDUtMDEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA1LTA0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T17:59+08:00"
+   }
+  },
+  "TPE-NRT|2027-05-01|2027-05-06": {
+   "at": "2026-11-06T15:23+08:00",
+   "cal_total": 27442,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CI",
+     "arr": "17:15",
+     "dep": "14:30",
+     "flight": "CI101",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 6,
+    "dep": "2027-05-01",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-05-01|2027-05-06",
+    "origin": "TPE",
+    "out": {
+     "airline": "CI",
+     "arr": "16:35",
+     "dep": "12:15",
+     "flight": "CI104",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15140,
+    "price_total": 30280,
+    "ret": "2027-05-06",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDUtMDEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA1LTA2KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T15:23+08:00"
+   }
+  },
+  "TPE-NRT|2027-05-01|2027-05-08": {
+   "at": "2026-11-05T20:15+08:00",
+   "cal_total": 847,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:50",
+     "dep": "14:10",
+     "flight": "JX801",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 8,
+    "dep": "2027-05-01",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-05-01|2027-05-08",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "15:05",
+     "dep": "10:40",
+     "flight": "JX802",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15127,
+    "price_total": 30254,
+    "ret": "2027-05-08",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDUtMDEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA1LTA4KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-05T20:15+08:00"
+   }
+  },
+  "TPE-NRT|2027-05-03|2027-05-10": {
+   "at": "2026-11-05T20:15+08:00",
+   "cal_total": 847,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "CI",
+     "arr": "17:15",
+     "dep": "14:30",
+     "flight": "CI101",
+     "from": "NRT",
+     "to": "TPE"
+    },
+    "days": 8,
+    "dep": "2027-05-03",
+    "dest": "NRT",
+    "dest_name": "東京成田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-NRT|2027-05-03|2027-05-10",
+    "origin": "TPE",
+    "out": {
+     "airline": "CI",
+     "arr": "16:35",
+     "dep": "12:15",
+     "flight": "CI104",
+     "from": "TPE",
+     "to": "NRT"
+    },
+    "price_pp": 15127,
+    "price_total": 30254,
+    "ret": "2027-05-10",
+    "route": "TPE-NRT",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDUtMDMoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA05SVBo-EgoyMDI3LTA1LTEwKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA05SVHIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-05T20:15+08:00"
+   }
+  },
+  "TPE-NRT|2027-05-04|2027-05-11": {
+   "at": "2026-11-05T19:29+08:00",
+   "cal_total": 834,
+   "deal": null,
+   "short": true,
+   "why": "回程目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-OKA|2026-11-15|2026-11-19": {
+   "at": "2026-11-06T02:57+08:00",
+   "cal_total": 21260,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:10",
+     "dep": "15:25",
+     "flight": "JX871",
+     "from": "OKA",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2026-11-15",
+    "dest": "OKA",
+    "dest_name": "沖繩",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-OKA|2026-11-15|2026-11-19",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:15",
+     "dep": "11:40",
+     "flight": "JX870",
+     "from": "TPE",
+     "to": "OKA"
+    },
+    "price_pp": 10640,
+    "price_total": 21280,
+    "ret": "2026-11-19",
+    "route": "TPE-OKA",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjYtMTEtMTUoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA09LQRo-EgoyMDI2LTExLTE5KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA09LQXIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T02:57+08:00"
+   }
+  },
+  "TPE-OKA|2026-12-26|2026-12-30": {
+   "at": "2026-11-07T01:27+08:00",
+   "cal_total": 21280,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:10",
+     "dep": "15:25",
+     "flight": "JX871",
+     "from": "OKA",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2026-12-26",
+    "dest": "OKA",
+    "dest_name": "沖繩",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-OKA|2026-12-26|2026-12-30",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:15",
+     "dep": "11:40",
+     "flight": "JX870",
+     "from": "TPE",
+     "to": "OKA"
+    },
+    "price_pp": 10640,
+    "price_total": 21280,
+    "ret": "2026-12-30",
+    "route": "TPE-OKA",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjYtMTItMjYoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA09LQRo-EgoyMDI2LTEyLTMwKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA09LQXIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T01:27+08:00"
+   }
+  },
+  "TPE-OKA|2027-03-20|2027-03-24": {
+   "at": "2026-11-07T07:05+08:00",
+   "cal_total": 21280,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:10",
+     "dep": "15:25",
+     "flight": "JX871",
+     "from": "OKA",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-03-20",
+    "dest": "OKA",
+    "dest_name": "沖繩",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-OKA|2027-03-20|2027-03-24",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:15",
+     "dep": "11:40",
+     "flight": "JX870",
+     "from": "TPE",
+     "to": "OKA"
+    },
+    "price_pp": 10657,
+    "price_total": 21314,
+    "ret": "2027-03-24",
+    "route": "TPE-OKA",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMjAoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA09LQRo-EgoyMDI3LTAzLTI0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA09LQXIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T07:05+08:00"
+   }
+  },
+  "TPE-OKA|2027-03-21|2027-03-24": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 21280,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "JX",
+     "arr": "16:10",
+     "dep": "15:25",
+     "flight": "JX871",
+     "from": "OKA",
+     "to": "TPE"
+    },
+    "days": 4,
+    "dep": "2027-03-21",
+    "dest": "OKA",
+    "dest_name": "沖繩",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-OKA|2027-03-21|2027-03-24",
+    "origin": "TPE",
+    "out": {
+     "airline": "JX",
+     "arr": "14:15",
+     "dep": "11:40",
+     "flight": "JX870",
+     "from": "TPE",
+     "to": "OKA"
+    },
+    "price_pp": 10657,
+    "price_total": 21314,
+    "ret": "2027-03-24",
+    "route": "TPE-OKA",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDMtMjEoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFBFcgUSA09LQRo-EgoyMDI3LTAzLTI0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA09LQXIFEgNUUEVCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T15:45+08:00"
+   }
+  },
+  "TSA-HND|2027-04-18|2027-04-21": {
+   "at": "2026-11-07T15:45+08:00",
+   "cal_total": 33064,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TSA-HND|2027-04-18|2027-04-22": {
+   "at": "2026-11-07T01:27+08:00",
+   "cal_total": 33064,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "NH",
+     "arr": "15:50",
+     "dep": "13:20",
+     "flight": "NH853",
+     "from": "HND",
+     "to": "TSA"
+    },
+    "days": 5,
+    "dep": "2027-04-18",
+    "dest": "HND",
+    "dest_name": "東京羽田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TSA-HND|2027-04-18|2027-04-22",
+    "origin": "TSA",
+    "out": {
+     "airline": "NH",
+     "arr": "17:45",
+     "dep": "13:30",
+     "flight": "NH852",
+     "from": "TSA",
+     "to": "HND"
+    },
+    "price_pp": 16532,
+    "price_total": 33064,
+    "ret": "2027-04-22",
+    "route": "TSA-HND",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMTgoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFNBcgUSA0hORBo-EgoyMDI3LTA0LTIyKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0hORHIFEgNUU0FCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-07T01:27+08:00"
+   }
+  },
+  "TSA-HND|2027-04-19|2027-04-22": {
+   "at": "2026-11-07T17:59+08:00",
+   "cal_total": 33064,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TSA-HND|2027-04-27|2027-05-03": {
+   "at": "2026-11-06T08:33+08:00",
+   "cal_total": 33024,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "NH",
+     "arr": "15:50",
+     "dep": "13:20",
+     "flight": "NH853",
+     "from": "HND",
+     "to": "TSA"
+    },
+    "days": 7,
+    "dep": "2027-04-27",
+    "dest": "HND",
+    "dest_name": "東京羽田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TSA-HND|2027-04-27|2027-05-03",
+    "origin": "TSA",
+    "out": {
+     "airline": "NH",
+     "arr": "17:45",
+     "dep": "13:30",
+     "flight": "NH852",
+     "from": "TSA",
+     "to": "HND"
+    },
+    "price_pp": 16532,
+    "price_total": 33064,
+    "ret": "2027-05-03",
+    "route": "TSA-HND",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFNBcgUSA0hORBo-EgoyMDI3LTA1LTAzKAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0hORHIFEgNUU0FCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T08:33+08:00"
+   }
+  },
+  "TSA-HND|2027-04-27|2027-05-04": {
+   "at": "2026-11-06T04:38+08:00",
+   "cal_total": 33024,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "NH",
+     "arr": "15:50",
+     "dep": "13:20",
+     "flight": "NH853",
+     "from": "HND",
+     "to": "TSA"
+    },
+    "days": 8,
+    "dep": "2027-04-27",
+    "dest": "HND",
+    "dest_name": "東京羽田",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TSA-HND|2027-04-27|2027-05-04",
+    "origin": "TSA",
+    "out": {
+     "airline": "NH",
+     "arr": "17:45",
+     "dep": "13:30",
+     "flight": "NH852",
+     "from": "TSA",
+     "to": "HND"
+    },
+    "price_pp": 16512,
+    "price_total": 33024,
+    "ret": "2027-05-04",
+    "route": "TSA-HND",
+    "url": "https://www.google.com/travel/flights/search?tfs=Gj4SCjIwMjctMDQtMjcoADICQ0kyAkJSMgJKWDICQUUyAkpMMgJOSDICQ1hACkgOWBJqBRIDVFNBcgUSA0hORBo-EgoyMDI3LTA1LTA0KAAyAkNJMgJCUjICSlgyAkFFMgJKTDICTkgyAkNYQA1ID1gUagUSA0hORHIFEgNUU0FCAgEBSAGYAQE&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-06T04:38+08:00"
+   }
+  }
+ },
+ "version": 1
+}
