@@ -1,0 +1,40 @@
+name: Round-trip Check (manual)
+
+# One-off round-trip search with custom time windows (Google Flights, TWD, per person).
+on:
+  workflow_dispatch:
+    inputs:
+      route:
+        description: "航線（例如 TPE-OKA，可逗號分隔）"
+        default: "TPE-OKA"
+      dep:
+        description: "去程日期（YYYY-MM-DD）"
+        required: true
+      ret:
+        description: "回程日期（YYYY-MM-DD）"
+        required: true
+      out_window:
+        description: "去程起飛時段"
+        default: "00:00-23:59"
+      ret_window:
+        description: "回程起飛時段"
+        default: "00:00-23:59"
+
+permissions:
+  contents: read
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Search
+        run: >-
+          python scripts/roundtrip_check.py --route "${{ inputs.route }}" --dep "${{ inputs.dep }}" --ret "${{ inputs.ret }}"
+          --out-window "${{ inputs.out_window }}" --ret-window "${{ inputs.ret_window }}"
