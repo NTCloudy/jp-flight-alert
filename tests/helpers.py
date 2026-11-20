@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from datetime import date, datetime, timedelta
 
-from flight_alert.config import TPE_TZ, Config
+from flight_alert.config import TPE_TZ, Config, LccConfig
 from flight_alert.gflights import Itinerary, Leg, RateLimited, SourceStats
 
 NOW = datetime(2026, 10, 17, 21, 0, tzinfo=TPE_TZ)
@@ -64,7 +64,8 @@ class FakeSource:
 
 
 def small_config(**over) -> Config:
-    base = dict(origins=["TPE"], destinations=["OKA", "NRT"], min_days=5, max_days=5, horizon_days=60, lead_days=2)
+    base = dict(origins=["TPE"], destinations=["OKA", "NRT"], min_days=5, max_days=5, horizon_days=60, lead_days=2,
+                lcc=LccConfig(enabled=False))  # LCC pass is tested separately (tests/test_lcc.py)
     base.update(over)
     return Config(**base)
 

@@ -20,6 +20,9 @@ def cmd_plan(cfg: cfgmod.Config) -> int:
     print(f"回程：{cfg.inbound.describe()}")
     print(f"通知：每人 ≤ {cfg.instant_max:,} 馬上寄；≤ {cfg.digest_max:,} 或比平常便宜 {cfg.anomaly_pct}% 以上 → "
           f"每天 {cfg.digest_hour}:00 整理" + (f"｜暫停到 {cfg.paused_until}" if cfg.paused_until else ""))
+    if cfg.lcc.enabled:
+        print(f"廉航（另外寄信）：票價＋{cfg.lcc.bag_kg}kg 行李（去回，估價）每人來回 < {cfg.lcc.max_total:,}｜"
+              + "、".join(f"{airline_name(a)} {cfg.lcc.bag_fee(a)}" for a in cfg.lcc.airlines) + "（每段行李費）")
     routes = cfg.routes()
     print(f"航線（{len(routes)} 條）：" + "、".join(f"{airport_name(o)}→{airport_name(d)}" for o, d in routes))
     off = [r for r, v in state.get("routes", {}).items() if v.get("no_service_until")]

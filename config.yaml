@@ -34,6 +34,15 @@ inbound:
   arrive_latest: "20:00"
 promo:
   enabled: true
+# 廉航（另外寄信，不影響上面傳統航空）：票價＋20kg 託運行李（去回各 1 件，估價）每人來回 < max_total 才通知
+# bag_fees：每人每段 20kg 預購價估算（新台幣）；沒列到的廉航用 bag_fee_default
+lcc:
+  enabled: true
+  max_total: 5000
+  bag_kg: 20
+  bag_fee_default: 1200
+  bag_fees: {"IT": 950, "MM": 950, "GK": 950, "JQ": 950, "TR": 950, "D7": 950, "AK": 950, "FD": 950, "Z2": 950, "VJ": 600, "VZ": 600}
+  airlines: ["IT", "MM", "GK", "JQ", "TR", "ZG", "IJ", "UO", "D7", "AK", "FD", "Z2", "VJ", "VZ", "SL", "BX", "LJ", "TW", "ZE", "RS"]
 muted:
   - "TPE-SHI|2027-03-06|2027-03-10"
   - "TPE-SHI|2026-11-02|2026-11-09"

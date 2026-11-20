@@ -241,6 +241,42 @@ def instant(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
     return subject, text, html
 
 
+# ---- low-cost carriers (fare + estimated checked bag) --------------------------------------
+def _lcc_price(d: dict) -> str:
+    return (f"每人 {money(d['total_pp'])}（票價 {money(d['price_pp'])}＋行李約 {money(d['bag_pp'])}）")
+
+
+def lcc_instant(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
+    """Separate email for LCC deals whose fare + estimated 20 kg bags (both ways) < lcc.max_total."""
+    deals = sorted(deals, key=lambda d: (d["total_pp"], d["dep"]))
+    b = deals[0]
+    kg = cfg.lcc.bag_kg
+    subject = (f"💸 廉航含行李：{airport_name(b['dest'])} 每人 {money(b['total_pp'])}"
+               f"（票 {money(b['price_pp'])}＋{kg}kg 行李約 {money(b['bag_pp'])}）"
+               f"{short_date(b['dep'])}–{short_date(b['ret'])}・{_airlines(b)}"
+               + (f" 等 {len(deals)} 組" if len(deals) > 1 else ""))
+    intro = (f"找到加上 {kg}kg 託運行李（去回各 1 件）後每人 {money(cfg.lcc.max_total)} 以內、符合你時段的廉航直飛來回"
+             f"（{cfg.adults} 人經濟艙）。行李費是各航空官網預購價的估算，實際以訂票頁為準：")
+    blocks_t, blocks_h = [], []
+    for d in deals:
+        blocks_t.append(
+            f"💸 {route_title(d)} {_lcc_price(d)}\n   {short_date(d['dep'])} → {short_date(d['ret'])}・{d['days']} 天・"
+            f"{_airlines(d)}\n   {flights_line(d)}\n   {d['adults']} 人票價共 {money(d['price_total'])}"
+            f"\n   👉 {d['url']}")
+        blocks_h.append(
+            f"<div style=\"border:1px solid #10b981;border-radius:12px;padding:10px 12px;margin:8px 0\">"
+            f"<div style=\"font-size:15px;font-weight:700\">{escape(route_title(d))}"
+            f"<span style=\"float:right;color:#047857\">每人 {money(d['total_pp'])}</span></div>"
+            f"<div style=\"font-size:14px;margin-top:2px\">{escape(short_date(d['dep']))} → {escape(short_date(d['ret']))}"
+            f"・{d['days']} 天・{escape(_airlines(d))}<span style=\"float:right;color:#6b7385;font-size:13px\">"
+            f"票價 {money(d['price_pp'])}＋行李約 {money(d['bag_pp'])}</span></div>"
+            f"<div style=\"font-size:14px;color:#374151;margin-top:2px\">{escape(flights_line(d))}</div>"
+            f"<div style=\"margin-top:8px\"><a href=\"{escape(d['url'])}\" style=\"{STYLE_BTN}\">Google Flights 查看／訂票</a></div></div>")
+    text = intro + "\n\n" + "\n\n".join(blocks_t) + "\n\n廉航便宜票常常很快賣完，建議盡快確認。\n網頁控制台：" + CONSOLE_URL
+    html = _page("💸 廉航含行李便宜票", _section(intro, "".join(blocks_h)))
+    return subject, text, html
+
+
 # ---- OTA cheaper than Google ---------------------------------------------------------------
 def ota_cheaper(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
     """Deals whose exact flights are cheaper on Trip.com / Agoda than on Google Flights."""

@@ -9,7 +9,7 @@ from pathlib import Path
 
 import yaml
 
-from .airports import FULL_SERVICE_AIRLINES, JAPAN_AIRPORTS, SONGSHAN_DESTINATIONS, TAIWAN_AIRPORTS
+from .airports import FULL_SERVICE_AIRLINES, JAPAN_AIRPORTS, LOW_COST_AIRLINES, SONGSHAN_DESTINATIONS, TAIWAN_AIRPORTS
 
 TPE_TZ = timezone(timedelta(hours=8))
 
@@ -18,6 +18,14 @@ DEFAULT_DESTINATIONS = [
     "OKJ", "TAK", "MYJ", "KMJ", "KOJ", "KMI", "FSZ", "IBR", "KIJ", "HNA", "AXT", "ISG", "UKB", "KKJ",
 ]
 DEFAULT_AIRLINES = ["CI", "BR", "JX", "AE", "JL", "NH", "CX"]
+DEFAULT_LCC_AIRLINES = list(LOW_COST_AIRLINES)
+# Estimated price of one 20 kg checked bag, per person, per flight, bought online with the ticket (TWD).
+# Sources: airline / travel-site price lists (2025-26). Carriers not listed use DEFAULT_LCC_BAG_FEE.
+DEFAULT_LCC_BAG_FEES = {
+    "IT": 950, "MM": 950, "GK": 950, "JQ": 950, "TR": 950,
+    "D7": 950, "AK": 950, "FD": 950, "Z2": 950, "VJ": 600, "VZ": 600,
+}
+DEFAULT_LCC_BAG_FEE = 1200  # unknown / unlisted low-cost carrier: conservative (higher) estimate
 
 
 class ConfigError(ValueError):
@@ -54,6 +62,27 @@ class Window:
 
 
 @dataclass
+class LccConfig:
+    """Separate low-cost-carrier alert: (fare + estimated 20 kg bag both ways) per person < max_total."""
+
+    enabled: bool = True
+    max_total: int = 5000          # per person, round trip, taxes + estimated checked bag included
+    bag_kg: int = 20               # informational (fees below are for this weight)
+    airlines: list[str] = field(default_factory=lambda: list(DEFAULT_LCC_AIRLINES))
+    bag_fees: dict = field(default_factory=lambda: dict(DEFAULT_LCC_BAG_FEES))
+    bag_fee_default: int = DEFAULT_LCC_BAG_FEE
+    renotify_drop: int = 500
+
+    def bag_fee(self, airline: str) -> int:
+        return int(self.bag_fees.get(airline, self.bag_fee_default))
+
+    @property
+    def min_bag_round_trip(self) -> int:
+        fees = [self.bag_fee(a) for a in self.airlines] or [self.bag_fee_default]
+        return 2 * min(fees)
+
+
+@dataclass
 class Config:
     instant_max: int = 8000
     digest_max: int = 10000
@@ -77,6 +106,7 @@ class Config:
     inbound: Window = Window(13 * 60, 15 * 60, 19 * 60, 20 * 60)
     promo_enabled: bool = True
     muted: list[str] = field(default_factory=list)
+    lcc: LccConfig = field(default_factory=LccConfig)
 
     # ---- derived helpers -------------------------------------------------
     @property
@@ -127,6 +157,28 @@ def _codes(values, allowed: dict, name: str) -> list[str]:
     return out
 
 
+def _lcc(raw) -> LccConfig:
+    raw = raw or {}
+    base = LccConfig()
+    fees = dict(base.bag_fees)
+    for k, v in (raw.get("bag_fees") or {}).items():
+        fees[str(k).strip().upper()] = int(v)
+    lcc = LccConfig(
+        enabled=bool(raw.get("enabled", base.enabled)),
+        max_total=int(raw.get("max_total", base.max_total)),
+        bag_kg=int(raw.get("bag_kg", base.bag_kg)),
+        airlines=_codes(raw.get("airlines", base.airlines), LOW_COST_AIRLINES, "lcc.airlines"),
+        bag_fees=fees,
+        bag_fee_default=int(raw.get("bag_fee_default", base.bag_fee_default)),
+        renotify_drop=int(raw.get("renotify_drop", base.renotify_drop)),
+    )
+    if lcc.enabled and not lcc.airlines:
+        raise ConfigError("lcc.airlines 至少要選一家廉航")
+    if lcc.enabled and lcc.max_total <= lcc.min_bag_round_trip:
+        raise ConfigError("lcc.max_total 要高於來回行李費")
+    return lcc
+
+
 def parse(data: dict) -> Config:
     data = data or {}
     alerts = data.get("alerts") or {}
@@ -164,6 +216,7 @@ def parse(data: dict) -> Config:
         inbound=_window(data.get("inbound"), base.inbound, "inbound"),
         promo_enabled=bool(promo.get("enabled", True)),
         muted=[str(x) for x in (data.get("muted") or [])],
+        lcc=_lcc(data.get("lcc")),
     )
     if not cfg.origins or not cfg.destinations or not cfg.airlines:
         raise ConfigError("出發機場、目的地、航空公司都至少要選一個")

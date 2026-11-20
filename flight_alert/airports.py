@@ -65,11 +65,12 @@ FULL_SERVICE_AIRLINES = {
     "TG": ("泰國航空", "https://www.thaiairways.com/zh-tw/"),
 }
 
-# Low-cost carriers seen on Taiwan <-> Japan routes (never whitelisted; used for display only).
+# Low-cost carriers seen on Taiwan <-> Japan routes (only searched by the separate LCC alert, lcc.py).
 LOW_COST_AIRLINES = {
-    "IT": "台灣虎航", "MM": "樂桃航空", "GK": "捷星日本", "TR": "酷航", "ZG": "ZIPAIR",
-    "IJ": "春秋航空日本", "UO": "香港快運", "D7": "亞洲航空 X", "VJ": "越捷航空",
-    "SL": "泰國獅子航空", "FD": "泰國亞洲航空", "7C": "濟州航空", "BX": "釜山航空",
+    "IT": "台灣虎航", "MM": "樂桃航空", "GK": "捷星日本", "JQ": "捷星航空", "TR": "酷航", "ZG": "ZIPAIR",
+    "IJ": "春秋航空日本", "UO": "香港快運", "D7": "亞洲航空 X", "AK": "亞洲航空", "FD": "泰國亞洲航空",
+    "Z2": "菲律賓亞洲航空", "VJ": "越捷航空", "VZ": "泰國越捷航空", "SL": "泰國獅子航空",
+    "BX": "釜山航空", "LJ": "真航空", "TW": "德威航空", "ZE": "易斯達航空", "RS": "首爾航空",
 }
 
 WEEKDAYS = "一二三四五六日"

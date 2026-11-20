@@ -49,9 +49,9 @@ def new_state() -> dict:
     }
 
 
-def load_state() -> dict:
+def load_state(name: str = "state.json") -> dict:
     state = new_state()
-    state.update(load("state.json", {}))
+    state.update(load(name, {}))
     return state
 
 

@@ -1,0 +1,45 @@
+name: LCC Dry Run (manual)
+
+# Runs only the low-cost-carrier pass against live Google Flights with a fresh, throw-away state:
+# prints what would be emailed, sends nothing and saves nothing.
+on:
+  workflow_dispatch:
+    inputs:
+      max_requests:
+        description: "最多送幾個請求"
+        default: "30"
+
+permissions:
+  contents: read
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: LCC dry run
+        env:
+          FLIGHT_ALERT_DATA: /tmp/lcc-dry
+        run: |
+          python - <<'PY'
+          import json
+          from flight_alert import app, config, lcc, store
+          from flight_alert.config import now_tpe
+          from flight_alert.gflights import GoogleFlights
+          cfg = config.load("config.yaml")
+          src = GoogleFlights(cfg)
+          res = lcc.run(cfg, src, store.new_state(), now_tpe(), True, False,
+                        max_requests=int("${{ inputs.max_requests }}"), send=app._send, pick=app.pick_instant)
+          for d in res.deals[:25]:
+              print("LCC", d["route"], d["dep"], d["ret"], d["out"]["flight"], d["back"]["flight"],
+                    "fare", d["price_pp"], "bags", d["bag_pp"], "total", d["total_pp"], d["category"])
+          cheapest = {r: v.get("min_pp") for r, v in res.routes.items() if v.get("min_pp")}
+          print("CAL_MIN", json.dumps(dict(sorted(cheapest.items(), key=lambda kv: kv[1])[:15]), ensure_ascii=False))
+          print("ERRORS", res.errors[:5])
+          PY
