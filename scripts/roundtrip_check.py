@@ -31,10 +31,15 @@ def main() -> int:
     ap.add_argument("--out-window", default="00:00-23:59")
     ap.add_argument("--ret-window", default="00:00-23:59")
     ap.add_argument("--max-outbound", type=int, default=8)
+    ap.add_argument("--bags", type=int, default=0, help="checked bags per person included in price")
     args = ap.parse_args()
     ow, rw = window(args.out_window), window(args.ret_window)
     cfg = dataclasses.replace(cfgmod.load("config.yaml"), outbound=ow, inbound=rw, airlines=[], adults=1)
     g = GoogleFlights(cfg, gap=4)
+    if args.bags:
+        from fli.models.google_flights.base import BagsFilter
+        common = g._common
+        g._common = lambda: {**common(), "bags": BagsFilter(checked_bags=args.bags)}
     ok = lambda legs, w: w.depart_earliest <= legs[0].dep.hour * 60 + legs[0].dep.minute <= w.depart_latest  # noqa: E731
     for route in args.route.split(","):
         o, d = route.strip().split("-")
@@ -48,7 +53,7 @@ def main() -> int:
             if not ok(it.ret, rw):
                 continue
             fmt = lambda legs: " + ".join(f"{x.flight} {x.origin}{x.dep:%H:%M}->{x.dest}{x.arr:%H:%M}" for x in legs)  # noqa: E731
-            line = f"RT {route} | {fmt(it.out)} || {fmt(it.ret)} | NT${int(it.total):,}/人"
+            line = f"RT {route} | {fmt(it.out)} || {fmt(it.ret)} | NT${int(it.total):,}/人 bags={args.bags}"
             if line not in seen:
                 seen.add(line)
                 print(line)

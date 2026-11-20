@@ -19,6 +19,9 @@ on:
       ret_window:
         description: "回程起飛時段"
         default: "00:00-23:59"
+      bags:
+        description: "每人託運行李件數（含在票價內，0-2）"
+        default: "0"
 
 permissions:
   contents: read
@@ -37,4 +40,4 @@ jobs:
       - name: Search
         run: >-
           python scripts/roundtrip_check.py --route "${{ inputs.route }}" --dep "${{ inputs.dep }}" --ret "${{ inputs.ret }}"
-          --out-window "${{ inputs.out_window }}" --ret-window "${{ inputs.ret_window }}"
+          --out-window "${{ inputs.out_window }}" --ret-window "${{ inputs.ret_window }}" --bags "${{ inputs.bags }}"
