@@ -1,0 +1,291 @@
+{
+ "checked": {
+  "TPE-CTS|2027-05-02|2027-05-06": {
+   "agoda": {
+    "at": "2026-11-20T16:33+08:00",
+    "price_pp": 23842,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=CTS&arrivalToType=1&departDate=2027-05-02&returnDate=2027-05-06&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-20T16:30+08:00",
+   "google_pp": 21408,
+   "trip": {
+    "at": "2026-11-20T16:32+08:00",
+    "price_pp": 20832,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=spk&ddate=2027-05-02&rdate=2027-05-06&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-CTS|2027-05-06|2027-05-10": {
+   "agoda": {
+    "at": "2026-11-21T16:18+08:00",
+    "price_pp": 23776,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=CTS&arrivalToType=1&departDate=2027-05-06&returnDate=2027-05-10&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-21T16:16+08:00",
+   "google_pp": 21408,
+   "trip": {
+    "at": "2026-11-21T16:18+08:00",
+    "price_pp": 20834,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=spk&ddate=2027-05-06&rdate=2027-05-10&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-KIX|2027-01-08|2027-01-12": {
+   "agoda": {
+    "at": "2026-11-21T05:06+08:00",
+    "price_pp": 20050,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=KIX&arrivalToType=1&departDate=2027-01-08&returnDate=2027-01-12&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-21T05:04+08:00",
+   "google_pp": 17815,
+   "trip": {
+    "at": "2026-11-21T05:05+08:00",
+    "price_pp": 18073,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-01-08&rdate=2027-01-12&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-KIX|2027-04-19|2027-04-23": {
+   "agoda": {
+    "at": "2026-11-21T16:17+08:00",
+    "price_pp": 16705,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=KIX&arrivalToType=1&departDate=2027-04-19&returnDate=2027-04-23&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-21T16:16+08:00",
+   "google_pp": 14970,
+   "trip": {
+    "at": "2026-11-21T16:17+08:00",
+    "price_pp": 15293,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=osa&ddate=2027-04-19&rdate=2027-04-23&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-NRT|2026-11-27|2026-12-01": {
+   "agoda": {
+    "at": "2026-11-20T16:32+08:00",
+    "price_pp": 14978,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NRT&arrivalToType=1&departDate=2026-11-27&returnDate=2026-12-01&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-20T16:30+08:00",
+   "google_pp": 13733,
+   "trip": {
+    "at": "2026-11-20T16:32+08:00",
+    "price_pp": 13841,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2026-11-27&rdate=2026-12-01&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-NRT|2027-05-16|2027-05-20": {
+   "agoda": {
+    "at": "2026-11-21T16:18+08:00",
+    "price_pp": 16916,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=NRT&arrivalToType=1&departDate=2027-05-16&returnDate=2027-05-20&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-21T16:16+08:00",
+   "google_pp": 15309,
+   "trip": {
+    "at": "2026-11-21T16:17+08:00",
+    "price_pp": 15588,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=tyo&ddate=2027-05-16&rdate=2027-05-20&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-OKA|2026-11-28|2026-12-02": {
+   "agoda": {
+    "at": "2026-11-21T16:16+08:00",
+    "price_pp": 11975,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=OKA&arrivalToType=1&departDate=2026-11-28&returnDate=2026-12-02&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-21T16:16+08:00",
+   "google_pp": 10814,
+   "trip": {
+    "at": "2026-11-21T16:16+08:00",
+    "note": "SiteError: 找不到 JX870 的卡片",
+    "status": "error",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2026-11-28&rdate=2026-12-02&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  },
+  "TPE-OKA|2026-11-29|2026-12-03": {
+   "agoda": {
+    "at": "2026-11-21T05:04+08:00",
+    "price_pp": 11800,
+    "status": "ok",
+    "url": "https://www.agoda.com/zh-tw/flights/results?departureFrom=TPE&departureFromType=1&arrivalTo=OKA&arrivalToType=1&departDate=2026-11-29&returnDate=2026-12-03&searchType=2&cabinType=Economy&adults=2&children=0&infants=0&sort=8&currency=TWD&currencyCode=TWD"
+   },
+   "at": "2026-11-21T05:04+08:00",
+   "google_pp": 10814,
+   "trip": {
+    "at": "2026-11-21T05:04+08:00",
+    "price_pp": 10379,
+    "status": "ok",
+    "url": "https://tw.trip.com/flights/showfarefirst?dcity=tpe&acity=oka&ddate=2026-11-29&rdate=2026-12-03&triptype=rt&class=y&quantity=2&searchboxarg=t&nonstoponly=on&locale=zh-TW&curr=TWD"
+   }
+  }
+ },
+ "last_run": {
+  "at": "2026-11-21T16:16+08:00",
+  "errors": 1,
+  "targets": 4
+ },
+ "log": [
+  {
+   "at": "2026-11-07T03:57+08:00",
+   "errors": 0,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-07T15:06+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-07T21:58+08:00",
+   "errors": 3,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-08T15:21+08:00",
+   "errors": 0,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-09T02:21+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-09T15:55+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-10T06:59+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-10T16:26+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-11T04:27+08:00",
+   "errors": 1,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-11T15:44+08:00",
+   "errors": 0,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-12T04:11+08:00",
+   "errors": 1,
+   "targets": 2
+  },
+  {
+   "at": "2026-11-12T16:18+08:00",
+   "errors": 1,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-13T04:48+08:00",
+   "errors": 0,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-13T15:59+08:00",
+   "errors": 1,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-14T04:28+08:00",
+   "errors": 0,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-14T15:36+08:00",
+   "errors": 1,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-15T02:43+08:00",
+   "errors": 1,
+   "targets": 2
+  },
+  {
+   "at": "2026-11-15T15:50+08:00",
+   "errors": 0,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-16T03:22+08:00",
+   "errors": 1,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-16T15:57+08:00",
+   "errors": 1,
+   "targets": 5
+  },
+  {
+   "at": "2026-11-17T06:53+08:00",
+   "errors": 0,
+   "targets": 2
+  },
+  {
+   "at": "2026-11-17T17:11+08:00",
+   "errors": 0,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-18T05:45+08:00",
+   "errors": 2,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-18T16:30+08:00",
+   "errors": 1,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-19T05:24+08:00",
+   "errors": 1,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-19T16:50+08:00",
+   "errors": 0,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-20T05:33+08:00",
+   "errors": 1,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-20T16:30+08:00",
+   "errors": 0,
+   "targets": 3
+  },
+  {
+   "at": "2026-11-21T05:04+08:00",
+   "errors": 0,
+   "targets": 4
+  },
+  {
+   "at": "2026-11-21T16:16+08:00",
+   "errors": 1,
+   "targets": 4
+  }
+ ],
+ "notified": {},
+ "version": 2
+}

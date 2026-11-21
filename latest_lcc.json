@@ -1,0 +1,397 @@
+{
+ "config": {
+  "airlines": [
+   "IT",
+   "MM",
+   "GK",
+   "JQ",
+   "TR",
+   "ZG",
+   "IJ",
+   "UO",
+   "D7",
+   "AK",
+   "FD",
+   "Z2",
+   "VJ",
+   "VZ",
+   "SL",
+   "BX",
+   "LJ",
+   "TW",
+   "ZE",
+   "RS"
+  ],
+  "bag_fees": {
+   "AK": 950,
+   "BX": 1200,
+   "D7": 950,
+   "FD": 950,
+   "GK": 950,
+   "IJ": 1200,
+   "IT": 950,
+   "JQ": 950,
+   "LJ": 1200,
+   "MM": 950,
+   "RS": 1200,
+   "SL": 1200,
+   "TR": 950,
+   "TW": 1200,
+   "UO": 1200,
+   "VJ": 600,
+   "VZ": 600,
+   "Z2": 950,
+   "ZE": 1200,
+   "ZG": 1200
+  },
+  "bag_kg": 20,
+  "max_total": 5000
+ },
+ "deals": [
+  {
+   "adults": 2,
+   "back": {
+    "airline": "MM",
+    "arr": "17:55",
+    "dep": "15:25",
+    "flight": "MM27",
+    "from": "KIX",
+    "to": "TPE"
+   },
+   "bag_pp": 1900,
+   "category": null,
+   "days": 5,
+   "dep": "2027-02-14",
+   "dest": "KIX",
+   "dest_name": "大阪關西",
+   "discount_pct": null,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-KIX|2027-02-14|2027-02-18",
+   "origin": "TPE",
+   "out": {
+    "airline": "MM",
+    "arr": "17:10",
+    "dep": "13:40",
+    "flight": "MM26",
+    "from": "TPE",
+    "to": "KIX"
+   },
+   "price_pp": 9450,
+   "price_total": 18900,
+   "ret": "2027-02-18",
+   "route": "TPE-KIX",
+   "total_pp": 11350,
+   "url": "https://www.google.com/travel/flights/search?tfs=GnISCjIwMjctMDItMTQoADICSVQyAk1NMgJHSzICSlEyAlRSMgJaRzICSUoyAlVPMgJENzICQUsyAkZEMgJaMjICVkoyAlZaMgJTTDICQlgyAkxKMgJUVzICWkUyAlJTQApIDlgSagUSA1RQRXIFEgNLSVgachIKMjAyNy0wMi0xOCgAMgJJVDICTU0yAkdLMgJKUTICVFIyAlpHMgJJSjICVU8yAkQ3MgJBSzICRkQyAloyMgJWSjICVloyAlNMMgJCWDICTEoyAlRXMgJaRTICUlNADUgPWBRqBRIDS0lYcgUSA1RQRUICAQFIAZgBAQ&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-11-21T02:00+08:00"
+  },
+  {
+   "adults": 2,
+   "back": {
+    "airline": "FD",
+    "arr": "17:55",
+    "dep": "14:00",
+    "flight": "FD243",
+    "from": "CTS",
+    "to": "TPE"
+   },
+   "bag_pp": 1900,
+   "category": null,
+   "days": 6,
+   "dep": "2026-12-02",
+   "dest": "CTS",
+   "dest_name": "札幌",
+   "discount_pct": null,
+   "flags": [
+    "去程稍晚抵達"
+   ],
+   "key": "TPE-CTS|2026-12-02|2026-12-07",
+   "origin": "TPE",
+   "out": {
+    "airline": "TR",
+    "arr": "17:00",
+    "dep": "12:15",
+    "flight": "TR892",
+    "from": "TPE",
+    "to": "CTS"
+   },
+   "price_pp": 10513,
+   "price_total": 21026,
+   "ret": "2026-12-07",
+   "route": "TPE-CTS",
+   "total_pp": 12413,
+   "url": "https://www.google.com/travel/flights/search?tfs=GnISCjIwMjYtMTItMDIoADICSVQyAk1NMgJHSzICSlEyAlRSMgJaRzICSUoyAlVPMgJENzICQUsyAkZEMgJaMjICVkoyAlZaMgJTTDICQlgyAkxKMgJUVzICWkUyAlJTQApIDlgSagUSA1RQRXIFEgNDVFMachIKMjAyNi0xMi0wNygAMgJJVDICTU0yAkdLMgJKUTICVFIyAlpHMgJJSjICVU8yAkQ3MgJBSzICRkQyAloyMgJWSjICVloyAlNMMgJCWDICTEoyAlRXMgJaRTICUlNADUgPWBRqBRIDQ1RTcgUSA1RQRUICAQFIAZgBAQ&hl=zh-TW&curr=TWD",
+   "verified_at": "2026-11-21T17:42+08:00"
+  }
+ ],
+ "routes": {
+  "TPE-AOJ": {
+   "avg30_pp": null,
+   "dest": "AOJ",
+   "name": "青森",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-AXT": {
+   "avg30_pp": null,
+   "dest": "AXT",
+   "name": "秋田",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-CTS": {
+   "avg30_pp": null,
+   "by_days": {
+    "5": 12246,
+    "6": 10516
+   },
+   "by_month": {
+    "2026-11": 12818,
+    "2026-12": 10516,
+    "2027-01": 10598,
+    "2027-02": 12246,
+    "2027-03": 12262
+   },
+   "dates": 116,
+   "dest": "CTS",
+   "med_pp": 15302,
+   "min_dep": "2026-12-01",
+   "min_pp": 10516,
+   "min_ret": "2026-12-06",
+   "name": "札幌",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-FSZ": {
+   "avg30_pp": null,
+   "dest": "FSZ",
+   "name": "靜岡",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-FUK": {
+   "avg30_pp": null,
+   "dest": "FUK",
+   "name": "福岡",
+   "origin": "TPE",
+   "updated": "2026-11-21T08:11+08:00"
+  },
+  "TPE-HIJ": {
+   "avg30_pp": null,
+   "dest": "HIJ",
+   "name": "廣島",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-HKD": {
+   "avg30_pp": null,
+   "dest": "HKD",
+   "name": "函館",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-HNA": {
+   "avg30_pp": null,
+   "dest": "HNA",
+   "name": "花卷",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-HND": {
+   "avg30_pp": null,
+   "dest": "HND",
+   "name": "東京羽田",
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-IBR": {
+   "avg30_pp": null,
+   "dest": "IBR",
+   "name": "茨城",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-KIJ": {
+   "avg30_pp": null,
+   "dest": "KIJ",
+   "name": "新潟",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-KIX": {
+   "avg30_pp": null,
+   "by_days": {
+    "5": 8357
+   },
+   "by_month": {
+    "2027-01": 12295,
+    "2027-02": 8357,
+    "2027-03": 8459
+   },
+   "dates": 55,
+   "dest": "KIX",
+   "med_pp": 10584,
+   "min_dep": "2027-02-14",
+   "min_pp": 8357,
+   "min_ret": "2027-02-18",
+   "name": "大阪關西",
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-KKJ": {
+   "avg30_pp": null,
+   "dest": "KKJ",
+   "name": "北九州",
+   "origin": "TPE",
+   "updated": "2026-11-21T08:11+08:00"
+  },
+  "TPE-KMI": {
+   "avg30_pp": null,
+   "dest": "KMI",
+   "name": "宮崎",
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-KMJ": {
+   "avg30_pp": null,
+   "dest": "KMJ",
+   "name": "熊本",
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-KMQ": {
+   "avg30_pp": null,
+   "dest": "KMQ",
+   "name": "小松",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-KOJ": {
+   "avg30_pp": null,
+   "dest": "KOJ",
+   "name": "鹿兒島",
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-MYJ": {
+   "avg30_pp": null,
+   "dest": "MYJ",
+   "name": "松山（愛媛）",
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-NGO": {
+   "avg30_pp": null,
+   "dest": "NGO",
+   "name": "名古屋",
+   "origin": "TPE",
+   "updated": "2026-11-21T08:11+08:00"
+  },
+  "TPE-NRT": {
+   "avg30_pp": null,
+   "by_days": {
+    "5": 8710
+   },
+   "by_month": {
+    "2027-04": 9610,
+    "2027-05": 8710
+   },
+   "dates": 14,
+   "dest": "NRT",
+   "med_pp": 10210,
+   "min_dep": "2027-05-17",
+   "min_pp": 8710,
+   "min_ret": "2027-05-21",
+   "name": "東京成田",
+   "near_miss": {
+    "dep": "2027-05-17",
+    "pp": 8710,
+    "ret": "2027-05-21",
+    "why": "去程沒有符合時段的航班（最便宜的 IT202 14:25 起飛、18:35 抵達）"
+   },
+   "origin": "TPE",
+   "updated": "2026-11-21T17:42+08:00"
+  },
+  "TPE-OKA": {
+   "avg30_pp": null,
+   "by_days": {
+    "4": 7663,
+    "5": 14643,
+    "6": 7416
+   },
+   "by_month": {
+    "2026-11": 7663,
+    "2026-12": 7416,
+    "2027-01": 7741,
+    "2027-02": 14643
+   },
+   "dates": 13,
+   "dest": "OKA",
+   "med_pp": 10663,
+   "min_dep": "2026-12-19",
+   "min_pp": 7416,
+   "min_ret": "2026-12-24",
+   "name": "沖繩",
+   "near_miss": {
+    "dep": "2026-12-19",
+    "pp": 7416,
+    "ret": "2026-12-24",
+    "why": "Google 目前查不到可訂的航班（可能已售完）"
+   },
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-OKJ": {
+   "avg30_pp": null,
+   "dest": "OKJ",
+   "name": "岡山",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-SDJ": {
+   "avg30_pp": null,
+   "dest": "SDJ",
+   "name": "仙台",
+   "origin": "TPE",
+   "updated": "2026-11-21T09:27+08:00"
+  },
+  "TPE-TAK": {
+   "avg30_pp": null,
+   "dest": "TAK",
+   "name": "高松",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-TOY": {
+   "avg30_pp": null,
+   "dest": "TOY",
+   "name": "富山",
+   "origin": "TPE",
+   "updated": "2026-11-21T15:41+08:00"
+  },
+  "TPE-UKB": {
+   "avg30_pp": null,
+   "dest": "UKB",
+   "name": "神戶",
+   "origin": "TPE",
+   "updated": "2026-11-21T08:11+08:00"
+  },
+  "TSA-HND": {
+   "avg30_pp": null,
+   "dest": "HND",
+   "name": "東京羽田",
+   "origin": "TSA",
+   "updated": "2026-11-21T17:42+08:00"
+  }
+ },
+ "run": {
+  "coverage": 0.222,
+  "failures": 0,
+  "ok": true,
+  "rate_limited": false,
+  "requests": 31,
+  "verified": 3
+ },
+ "updated": "2026-11-21T17:42+08:00"
+}

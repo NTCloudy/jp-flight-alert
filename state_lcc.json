@@ -1,0 +1,177 @@
+{
+ "cooldown_until": "2026-11-18T22:39+08:00",
+ "digest_last_date": null,
+ "fail_streak": 0,
+ "fp_exact": "[{\"arrive_ideal\": 840, \"arrive_latest\": 1110, \"depart_earliest\": 600, \"depart_latest\": 840}, {\"arrive_ideal\": 1080, \"arrive_latest\": 1200, \"depart_earliest\": 780, \"depart_latest\": 930}, [\"AK\", \"BX\", \"D7\", \"FD\", \"GK\", \"IJ\", \"IT\", \"JQ\", \"LJ\", \"MM\", \"RS\", \"SL\", \"TR\", \"TW\", \"UO\", \"VJ\", \"VZ\", \"Z2\", \"ZE\", \"ZG\"], true, 2]",
+ "fp_server": "[[10, 14, 18], [13, 15, 20], [\"AK\", \"BX\", \"D7\", \"FD\", \"GK\", \"IJ\", \"IT\", \"JQ\", \"LJ\", \"MM\", \"RS\", \"SL\", \"TR\", \"TW\", \"UO\", \"VJ\", \"VZ\", \"Z2\", \"ZE\", \"ZG\"], true, 2]",
+ "health_alert_at": null,
+ "last_run": "2026-11-21T17:42+08:00",
+ "last_scan": null,
+ "last_scan_ok": null,
+ "notified": {},
+ "promo_pending": [],
+ "promo_recent": [],
+ "promo_seen": {},
+ "rate_limit_streak": 0,
+ "routes": {},
+ "scan_log": [],
+ "verify_cache": {
+  "TPE-CTS|2026-12-01|2026-12-06": {
+   "at": "2026-11-21T15:41+08:00",
+   "cal_total": 21032,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-CTS|2026-12-02|2026-12-07": {
+   "at": "2026-11-21T17:42+08:00",
+   "cal_total": 21032,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "FD",
+     "arr": "17:55",
+     "dep": "14:00",
+     "flight": "FD243",
+     "from": "CTS",
+     "to": "TPE"
+    },
+    "days": 6,
+    "dep": "2026-12-02",
+    "dest": "CTS",
+    "dest_name": "札幌",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-CTS|2026-12-02|2026-12-07",
+    "origin": "TPE",
+    "out": {
+     "airline": "TR",
+     "arr": "17:00",
+     "dep": "12:15",
+     "flight": "TR892",
+     "from": "TPE",
+     "to": "CTS"
+    },
+    "price_pp": 10513,
+    "price_total": 21026,
+    "ret": "2026-12-07",
+    "route": "TPE-CTS",
+    "url": "https://www.google.com/travel/flights/search?tfs=GnISCjIwMjYtMTItMDIoADICSVQyAk1NMgJHSzICSlEyAlRSMgJaRzICSUoyAlVPMgJENzICQUsyAkZEMgJaMjICVkoyAlZaMgJTTDICQlgyAkxKMgJUVzICWkUyAlJTQApIDlgSagUSA1RQRXIFEgNDVFMachIKMjAyNi0xMi0wNygAMgJJVDICTU0yAkdLMgJKUTICVFIyAlpHMgJJSjICVU8yAkQ3MgJBSzICRkQyAloyMgJWSjICVloyAlNMMgJCWDICTEoyAlRXMgJaRTICUlNADUgPWBRqBRIDQ1RTcgUSA1RQRUICAQFIAZgBAQ&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-21T17:42+08:00"
+   }
+  },
+  "TPE-CTS|2027-02-15|2027-02-19": {
+   "at": "2026-11-21T08:11+08:00",
+   "cal_total": 24492,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-CTS|2027-03-23|2027-03-27": {
+   "at": "2026-11-21T04:06+08:00",
+   "cal_total": 24524,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-KIX|2027-02-14|2027-02-18": {
+   "at": "2026-11-21T02:00+08:00",
+   "cal_total": 16714,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "MM",
+     "arr": "17:55",
+     "dep": "15:25",
+     "flight": "MM27",
+     "from": "KIX",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-02-14",
+    "dest": "KIX",
+    "dest_name": "大阪關西",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-KIX|2027-02-14|2027-02-18",
+    "origin": "TPE",
+    "out": {
+     "airline": "MM",
+     "arr": "17:10",
+     "dep": "13:40",
+     "flight": "MM26",
+     "from": "TPE",
+     "to": "KIX"
+    },
+    "price_pp": 9450,
+    "price_total": 18900,
+    "ret": "2027-02-18",
+    "route": "TPE-KIX",
+    "url": "https://www.google.com/travel/flights/search?tfs=GnISCjIwMjctMDItMTQoADICSVQyAk1NMgJHSzICSlEyAlRSMgJaRzICSUoyAlVPMgJENzICQUsyAkZEMgJaMjICVkoyAlZaMgJTTDICQlgyAkxKMgJUVzICWkUyAlJTQApIDlgSagUSA1RQRXIFEgNLSVgachIKMjAyNy0wMi0xOCgAMgJJVDICTU0yAkdLMgJKUTICVFIyAlpHMgJJSjICVU8yAkQ3MgJBSzICRkQyAloyMgJWSjICVloyAlNMMgJCWDICTEoyAlRXMgJaRTICUlNADUgPWBRqBRIDS0lYcgUSA1RQRUICAQFIAZgBAQ&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-21T02:00+08:00"
+   }
+  },
+  "TPE-NRT|2027-05-17|2027-05-21": {
+   "at": "2026-11-21T17:42+08:00",
+   "cal_total": 17420,
+   "deal": null,
+   "short": true,
+   "why": "去程沒有符合時段的航班（最便宜的 IT202 14:25 起飛、18:35 抵達）"
+  },
+  "TPE-OKA|2026-11-28|2026-12-01": {
+   "at": "2026-11-21T17:42+08:00",
+   "cal_total": 15326,
+   "deal": null,
+   "short": true,
+   "why": "回程目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-OKA|2026-12-19|2026-12-24": {
+   "at": "2026-11-21T15:41+08:00",
+   "cal_total": 14832,
+   "deal": null,
+   "short": true,
+   "why": "Google 目前查不到可訂的航班（可能已售完）"
+  },
+  "TPE-OKA|2027-02-02|2027-02-06": {
+   "at": "2026-11-21T02:00+08:00",
+   "cal_total": 29286,
+   "deal": {
+    "adults": 2,
+    "back": {
+     "airline": "MM",
+     "arr": "14:20",
+     "dep": "13:35",
+     "flight": "MM925",
+     "from": "OKA",
+     "to": "TPE"
+    },
+    "days": 5,
+    "dep": "2027-02-02",
+    "dest": "OKA",
+    "dest_name": "沖繩",
+    "flags": [
+     "去程稍晚抵達"
+    ],
+    "key": "TPE-OKA|2027-02-02|2027-02-06",
+    "origin": "TPE",
+    "out": {
+     "airline": "FD",
+     "arr": "15:55",
+     "dep": "13:30",
+     "flight": "FD230",
+     "from": "TPE",
+     "to": "OKA"
+    },
+    "price_pp": 14643,
+    "price_total": 29286,
+    "ret": "2027-02-06",
+    "route": "TPE-OKA",
+    "url": "https://www.google.com/travel/flights/search?tfs=GnISCjIwMjctMDItMDIoADICSVQyAk1NMgJHSzICSlEyAlRSMgJaRzICSUoyAlVPMgJENzICQUsyAkZEMgJaMjICVkoyAlZaMgJTTDICQlgyAkxKMgJUVzICWkUyAlJTQApIDlgSagUSA1RQRXIFEgNPS0EachIKMjAyNy0wMi0wNigAMgJJVDICTU0yAkdLMgJKUTICVFIyAlpHMgJJSjICVU8yAkQ3MgJBSzICRkQyAloyMgJWSjICVloyAlNMMgJCWDICTEoyAlRXMgJaRTICUlNADUgPWBRqBRIDT0tBcgUSA1RQRUICAQFIAZgBAQ&hl=zh-TW&curr=TWD",
+    "verified_at": "2026-11-21T02:00+08:00"
+   }
+  }
+ },
+ "version": 1
+}
