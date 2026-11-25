@@ -1,4 +1,5 @@
-"""Airline promotion monitor: Google News RSS search for full-service airline sales to Japan.
+"""Airline promotion monitor: Google News RSS search for airline sales to Japan
+(full-service airlines for the digest / console, low-cost carriers for their own instant email).
 
 Airline websites block automated requests, so we watch news coverage instead: Taiwanese media
 report almost every China Airlines / EVA / STARLUX / JAL / ANA / Cathay sale within hours.
@@ -31,12 +32,32 @@ AIRLINES = {
     "NH": r"全日空|\bANA\b",
     "CX": r"國泰航空|國泰(?!世華)(?=.{0,12}(機票|航線|飛|促銷|優惠|旅展))",
 }
+LCC_QUERIES = [
+    "(台灣虎航 OR 虎航 OR 樂桃 OR 捷星 OR 酷航 OR 亞航 OR 亞洲航空 OR 越捷 OR 香港快運 OR ZIPAIR OR 春秋航空) "
+    "(日本 OR 東京 OR 大阪 OR 沖繩 OR 北海道 OR 札幌 OR 福岡 OR 名古屋 OR 日韓 OR 全航線) "
+    "(促銷 OR 特價 OR 優惠 OR 早鳥 OR 開賣 OR 快閃 OR 搶票 OR 元起 OR 旅展 OR 折扣) when:3d",
+]
+
+LCC_AIRLINES = {
+    "IT": r"台灣虎航|虎航",
+    "MM": r"樂桃",
+    "GK": r"捷星",
+    "TR": r"酷航|\bScoot\b",
+    "AK": r"亞航|亞洲航空|AirAsia",
+    "VJ": r"越捷|VietJet",
+    "UO": r"香港快運|HK ?Express",
+    "ZG": r"ZIPAIR",
+    "IJ": r"春秋航空",
+}
+
 PROMO_RE = re.compile(r"促銷|特價|優惠|早鳥|開賣|開搶|搶購|限時|快閃|旅展|降價|特惠|最低|有找|元起|[0-9一二三四五六七八九]+折|買一送一|買1送1")
 JAPAN_RE = re.compile(r"日本|東京|大阪|京都|關西|沖繩|那霸|北海道|札幌|函館|福岡|九州|名古屋|仙台|東北|熊本|鹿兒島|"
                       r"廣島|岡山|高松|四國|富山|小松|北陸|靜岡|青森|秋田|花卷|新潟|石垣|宮古|日韓|日線|"
                       r"全航線|全球航線|全球.{0,6}航點|亞洲線|亞洲航線|東北亞")
 EXCLUDE_RE = re.compile(r"懶人包.{0,20}卡|信用卡.{0,20}(回饋|比較|懶人包|推薦)|(優惠碼|折扣碼)》|Klook|KKday|Trip\.com|"
                         r"國泰世華|Buffet|吃到飽|機加酒|住這裡|房價|股價|股東|營收|財報|罷工|停飛|事故|延誤|徵才|招募|空服員")
+# LCC sales departing from other cities (e.g. "香港飛大阪") are not useful from Taiwan
+LCC_EXCLUDE_RE = re.compile(r"(香港|澳門|新加坡|吉隆坡|馬來西亞|首爾|釜山|曼谷|\$\d)(出發|飛|起飛)|HK\$|港幣|\$\d+起")
 DISCOUNT_RE = re.compile(r"[0-9]+(?:\.[0-9])?折|買[一1]送[一1]|[0-9,]+元")
 
 
@@ -49,11 +70,13 @@ def _clean_title(title: str) -> tuple[str, str]:
     return title, ""
 
 
-def match(title: str) -> list[str] | None:
-    """Airline codes if the headline looks like a full-service airline sale relevant to Japan."""
+def match(title: str, airlines: dict | None = None) -> list[str] | None:
+    """Airline codes if the headline looks like a sale (by one of `airlines`) relevant to Japan."""
     if EXCLUDE_RE.search(title) or not PROMO_RE.search(title) or not JAPAN_RE.search(title):
         return None
-    codes = [code for code, pat in AIRLINES.items() if re.search(pat, title)]
+    if airlines is LCC_AIRLINES and LCC_EXCLUDE_RE.search(title):
+        return None
+    codes = [code for code, pat in (airlines or AIRLINES).items() if re.search(pat, title)]
     return codes or None
 
 
@@ -85,10 +108,10 @@ def parse_rss(xml_text: str) -> list[dict]:
     return items
 
 
-def fetch(session: requests.Session | None = None, timeout: int = 20) -> list[dict]:
+def fetch(session: requests.Session | None = None, timeout: int = 20, queries: list[str] | None = None) -> list[dict]:
     s = session or requests.Session()
     out: list[dict] = []
-    for q in QUERIES:
+    for q in queries or QUERIES:
         url = f"https://news.google.com/rss/search?q={quote(q)}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
         r = s.get(url, timeout=timeout, headers={"User-Agent": "Mozilla/5.0 (jp-flight-alert)"})
         r.raise_for_status()
@@ -103,7 +126,7 @@ def _signatures(title: str, codes: list[str]) -> set:
 
 
 def select(items: list[dict], seen: dict, now: datetime, recent: list[dict] | None = None,
-           max_age_days: int = 4, per_airline: int = 2) -> list[dict]:
+           max_age_days: int = 4, per_airline: int = 2, airlines: dict | None = None) -> list[dict]:
     """New, relevant, de-duplicated promo headlines (newest first).
 
     `recent` holds headlines already reported in the last two weeks; the same sale covered by
@@ -116,7 +139,7 @@ def select(items: list[dict], seen: dict, now: datetime, recent: list[dict] | No
         signatures |= _signatures(p["title"], p.get("airlines") or [])
     per: dict[str, int] = {}
     for it in sorted(items, key=lambda x: x.get("published") or "", reverse=True):
-        codes = match(it["title"])
+        codes = match(it["title"], airlines)
         if not codes:
             continue
         if it.get("published") and datetime.fromisoformat(it["published"]) < cutoff:

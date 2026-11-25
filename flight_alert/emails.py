@@ -277,6 +277,29 @@ def lcc_instant(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
     return subject, text, html
 
 
+def lcc_promos(items: list[dict]) -> tuple[str, str, str]:
+    """Low-cost-carrier sale news (sent as soon as it is found)."""
+    from .airports import LOW_COST_AIRLINES
+    names = []
+    for p in items:
+        for c in p.get("airlines") or []:
+            n = LOW_COST_AIRLINES.get(c, c)
+            if n not in names:
+                names.append(n)
+    first = items[0]["title"]
+    subject = (f"🏷️ 廉航促銷：{'、'.join(names)}｜{first[:40]}{'…' if len(first) > 40 else ''}"
+               + (f" 等 {len(items)} 則" if len(items) > 1 else ""))
+    intro = "廉航有新的促銷消息（新聞整理，價格多為單程未稅、不含行李，限時開賣要早點搶）："
+    text = intro + "\n\n" + "\n".join(f"🏷️ {p['title']}（{p.get('source') or '新聞'}）\n   {p['link']}" for p in items)
+    text += "\n\n網頁控制台：" + CONSOLE_URL
+    rows = "".join(
+        f"<div style=\"margin:8px 0;font-size:14px\">🏷️ <a href=\"{escape(p['link'])}\" style=\"color:#0b63ce\">"
+        f"{escape(p['title'])}</a> <span style=\"color:#6b7385;font-size:12px\">{escape(p.get('source') or '新聞')}</span></div>"
+        for p in items)
+    html = _page("🏷️ 廉航促銷", _section(intro, rows))
+    return subject, text, html
+
+
 # ---- OTA cheaper than Google ---------------------------------------------------------------
 def ota_cheaper(deals: list[dict], cfg: Config) -> tuple[str, str, str]:
     """Deals whose exact flights are cheaper on Trip.com / Agoda than on Google Flights."""

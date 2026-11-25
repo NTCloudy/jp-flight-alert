@@ -96,6 +96,9 @@ class LccRunTest(unittest.TestCase):
         p2 = mock.patch.object(app, "send_email", side_effect=lambda s, t, h=None, dry_run=False: self.sent.append(s))
         p2.start()
         self.addCleanup(p2.stop)
+        p3 = mock.patch("flight_alert.promo.fetch", return_value=[])  # no network in tests
+        p3.start()
+        self.addCleanup(p3.stop)
 
     def offers(self):
         dep, ret = day(10), day(14)
@@ -151,3 +154,31 @@ class LccRunTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class LccPromoTest(unittest.TestCase):
+    def test_match(self):
+        from flight_alert import promo
+        L = promo.LCC_AIRLINES
+        self.assertEqual(promo.match("虎航全航線999元起！飛東京大阪限時開搶", L), ["IT"])
+        self.assertEqual(promo.match("廉航雙雄今開搶！台灣虎航日本特價512元起、樂桃1580元起", L), ["IT", "MM"])
+        self.assertIsNone(promo.match("樂桃航空優惠｜香港飛大阪單程低至$300起", L))   # not from Taiwan
+        self.assertIsNone(promo.match("華航日本線促銷76折", L))                          # full-service: not LCC
+        self.assertIsNone(promo.match("虎航飛東京 營收創新高", L))
+        self.assertIsNone(promo.match("虎航全航線999元起！飛東京大阪限時開搶"))          # full-service list unchanged
+
+    def test_first_run_silent_then_email(self):
+        sent = []
+        send = lambda st, s, t, h, d: sent.append(s) or True  # noqa: E731
+        state = store.new_state()
+        item = lambda title, h: {"title": title, "source": "新聞", "link": "https://n/" + title,  # noqa: E731
+                                 "published": (NOW - timedelta(hours=h)).isoformat()}
+        old = [item("虎航全航線999元起！飛東京大阪限時開搶", 5)]
+        lcc.check_promos(state, NOW, False, False, send, fetch=lambda: old)
+        self.assertEqual(sent, [])
+        new = old + [item("酷航飛東京大阪促銷 單程含稅2499元起", 1)]
+        lcc.check_promos(state, NOW + timedelta(hours=1), False, False, send, fetch=lambda: new)
+        self.assertEqual(len(sent), 1)
+        self.assertTrue(sent[0].startswith("🏷️ 廉航促銷：酷航"))
+        lcc.check_promos(state, NOW + timedelta(hours=2), False, False, send, fetch=lambda: new)
+        self.assertEqual(len(sent), 1)

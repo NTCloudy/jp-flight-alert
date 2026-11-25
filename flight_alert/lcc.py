@@ -18,7 +18,7 @@ import json
 import os
 from datetime import datetime
 
-from . import emails, scanner, store
+from . import emails, promo, scanner, store
 from .config import Config
 
 STATE_FILE = "state_lcc.json"
@@ -60,14 +60,58 @@ def _sync_cooldown(src: dict, dst: dict) -> None:
             dst[k] = src[k]
 
 
+PROMO_EVERY_HOURS = 0.9
+
+
+def check_promos(state: dict, now: datetime, dry_run: bool, paused: bool, send, fetch=None) -> list[dict]:
+    """LCC sale news (Google News RSS): new headlines are emailed right away in their own email."""
+    last = state.get("promo_checked_at")
+    if last and (now - datetime.fromisoformat(last)).total_seconds() / 3600 < PROMO_EVERY_HOURS:
+        return []
+    try:
+        items = (fetch or (lambda: promo.fetch(queries=promo.LCC_QUERIES)))()
+    except Exception as e:  # noqa: BLE001
+        print(f"[廉航促銷] 讀取失敗：{type(e).__name__}: {e}")
+        return []
+    state["promo_checked_at"] = now.isoformat(timespec="minutes")
+    if not state.get("promo_initialized"):
+        # first run: remember everything already out there instead of emailing old news
+        old = promo.select(items, state["promo_seen"], now, airlines=promo.LCC_AIRLINES, per_airline=10**6)
+        promo.update_state(state, old, now)
+        state["promo_initialized"] = True
+        state["promo_pending"] = []
+        print(f"[廉航促銷] 第一次執行：記下現有 {len(old)} 則，之後有新的才寄")
+        return []
+    new = promo.select(items, state["promo_seen"], now, recent=state.get("promo_recent"),
+                       airlines=promo.LCC_AIRLINES)
+    print(f"[廉航促銷] 新消息 {len(new)} 則")
+    if not new:
+        return []
+    if paused:
+        return []
+    subject, text, html = emails.lcc_promos(new)
+    if send and send(state, subject, text, html, dry_run):
+        promo.update_state(state, new, now)
+        state["promo_pending"] = []
+        return new
+    return []
+
+
 def run(cfg: Config, source, main_state: dict, now: datetime, dry_run: bool, paused: bool,
-        max_requests: int | None = None, send=None, pick=None) -> scanner.RunResult | None:
-    """One LCC pass. `send(state, subject, text, html, dry_run)` and `pick(deals, state, cfg, now)` come
-    from app.py (same mail delivery and de-duplication as the full-service alert)."""
+        max_requests: int | None = None, send=None, pick=None, scan: bool = True,
+        fetch_promos=None) -> scanner.RunResult | None:
+    """One LCC pass: sale news, then (when `scan`) fares. `send(state, subject, text, html, dry_run)` and
+    `pick(deals, state, cfg, now)` come from app.py (same mail delivery and de-duplication as the
+    full-service alert)."""
     if not cfg.lcc.enabled:
         return None
     lcfg = view(cfg)
     state = store.load_state(STATE_FILE)
+    if cfg.promo_enabled:
+        check_promos(state, now, dry_run, paused, send, fetch_promos)
+    if not scan:
+        store.save(STATE_FILE, state)
+        return None
     calendar = store.load(CALENDAR_FILE, {})
     history = store.load(HISTORY_FILE, {})
     _sync_cooldown(main_state, state)  # one Google cool-down for both scans

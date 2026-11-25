@@ -175,9 +175,10 @@ def run(cfg: Config, mode: str = "auto", dry_run: bool = False, source=None, now
                 "failures": res.failures, "rate_limited": res.rate_limited, "tasks_done": res.tasks_done,
                 "verified": res.verified, "deals": len(res.deals)}]
         # separate low-cost-carrier alert (own files and emails; skipped while Google throttles us)
-        if cfg.lcc.enabled and not res.rate_limited and not res.skipped_cooldown:
+        if cfg.lcc.enabled:
             try:
-                lcc.run(cfg, source, state, now, dry_run, paused, send=_send, pick=pick_instant)
+                lcc.run(cfg, source, state, now, dry_run, paused, send=_send, pick=pick_instant,
+                        scan=not res.rate_limited and not res.skipped_cooldown)
             except Exception as e:  # noqa: BLE001 - never break the full-service alert
                 print(f"[廉航] 執行失敗：{type(e).__name__}: {e}")
 
