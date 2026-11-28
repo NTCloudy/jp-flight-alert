@@ -1,0 +1,251 @@
+{
+ "config": {
+  "airlines": [
+   "IT",
+   "MM",
+   "GK",
+   "JQ",
+   "TR",
+   "ZG",
+   "IJ",
+   "UO",
+   "D7",
+   "AK",
+   "FD",
+   "Z2",
+   "VJ",
+   "VZ",
+   "SL",
+   "BX",
+   "LJ",
+   "TW",
+   "ZE",
+   "RS"
+  ],
+  "bag_fees": {
+   "AK": 950,
+   "BX": 1200,
+   "D7": 950,
+   "FD": 950,
+   "GK": 950,
+   "IJ": 1200,
+   "IT": 950,
+   "JQ": 950,
+   "LJ": 1200,
+   "MM": 950,
+   "RS": 1200,
+   "SL": 1200,
+   "TR": 950,
+   "TW": 1200,
+   "UO": 1200,
+   "VJ": 600,
+   "VZ": 600,
+   "Z2": 950,
+   "ZE": 1200,
+   "ZG": 1200
+  },
+  "bag_kg": 20,
+  "max_total": 5000
+ },
+ "deals": [],
+ "routes": {
+  "TPE-AOJ": {
+   "avg30_pp": null,
+   "dest": "AOJ",
+   "name": "青森",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-AXT": {
+   "avg30_pp": null,
+   "dest": "AXT",
+   "name": "秋田",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-CTS": {
+   "avg30_pp": 15768,
+   "dest": "CTS",
+   "name": "札幌",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-FSZ": {
+   "avg30_pp": null,
+   "dest": "FSZ",
+   "name": "靜岡",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-FUK": {
+   "avg30_pp": null,
+   "dest": "FUK",
+   "name": "福岡",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-HIJ": {
+   "avg30_pp": null,
+   "dest": "HIJ",
+   "name": "廣島",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-HKD": {
+   "avg30_pp": null,
+   "dest": "HKD",
+   "name": "函館",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-HNA": {
+   "avg30_pp": null,
+   "dest": "HNA",
+   "name": "花卷",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-HND": {
+   "avg30_pp": null,
+   "dest": "HND",
+   "name": "東京羽田",
+   "origin": "TPE",
+   "updated": "2026-11-28T10:57+08:00"
+  },
+  "TPE-IBR": {
+   "avg30_pp": null,
+   "dest": "IBR",
+   "name": "茨城",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-KIJ": {
+   "avg30_pp": null,
+   "dest": "KIJ",
+   "name": "新潟",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-KIX": {
+   "avg30_pp": 9910,
+   "dest": "KIX",
+   "name": "大阪關西",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-KKJ": {
+   "avg30_pp": null,
+   "dest": "KKJ",
+   "name": "北九州",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-KMI": {
+   "avg30_pp": null,
+   "dest": "KMI",
+   "name": "宮崎",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-KMJ": {
+   "avg30_pp": null,
+   "dest": "KMJ",
+   "name": "熊本",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-KMQ": {
+   "avg30_pp": null,
+   "dest": "KMQ",
+   "name": "小松",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-KOJ": {
+   "avg30_pp": null,
+   "dest": "KOJ",
+   "name": "鹿兒島",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-MYJ": {
+   "avg30_pp": null,
+   "dest": "MYJ",
+   "name": "松山（愛媛）",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-NGO": {
+   "avg30_pp": null,
+   "dest": "NGO",
+   "name": "名古屋",
+   "origin": "TPE",
+   "updated": "2026-11-28T10:57+08:00"
+  },
+  "TPE-NRT": {
+   "avg30_pp": 10210,
+   "dest": "NRT",
+   "name": "東京成田",
+   "origin": "TPE",
+   "updated": "2026-11-28T10:57+08:00"
+  },
+  "TPE-OKA": {
+   "avg30_pp": 13401,
+   "dest": "OKA",
+   "name": "沖繩",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-OKJ": {
+   "avg30_pp": null,
+   "dest": "OKJ",
+   "name": "岡山",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-SDJ": {
+   "avg30_pp": null,
+   "dest": "SDJ",
+   "name": "仙台",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-TAK": {
+   "avg30_pp": null,
+   "dest": "TAK",
+   "name": "高松",
+   "origin": "TPE",
+   "updated": "2026-11-28T20:19+08:00"
+  },
+  "TPE-TOY": {
+   "avg30_pp": null,
+   "dest": "TOY",
+   "name": "富山",
+   "origin": "TPE",
+   "updated": "2026-11-28T18:18+08:00"
+  },
+  "TPE-UKB": {
+   "avg30_pp": null,
+   "dest": "UKB",
+   "name": "神戶",
+   "origin": "TPE",
+   "updated": "2026-11-28T10:57+08:00"
+  },
+  "TSA-HND": {
+   "avg30_pp": null,
+   "dest": "HND",
+   "name": "東京羽田",
+   "origin": "TSA",
+   "updated": "2026-11-28T20:19+08:00"
+  }
+ },
+ "run": {
+  "coverage": 0.224,
+  "failures": 0,
+  "ok": true,
+  "rate_limited": false,
+  "requests": 30,
+  "verified": 0
+ },
+ "updated": "2026-11-28T20:19+08:00"
+}

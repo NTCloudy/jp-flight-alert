@@ -1,0 +1,26 @@
+{
+ "cooldown_until": "2026-11-26T09:24+08:00",
+ "digest_last_date": null,
+ "email_error": {
+  "at": "2026-11-28T20:25+08:00",
+  "error": "SMTPServerDisconnected: Connection unexpectedly closed"
+ },
+ "fail_streak": 0,
+ "fp_exact": "[{\"arrive_ideal\": 840, \"arrive_latest\": 1110, \"depart_earliest\": 600, \"depart_latest\": 840}, {\"arrive_ideal\": 1080, \"arrive_latest\": 1200, \"depart_earliest\": 780, \"depart_latest\": 930}, [\"AK\", \"BX\", \"D7\", \"FD\", \"GK\", \"IJ\", \"IT\", \"JQ\", \"LJ\", \"MM\", \"RS\", \"SL\", \"TR\", \"TW\", \"UO\", \"VJ\", \"VZ\", \"Z2\", \"ZE\", \"ZG\"], true, 2]",
+ "fp_server": "[[10, 14, 18], [13, 15, 20], [\"AK\", \"BX\", \"D7\", \"FD\", \"GK\", \"IJ\", \"IT\", \"JQ\", \"LJ\", \"MM\", \"RS\", \"SL\", \"TR\", \"TW\", \"UO\", \"VJ\", \"VZ\", \"Z2\", \"ZE\", \"ZG\"], true, 2]",
+ "health_alert_at": null,
+ "last_run": "2026-11-28T20:19+08:00",
+ "last_scan": null,
+ "last_scan_ok": null,
+ "notified": {},
+ "promo_checked_at": "2026-11-28T20:19+08:00",
+ "promo_initialized": true,
+ "promo_pending": [],
+ "promo_recent": [],
+ "promo_seen": {},
+ "rate_limit_streak": 0,
+ "routes": {},
+ "scan_log": [],
+ "verify_cache": {},
+ "version": 1
+}
